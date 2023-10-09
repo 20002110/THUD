@@ -690,7 +690,7 @@ a:focus {
 .contact_section .contact_form-container button {
   display: inline-block;
   padding: 10px 60px;
-  background-color: #f1db25;
+  background-color: rgba(150, 129, 26, 0.7);
   color: #ffffff;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
@@ -704,6 +704,18 @@ a:focus {
   border-color: #f1db25;
   color: #f1db25;
 }
+
+.contact_section .contact_form-container  .regis {
+  margin: 20px;
+}
+
+.contact_section .contact_form-container  .regis .register{
+  justify-content: center;
+  padding-left:  15px;
+  padding-bottom: 6px;
+}
+
+
 
 .contact_bg_box {
   position: absolute;
