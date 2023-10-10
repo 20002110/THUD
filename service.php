@@ -1,3 +1,15 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
+  echo "Bạn chưa đăng nhập";
+  header("location: login.php");
+  exit;
+}
+
+
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -106,17 +118,11 @@
                 <li class="nav-item ">
                   <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="about.html"> About</a>
-                </li>
                 <li class="nav-item active">
                   <a class="nav-link" href="service.php"> Services </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="guard.html"> Guards </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="contact.html">Contact us</a>
+                  <a class="nav-link" href="login.php">Log in</a>
                 </li>
               </ul>
             </div>
@@ -174,9 +180,7 @@
 
             }
 
-          } 
-
-          elseif( isset($_GET['filter']) ){
+          } elseif (isset($_GET['filter'])) {
             $filter = $_GET['filter'];
 
             $result = $db->find_by_data('services', $filter);

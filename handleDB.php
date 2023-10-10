@@ -15,17 +15,6 @@ class HandleDB {
         }
     }
 
-    public function create($table, $data) {
-        $columns = implode(", ", array_keys($data));
-        $values = "'" . implode("', '", array_values($data)) . "'";
-        $sql = "INSERT INTO $table ($columns) VALUES ($values)";
-
-        if ($this->conn->query($sql) === TRUE) {
-            return true;
-        } else {
-            return false;
-        }
-    }
 
     public function update($table, $data, $where) {
         $set = "";
@@ -61,6 +50,18 @@ class HandleDB {
         } else {
             return false;
         }
+    }
+
+    public function find_data($table, $column, $data){
+        $sql = "SELECT * FROM $table WHERE $column = '$data'";
+        $result = $this->conn->query($sql);
+
+        if ($result->num_rows > 0) {
+            return $result->fetch_assoc();
+        } else {
+            return false;
+        }
+
     }
 
     public function find_by_data($table, $data){
