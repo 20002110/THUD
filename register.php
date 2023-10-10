@@ -1,3 +1,45 @@
+<?php
+    include 'handleDB.php';
+
+    $db = new handleDB();
+
+    if (isset($_POST['signup'])) {
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+        $confirm_password = $_POST['confirm_password'];
+
+        if ($db->find_data("Users", "username",$email) == false) {
+            if ($password == $confirm_password) {
+
+
+                $password = password_hash($password, PASSWORD_DEFAULT);
+
+                $data = array(
+                    "username" => $email,
+                    "password" => $password,
+                );
+
+                if ($db->add_data("Users", $data)) {
+                    // display success message
+                    echo "Thêm thành công";
+                    header("Location: login.php");
+                    
+
+                } else {
+                    echo "Thêm thất bại";
+                }
+            } else {
+                echo "Mật khẩu không khớp";
+            }
+        } else {
+            echo "Email đã tồn tại";
+        }
+    }
+
+    $db->__destruct();
+
+    ?>
+
 <!DOCTYPE html>
 <html>
 
@@ -106,7 +148,7 @@
         <div class="container">
             <div class="heading_container heading_center">
                 <h2>
-                    LOG IN
+                    SIGN UP 
                 </h2>
             </div>
             <div class="">
@@ -238,41 +280,3 @@
 </html>
 
 
-<?php
-    include 'handleDB.php';
-
-    $db = new handleDB();
-
-    if (isset($_POST['signup'])) {
-        $email = $_POST['email'];
-        $password = $_POST['password'];
-        $confirm_password = $_POST['confirm_password'];
-
-        if ($db->find_data("Users", $email, "email") == false) {
-            if ($password == $confirm_password) {
-                $data = array(
-                    "email" => $email,
-                    "password" => $password,
-                    "username" => "ad"
-                );
-
-                if ($db->add_data("Users", $data)) {
-                    // display success message
-                    echo "Thêm thành công";
-                    header("Location: login.php");
-                    
-
-                } else {
-                    echo "Thêm thất bại";
-                }
-            } else {
-                echo "Mật khẩu không khớp";
-            }
-        } else {
-            echo "Email đã tồn tại";
-        }
-    }
-
-    $db->__destruct();
-
-    ?>

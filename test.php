@@ -1,15 +1,19 @@
+
+
 <?php 
 
 include "handleDB.php";
 
 $handleDB = new HandleDB();
 
-$data = array( 
+$username = "test";
+$password = "test";
 
-    "username" => "ad",
-    "password" => "12112002",
-    "email" => "admin@gmail.com"
+$password = hash_hmac('sha256', $password, 'key');
 
+$data = array(
+    "username" => $username,
+    "password" => $password
 );
 
 if ($handleDB->add_data("Users", $data)) {
@@ -17,4 +21,6 @@ if ($handleDB->add_data("Users", $data)) {
 } else {
     echo "Thêm thất bại";
 }
+
+
 ?>
