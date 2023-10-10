@@ -106,17 +106,11 @@
                 <li class="nav-item ">
                   <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="about.html"> About</a>
-                </li>
                 <li class="nav-item active">
                   <a class="nav-link" href="service.php"> Services </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="guard.html"> Guards </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="contact.html">Contact us</a>
+                  <a class="nav-link" href="login.php">Log in</a>
                 </li>
               </ul>
             </div>
@@ -159,7 +153,7 @@
                     <p>
                       ' . $service['content'] . '
                     </p>
-                    <a href = "service-detail.php?id=' . $service['id'] . '" class = "btn btn-outline-primary" >
+                    <a href = "detail.php?id=' . $service['id'] . '" class = "btn btn-outline-primary" >
                       Read More
                     </a>
   
@@ -195,7 +189,7 @@
                     <p>
                       ' . $service['content'] . '
                     </p>
-                    <a href = "service-detail.php?id=' . $service['id'] . '" class = "btn btn-outline-primary" >
+                    <a href = "detail.php?id=' . $service['id'] . '" class = "btn btn-outline-primary" >
                       Read More
                     </a>
   
@@ -227,7 +221,7 @@
                     <p>
                       ' . $service['content'] . '
                     </p>
-                    <a href = "service-detail.php?id=' . $service['id'] . '" class = "btn btn-outline-primary" >
+                    <a href = "detail.php?id=' . $service['id'] . '" class = "btn btn-outline-primary" >
                       Read More
                     </a>
   
@@ -322,8 +316,7 @@
     <!-- footer section -->
     <footer class="container-fluid footer_section">
       <p>
-        &copy; <span id="currentYear"></span> All Rights Reserved. Design by
-        <a href="https://html.design/">Free Html Templates</a>
+        &copy; <span id="currentYear"></span> All Rights Reserved. Design by Admin
       </p>
     </footer>
     <!-- footer section -->

@@ -207,6 +207,14 @@ body {
   transition: all .2s;
 }
 
+
+.custom_nav-container .navbar-nav .nav-item .nav-link1 {
+
+  color: #5a5858;
+
+}
+
+
 .custom_nav-container .navbar-nav .nav-item:hover .nav-link, .custom_nav-container .navbar-nav .nav-item.active .nav-link {
   background-color: #1c1c1c;
 }
@@ -682,7 +690,7 @@ a:focus {
 .contact_section .contact_form-container button {
   display: inline-block;
   padding: 10px 60px;
-  background-color: #f1db25;
+  background-color: rgba(150, 129, 26, 0.7);
   color: #ffffff;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
@@ -696,6 +704,18 @@ a:focus {
   border-color: #f1db25;
   color: #f1db25;
 }
+
+.contact_section .contact_form-container  .regis {
+  margin: 20px;
+}
+
+.contact_section .contact_form-container  .regis .register{
+  justify-content: center;
+  padding-left:  15px;
+  padding-bottom: 6px;
+}
+
+
 
 .contact_bg_box {
   position: absolute;
@@ -919,5 +939,41 @@ a:focus {
 
 .footer_section a {
   color: rgba(254, 254, 255, 0.7);
+}
+
+.detail_product {
+  padding: 0 15px;
+  margin: 20px;
+}
+
+.detail_product .row {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+
+}
+
+.detail_product .row .row-md-6 .detailt_product-img {
+  margin-bottom: 25px;
+  /* limited image by resize */
+  max-height: 400px;
+  max-width: 400px;
+  overflow: hidden;
+
+  /* limited image by resize */
+  position: relative;
+
+  margin: 20px;
+  padding: 20px;
+
+}
+
+.detail_product .row .row-md-6 {
+  margin: 50px;
+  padding: 50px;
+}
+
+.detail_product_btn a {
+  margin: 20px;
 }
 
