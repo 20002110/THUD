@@ -1,3 +1,35 @@
+<?php
+include 'handleDB.php';
+
+$db = new handleDB();
+
+if (isset($_POST['login'])) {
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+    $data = $db->find_data("Users", "username", $email);
+
+    if ($data == false) {
+        echo "<script>alert('Email không tồn tại')</script>";
+        print_r($data);
+    } else {
+        // $password = password_hash($password, PASSWORD_DEFAULT);
+        if (password_verify($password, $data['password'])) {
+            echo "<script>alert('Đăng nhập thành công')</script>";
+            session_start();
+            $_SESSION['username'] = $email;
+            header("Location: index.php");
+        } else {
+            echo "<script>alert('Sai mật khẩu') </script>";
+            echo $password;
+            echo $data['password'];
+        }
+    }
+
+}
+
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -112,14 +144,14 @@
             <div class="">
                 <div class="row">
                     <div class="col-md-7 mx-auto">
-                        <form action="" method = "POST">
+                        <form action="" method = "post">
                             <div class="contact_form-container">
                                 <div>
                                     <div>
-                                        <input type="email" placeholder="Email " required />
+                                        <input type="email" placeholder="Email " name = "email" id = "email" required />
                                     </div>
                                     <div>
-                                        <input type="password" placeholder="Password" required />
+                                        <input type="password" placeholder="Password" name="password" id = "password" required />
                                     </div>
                                     <div class="btn-box ">
                                         <button type="submit" name = "login" >
@@ -230,30 +262,3 @@
 
 </html>
 
-<?php 
-        include 'handleDB.php';
-
-        $db = new handleDB();
-
-        if(isset($_POST['login'])){
-            $email = $_POST['email'];
-            $password = $_POST['password'];
-
-            $data = $db -> find_data("Users", $email, "email");
-
-            if ($data == false) {
-                echo "<script>alert('Email không tồn tại')</script>";
-                print_r($data);
-            } else {
-                if ($data['password'] == $password) {
-                    echo "<script>alert('Đăng nhập thành công')</script>";
-                    $_SESSION['user'] = $data;
-                    header("Location: index.php");
-                } else {
-                    echo "<script>alert('Mật khẩu không đúng')</script>";
-                }
-            }
-
-        }
-
-    ?>

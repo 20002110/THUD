@@ -1,3 +1,15 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
+  echo "Bạn chưa đăng nhập";
+  header("location: login.php");
+  exit;
+}
+
+
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -168,9 +180,7 @@
 
             }
 
-          } 
-
-          elseif( isset($_GET['filter']) ){
+          } elseif (isset($_GET['filter'])) {
             $filter = $_GET['filter'];
 
             $result = $db->find_by_data('services', $filter);
