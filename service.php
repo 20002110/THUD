@@ -183,7 +183,7 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
 
               }
             } else {
-              echo "Không có dữ liệu";
+              echo "<p style='color: red'>Không có dữ liệu</p>";
 
             }
 
