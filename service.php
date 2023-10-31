@@ -170,7 +170,7 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
                       ' . $service['name'] . '
                     </h5>
                     <p>
-                      ' . $service['content'] . '
+                      ' . $service['subcontent'] . '
                     </p>
                     <a href = "detail.php?id=' . $service['id'] . '" class = "btn btn-outline-primary" >
                       Read More
