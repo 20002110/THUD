@@ -25,7 +25,7 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
   <meta name="author" content="" />
   <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
 
-  <title>Guarder</title>
+  <title>Services</title>
 
   <!-- bootstrap core css -->
   <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
@@ -79,7 +79,7 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
           <nav class="navbar navbar-expand-lg custom_nav-container">
             <a class="navbar-brand" href="index.php">
               <span>
-                Guarder
+
               </span>
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -236,7 +236,7 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
                       ' . $service['name'] . '
                     </h5>
                     <p>
-                      ' . $service['content'] . '
+                      ' . $service['subcontent'] . '
                     </p>
                     <a href = "detail.php?id=' . $service['id'] . '" class = "btn btn-outline-primary" >
                       Read More

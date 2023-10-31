@@ -45,7 +45,7 @@ if (isset($_POST['login'])) {
     <meta name="author" content="" />
     <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
 
-    <title>Guarder</title>
+    <title>Login</title>
 
     <!-- bootstrap core css -->
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
@@ -99,7 +99,7 @@ if (isset($_POST['login'])) {
                     <nav class="navbar navbar-expand-lg custom_nav-container">
                         <a class="navbar-brand" href="index.html">
                             <span>
-                                Guarder
+                                
                             </span>
                         </a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse"

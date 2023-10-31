@@ -55,7 +55,7 @@
     <meta name="author" content="" />
     <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
 
-    <title>Guarder</title>
+    <title>Register</title>
 
     <!-- bootstrap core css -->
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
@@ -109,7 +109,7 @@
                     <nav class="navbar navbar-expand-lg custom_nav-container">
                         <a class="navbar-brand" href="index.html">
                             <span>
-                                Guarder
+                                
                             </span>
                         </a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse"
