@@ -6,7 +6,11 @@ session_start();
 if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
  header("location: login.php");
 exit;
+<<<<<<< HEAD
 }
+=======
+} 
+>>>>>>> KyoGren
 if ($_SESSION['username'] != "admin@gmail.com") {
  header("location: addNew.php");
 exit;
