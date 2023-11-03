@@ -29,13 +29,12 @@
 
 <body>
   <div class="hero_area">
-    <!-- header section strats -->
+    <!-- header section start -->
     <div class="hero_bg_box">
       <div class="img-box">
-        <img src="images/vinfast.jpeg" alt="">
+        <img src="images/slider_bg.jpeg" alt="">
       </div>
     </div>
-
     <header class="header_section">
       <div class="header_top">
         <div class="container-fluid">
@@ -66,7 +65,7 @@
           <nav class="navbar navbar-expand-lg custom_nav-container">
             <a class="navbar-brand" href="index.php">
               <span>
-                Guarder
+                <i>"TÊN THƯƠNG HIỆU"</i>
               </span>
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -82,7 +81,15 @@
                   <a class="nav-link" href="service.php"> Services </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="login.php">Log in</a>
+                  <!-- <a class="nav-link" href="login.php">Log in</a> -->
+                  <?php
+                    session_start();
+                    if (isset($_SESSION['username'])) {
+                      echo '<a class="nav-link" href="logout.php">Log out</a>';
+                    } else {
+                      echo '<a class="nav-link" href="login.php">Log in</a>';
+                    }
+                  ?>
                 </li>
               </ul>
             </div>
@@ -91,6 +98,7 @@
       </div>
     </header>
     <!-- end header section -->
+
     <!-- slider section -->
     <section class=" slider_section ">
       <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
@@ -101,18 +109,19 @@
                 <div class="col-md-7">
                   <div class="detail-box">
                     <h1>
-                      Your Saftey <br>
+                      <i>"Tên thương hiệu"</i> <br>
                       <span>
-                        Our Responsibility
+                        Cùng bạn trên mọi hành trình  
                       </span>
                     </h1>
                     <p>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                      sed do eiusmod magna aliqua. Ut enim ad minim veniam
+                      Trải nghiệm sự khác biệt của <i>"Tên thương hiệu"</i> với 
+                      <span class="text-primary">hơn 10000</span>
+                      xe rộng khắp Hà Nội và TP.Hồ Chí Minh
                     </p>
                     <div class="btn-box">
-                      <a href="" class="btn-1"> Read more </a>
-                      <a href="" class="btn-2">Get A Quote</a>
+                      <a href="" class="btn-1"> Xe tự lái </a>
+                      <a href="" class="btn-2">Xe có tài xế</a> 
                     </div>
                   </div>
                 </div>
@@ -125,18 +134,19 @@
                 <div class="col-md-7">
                   <div class="detail-box">
                     <h1>
-                      Your Saftey <br>
+                      Chương trình <br>
                       <span>
-                        Our Responsibility
+                         khuyến mãi
                       </span>
                     </h1>
                     <p>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                      sed do eiusmod magna aliqua. Ut enim ad minim veniam
+                        Nhận nhiều 
+                        <span class="text-primary">ưu đãi</span>
+                        hấp dẫn từ <i>"Tên thương hiệu"</i> với nhiều khuyến mãi trên tất cả các dịch vụ hiện có
                     </p>
                     <div class="btn-box">
-                      <a href="" class="btn-1"> Read more </a>
-                      <a href="" class="btn-2">Get A Quote</a>
+                      <a href="" class="btn-1">Tìm hiểu ngay</a>
+                      <!-- <a href="" class="btn-2">Get A Quote</a> -->
                     </div>
                   </div>
                 </div>
@@ -148,19 +158,21 @@
               <div class="row">
                 <div class="col-md-7">
                   <div class="detail-box">
+
                     <h1>
-                      Your Saftey <br>
+                      An toàn của bạn <br>
                       <span>
-                        Our Responsibility
+                        Trách nhiệm của chúng tôi
                       </span>
                     </h1>
                     <p>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                      sed do eiusmod magna aliqua. Ut enim ad minim veniam
+                        Chúng tôi cam kết về an toàn của khách hàng trong quá trình trải nghiệm dịch vụ
+                        <br>  
+                        Mọi thông tin chi tiết được nằm trong 
+                        <span class="text-primary">điều khoản dịch vụ</span>
                     </p>
                     <div class="btn-box">
-                      <a href="" class="btn-1"> Read more </a>
-                      <a href="" class="btn-2">Get A Quote</a>
+                      <a href="" class="btn-1">Tìm hiểu ngay</a>
                     </div>
                   </div>
                 </div>
@@ -181,14 +193,13 @@
   </div>
 
   <!-- about section -->
-
   <section class="about_section layout_padding">
     <div class="container">
       <div class="row">
         <div class="col-md-6 px-0">
           <div class="img_container">
             <div class="img-box">
-              <img src="images/about-img.jpg" alt="" />
+              <img src="images/who_are_we.jpg" alt="" />
             </div>
           </div>
         </div>
@@ -196,35 +207,36 @@
           <div class="detail-box">
             <div class="heading_container ">
               <h2>
-                Who Are We?
+                <i>"Tên thương hiệu"</i> - slogan
               </h2>
             </div>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-              in reprehenderit in voluptate velit
+                Chúng tôi quan niệm rằng, mỗi chuyến đi là một hành trình trải nghiệm và khám phá, là cơ hội để bản thân tìm hiểu 
+                những khoảnh khắc mới mẻ trong cuộc sống. Do đó, chất lượng dịch vụ, trải nghiệm người dùng là ưu tiên hàng đầu và 
+                là nguồn cảm hứng của chúng tôi xuyên suốt của trình hoạt động.
+                <br><br>
+                <i>"Tên thương hiệu"</i> là nền tảng cho thuê xe với đa dạng phân khúc, mẫu mã. Chúng tôi không chỉ dừng lại 
+                với việc kết nối với khách hàng một cách nhanh chóng, đảm bảo chất lượng xe an toàn, bên cạnh đó chúng tôi còn 
+                hướng tới trải nghiệm của khách hàng một cách tốt nhất trong quá trình trải nghiệm dịch vụ.
+                     
             </p>
-            <div class="btn-box">
+            <!-- <div class="btn-box">
               <a href="">
                 Read More
               </a>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
     </div>
   </section>
-
   <!-- end about section -->
 
   <!-- contact section -->
-
   <section class="contact_section layout_padding">
     <div class="contact_bg_box">
       <div class="img-box">
-        <img src="images/contact-bg.jpg" alt="">
+        <img src="images/get_in_touch.jpg" alt="">
       </div>
     </div>
     <div class="container">
@@ -264,20 +276,15 @@
       </div>
     </div>
   </section>
-
   <!-- end contact section -->
 
   <!-- team section -->
-
   <section class="team_section layout_padding">
     <div class="container">
       <div class="heading_container heading_center">
         <h2>
-          Our Services
+            Xe dành cho bạn
         </h2>
-        <p>
-        Chúng tôi cung cấp dịch vụ cho thuê xe chuyên nghiệp, đảm bảo uy tín, giá cả phải chăng nhất thị trường.
-        </p>
       </div>
       <div class="row">
         <div class="col-md-4 col-sm-6 mx-auto ">
@@ -327,13 +334,12 @@
         </div>
       </div>
       <div class="btn-box">
-        <a href="">
+        <a href="service.php">
           View All
         </a>
       </div>
     </div>
   </section>
-
   <!-- end team section -->
 
   <!-- info section -->
@@ -397,7 +403,6 @@
       </div>
     </div>
   </section>
-
   <!-- end info_section -->
 
 

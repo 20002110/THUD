@@ -2,7 +2,7 @@
 class HandleDB {
     const HOST = "localhost";
     const USER = "admin";
-    const PASSWORD = "12112002";
+    const PASSWORD = "anhquan";
     const DATABASE = "Admin";
 
     private $conn;
@@ -52,8 +52,8 @@ class HandleDB {
         }
     }
 
-    public function find_data($table, $data ,$where){
-        $sql = "SELECT $data FROM $table WHERE $where";
+    public function find_data($table, $column, $data){
+        $sql = "SELECT * FROM $table WHERE $column = '$data'";
         $result = $this->conn->query($sql);
 
         if ($result->num_rows > 0) {
@@ -61,6 +61,7 @@ class HandleDB {
         } else {
             return false;
         }
+
     }
 
     public function find_by_data($table, $data){
