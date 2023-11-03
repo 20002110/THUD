@@ -25,7 +25,7 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
   <meta name="author" content="" />
   <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
 
-  <title>Guarder</title>
+  <title>Services</title>
 
   <!-- bootstrap core css -->
   <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
@@ -79,7 +79,7 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
           <nav class="navbar navbar-expand-lg custom_nav-container">
             <a class="navbar-brand" href="index.php">
               <span>
-                Guarder
+
               </span>
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -121,8 +121,15 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
                 <li class="nav-item active">
                   <a class="nav-link" href="service.php"> Services </a>
                 </li>
+                <?php 
+                if($_SESSION['username'] == 'admin@gmail.com'){
+                  echo '<li class="nav-item">
+                  <a class="nav-link" href="addNew.php">Add Product</a>
+                </li>';
+                }
+                ?>
                 <li class="nav-item">
-                  <a class="nav-link" href="login.php">Log in</a>
+                  <a class="nav-link" href="logout.php">Log out</a>
                 </li>
               </ul>
             </div>
@@ -163,7 +170,7 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
                       ' . $service['name'] . '
                     </h5>
                     <p>
-                      ' . $service['content'] . '
+                      ' . $service['subcontent'] . '
                     </p>
                     <a href = "detail.php?id=' . $service['id'] . '" class = "btn btn-outline-primary" >
                       Read More
@@ -176,7 +183,7 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
 
               }
             } else {
-              echo "Không có dữ liệu";
+              echo "<p style='color: red'>Không có dữ liệu</p>";
 
             }
 
@@ -229,7 +236,7 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
                       ' . $service['name'] . '
                     </h5>
                     <p>
-                      ' . $service['content'] . '
+                      ' . $service['subcontent'] . '
                     </p>
                     <a href = "detail.php?id=' . $service['id'] . '" class = "btn btn-outline-primary" >
                       Read More

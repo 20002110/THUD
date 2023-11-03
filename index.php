@@ -66,7 +66,7 @@
           <nav class="navbar navbar-expand-lg custom_nav-container">
             <a class="navbar-brand" href="index.php">
               <span>
-                Guarder
+                
               </span>
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -82,7 +82,15 @@
                   <a class="nav-link" href="service.php"> Services </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="login.php">Log in</a>
+                  <!-- <a class="nav-link" href="login.php">Log in</a> -->
+                  <?php
+                    session_start();
+                    if (isset($_SESSION['username'])) {
+                      echo '<a class="nav-link" href="logout.php">Log out</a>';
+                    } else {
+                      echo '<a class="nav-link" href="login.php">Log in</a>';
+                    }
+                  ?>
                 </li>
               </ul>
             </div>
