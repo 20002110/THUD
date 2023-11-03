@@ -30,7 +30,7 @@ exit;
     <meta name="author" content="" />
     <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
 
-    <title>Guarder</title>
+    <title>Add Product</title>
 
     <!-- bootstrap core css -->
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
