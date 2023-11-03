@@ -2,7 +2,7 @@
 class HandleDB {
     const HOST = "localhost";
     const USER = "admin";
-    const PASSWORD = "anhquan";
+    const PASSWORD = "12112002";
     const DATABASE = "Admin";
 
     private $conn;
