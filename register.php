@@ -1,9 +1,10 @@
+
 <?php
     include 'handleDB.php';
 
     $db = new handleDB();
 
-    if (isset($_POST['signup'])) {
+    if (isset($_POST['submit'])) {
         $email = $_POST['email'];
         $password = $_POST['password'];
         $confirm_password = $_POST['confirm_password'];
@@ -26,13 +27,13 @@
                     
 
                 } else {
-                    echo "Thêm thất bại";
+                    echo "<script>alert('Thêm thất bại')</script>";
                 }
             } else {
-                echo "Mật khẩu không khớp";
+                echo "<script>alert('Mật khẩu không khớp')</script>";
             }
         } else {
-            echo "Email đã tồn tại";
+            echo "<script>alert('Email đã tồn tại')</script>";
         }
     }
 
@@ -66,6 +67,8 @@
 
     <!-- Custom styles for this template -->
     <link href="css/style.css" rel="stylesheet" />
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+
     <!-- responsive style -->
     <link href="css/responsive.css" rel="stylesheet" />
 </head>
@@ -148,7 +151,7 @@
         <div class="container">
             <div class="heading_container heading_center">
                 <h2>
-                    SIGN UP 
+                    FORGOT PASSWORD
                 </h2>
             </div>
             <div class="">
@@ -161,11 +164,28 @@
                                         <input type="email" placeholder="Email " id = "email" name = "email" required />
                                     </div>
                                     <div>
-                                        <input type="password" placeholder="Password" id = "password" name = "password" required />
+                                        <input type="password" placeholder="New Password" id = "password" name = "password" required />
                                     </div>
                                     <div>
                                         <input type="password" placeholder="Confirm Password" id = "confirm_password" name="confirm_password" required />
-        
+                                    </div>
+                                    <div>
+                                        <label id="otp" style="display: none"></label>
+                                    </div>
+                                    <div>
+                                        <input type="number" placeholder="OTP" id = "in_otp" name="in_otp" style= "display: none" required />
+                                    </div>
+                                    <div class="btn-box ">
+                                        <button type="submit" name="send_otp" onclick="sendMail()" id = "send_otp">
+                                            Send OTP
+                                        </button>
+                                    </div>
+                                    <div class="btn-box ">
+                                        <button type="submit" name="submit" id="submit" style="display: none">
+                                            Register
+                                        </button>
+                                    </div>
+                                            
                                     <script>
                                         var password = document.getElementById("password")
                                             , confirm_password = document.getElementById("confirm_password");
@@ -182,11 +202,60 @@
                                         confirm_password.onkeyup = validatePassword;
 
                                     </script>
-                                    <div class="btn-box ">
-                                        <button type="submit" name="signup" >
-                                            Sign up
-                                        </button>
-                                    </div>
+
+                                    <script>
+                                        // emailjs
+                                        emailjs.init("6VzQcCIDbGU-WvZ0L")
+
+                                        function sendMail(contactForm) {
+                                            document.getElementById("send_otp").style.display = "none";
+                                            var receiver = document.getElementById("email").value;
+
+                                            var otp = Math.floor(Math.random() * 1000000);
+
+                                            //  set otp to variable php
+
+
+                                            var message = "Your OTP to veryfy is " + otp;
+
+                                            var templateParams = {
+                                                from_name: "Admin",
+                                                to_name: receiver,
+                                                message: message,
+                                            };
+
+                                            emailjs.send("service_xs8w0pp", "template_06kpj9m", templateParams)
+                                                .then(function (response) {
+                                                    console.log("SUCCESS!", response.status, response.text);
+                                                    //  notice "please check your email to get OTP" in a label
+                                                    document.getElementById("otp").style.display = "block";
+                                                    document.getElementById("otp").innerHTML = "Please check your email to get OTP";
+                                                    document.getElementById("in_otp").style.display = "block";
+                                                    // check otp match and display submit button
+                                                    document.getElementById("in_otp").onkeyup = function () {
+                                                        var get_otp = document.getElementById("in_otp").value;
+                                                        if (get_otp == otp) {
+                                                            document.getElementById("send_otp").style.display = "none";
+                                                            document.getElementById("otp").style.color = "green";
+                                                            document.getElementById("otp").innerHTML = "OTP matched";
+                                                            document.getElementById("submit").style.display = "block";
+                                                        }
+                                                        else {
+                                                            document.getElementById("send_otp").style.display = "block";
+                                                            document.getElementById("send_otp").innerHTML = "Send OTP again";
+                                                            document.getElementById("otp").style.color = "red";
+                                                            document.getElementById("otp").innerHTML = "OTP does not match";
+                                                            document.getElementById("submit").style.display = "none";
+                                                        }
+                                                    }
+                                                }, function (error) {
+                                                    console.log("FAILED...", error);
+                                                });
+
+                                        }
+
+
+                                    </script>
                                 </div>
                             </div>
                         </form>
