@@ -39,13 +39,13 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
 
 <body class="sub_page">
   <div class="hero_area">
-    <!-- header section start -->
-    <!-- <div class="hero_bg_box">
+    <div class="hero_bg_box">
       <div class="img-box">
-        <img src="images/hero-bg.jpg" alt="">
+        <img src="images/login_bg.jpg" alt="">
       </div>
-    </div> -->
+    </div>
 
+    <!-- end header section -->
     <header class="header_section">
       <div class="header_top">
         <div class="container-fluid">

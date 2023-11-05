@@ -45,7 +45,7 @@ if (isset($_POST['login'])) {
     <meta name="author" content="" />
     <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
 
-    <title>Guarder</title>
+    <title>LOGIN</title>
 
     <!-- bootstrap core css -->
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
@@ -62,13 +62,12 @@ if (isset($_POST['login'])) {
 
 <body class="sub_page">
     <div class="hero_area">
-        <!-- header section strats -->
+        <!-- header section start -->
         <div class="hero_bg_box">
             <div class="img-box">
-                <img src="images/hero-bg.jpg" alt="">
+                <img src="images/login_bg.jpg" alt="">
             </div>
         </div>
-
         <header class="header_section">
             <div class="header_top">
                 <div class="container-fluid">
@@ -99,7 +98,7 @@ if (isset($_POST['login'])) {
                     <nav class="navbar navbar-expand-lg custom_nav-container">
                         <a class="navbar-brand" href="index.html">
                             <span>
-                                Guarder
+                                "Tên thương hiệu"
                             </span>
                         </a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -128,11 +127,10 @@ if (isset($_POST['login'])) {
         <!-- end header section -->
     </div>
 
-
     <section class="contact_section layout_padding">
         <div class="contact_bg_box">
             <div class="img-box">
-                <img src="images/contact-bg.jpg" alt="">
+                <img src="images/login_bg.jpg" alt="">
             </div>
         </div>
         <div class="container">
@@ -241,12 +239,7 @@ if (isset($_POST['login'])) {
             </div>
         </div>
     </section>
-
     <!-- end info_section -->
-
-
-
-
     <!-- footer section -->
     <footer class="container-fluid footer_section">
         <p>
