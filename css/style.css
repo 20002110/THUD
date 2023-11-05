@@ -48,16 +48,16 @@ body {
   padding-bottom: 10px;
 }
 
-.heading_container h2::before {
+/* .heading_container h2::before {
   content: "";
   width: 40px;
   height: 7px;
-  background-color: #f1db25;
+  background-color: #5fcf86;
   border-radius: 10px;
   position: absolute;
   bottom: 0;
   left: 0;
-}
+} */
 
 .heading_container.heading_center {
   -webkit-box-align: center;
@@ -123,6 +123,7 @@ body {
 
 .sub_page .hero_area {
   min-height: auto;
+  background-color: #6b6b6e;
 }
 
 .sub_page .custom_nav-container.navbar-expand-lg .navbar-nav .nav-item .nav-link {
@@ -178,7 +179,7 @@ body {
 
 .header_top .contact_link-container a i {
   font-size: 20px;
-  color: #f1db25;
+  color: #5fcf86;
   margin-right: 5px;
 }
 
@@ -352,7 +353,7 @@ a:focus {
 }
 
 .slider_section .detail-box h1 span {
-  color: #f1db25;
+  color: #5fcf86;
 }
 
 .slider_section .detail-box p {
@@ -380,6 +381,7 @@ a:focus {
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
   border: 1px solid transparent;
+  border-radius: 10px;
 }
 
 .slider_section .detail-box .btn-box .btn-1:hover {
@@ -391,17 +393,18 @@ a:focus {
 .slider_section .detail-box .btn-box .btn-2 {
   display: inline-block;
   padding: 10px 35px;
-  background-color: #f1db25;
+  background-color: #5fcf86;
   color: #ffffff;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
   border: 1px solid transparent;
+  border-radius: 10px;
 }
 
 .slider_section .detail-box .btn-box .btn-2:hover {
   background-color: transparent;
-  border-color: #f1db25;
-  color: #f1db25;
+  border-color: #5fcf86;
+  color: #5fcf86;
 }
 
 .slider_section .img-box {
@@ -431,7 +434,7 @@ a:focus {
   height: 20px;
   border-radius: 100%;
   text-align: center;
-  background-color: #f1db25;
+  background-color: #5fcf86;
   opacity: 1;
   border: none;
   margin: 0 4px;
@@ -467,7 +470,7 @@ a:focus {
 .about_section .detail-box a {
   display: inline-block;
   padding: 10px 35px;
-  background-color: #f1db25;
+  background-color: #5fcf86;
   color: #ffffff;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
@@ -477,8 +480,8 @@ a:focus {
 
 .about_section .detail-box a:hover {
   background-color: transparent;
-  border-color: #f1db25;
-  color: #f1db25;
+  border-color: #5fcf86;
+  color: #5fcf86;
 }
 
 .service_section {
@@ -518,7 +521,7 @@ a:focus {
 .service_section .box .detail-box a {
   display: inline-block;
   padding: 8px 35px;
-  background-color: #f1db25;
+  background-color: #5fcf86;
   color: #ffffff;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
@@ -528,8 +531,8 @@ a:focus {
 
 .service_section .box .detail-box a:hover {
   background-color: transparent;
-  border-color: #f1db25;
-  color: #f1db25;
+  border-color: #5fcf86;
+  color: #5fcf86;
 }
 
 .client_section {
@@ -614,7 +617,7 @@ a:focus {
 
 .client_section .carousel-control-prev:hover,
 .client_section .carousel-control-next:hover {
-  background-color: #f1db25;
+  background-color: #5fcf86;
 }
 
 .client_section .carousel-control-prev {
@@ -690,19 +693,20 @@ a:focus {
 .contact_section .contact_form-container button {
   display: inline-block;
   padding: 10px 60px;
-  background-color: rgba(150, 129, 26, 0.7);
+  background-color: #5fcf86;
   color: #ffffff;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
   border: 1px solid transparent;
   text-transform: uppercase;
   font-weight: bold;
+  border-radius: 10px;
 }
 
 .contact_section .contact_form-container button:hover {
   background-color: transparent;
-  border-color: #f1db25;
-  color: #f1db25;
+  border-color: #5fcf86;
+  color: #5fcf86;
 }
 
 .contact_section .contact_form-container  .regis {
@@ -714,8 +718,6 @@ a:focus {
   padding-left:  15px;
   padding-bottom: 6px;
 }
-
-
 
 .contact_bg_box {
   position: absolute;
@@ -755,8 +757,8 @@ a:focus {
   background: -webkit-gradient(linear, left top, right top, from(rgba(0, 0, 0, 0.7)), to(rgba(0, 0, 0, 0.35)));
   background: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.35));
 }
-
 /* end contact section */
+
 .team_section .box {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -772,21 +774,23 @@ a:focus {
 
 .team_section .box .img-box {
   width: 100%;
+  border-radius: 40px;
 }
 
 
 .team_section .box .img-box img {
   width: 100%;
+  border-radius: 40px;
 }
 
 .team_section .box .detail-box {
-  position: absolute;
+  /* position: absolute; */
   width: 100%;
-  color: #ffffff;
-  padding: 25px 15px;
+  color: #000000;
+  padding: 10px 10px;
   text-align: center;
   bottom: 0;
-  background-color: rgba(28, 28, 28, 0.75);
+  /* background-color: rgba(28, 28, 28, 0.75); */
 }
 
 .team_section .btn-box {
@@ -796,23 +800,25 @@ a:focus {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  margin-top: 45px;
-}
+  margin-top: 0px;}
 
 .team_section .btn-box a {
   display: inline-block;
-  padding: 10px 45px;
-  background-color: #f1db25;
+  padding: 10px 20px;
+  background-color: #5fcf86;
   color: #ffffff;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
   border: 1px solid transparent;
+  border-radius: 10px;
+
 }
 
 .team_section .btn-box a:hover {
   background-color: transparent;
-  border-color: #f1db25;
-  color: #f1db25;
+  border-color: #5fcf86;
+  color: #5fcf86;
+  border-radius: 15px;
 }
 
 .info_section {
@@ -898,7 +904,7 @@ a:focus {
   outline: none;
   border: none;
   color: #ffffff;
-  background: #f1db25;
+  background: #5fcf86;
   border-radius: 30px;
   margin-top: 15px;
   text-transform: uppercase;

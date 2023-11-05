@@ -6,8 +6,6 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
   header("location: login.php");
   exit;
 }
-
-
 ?>
 
 <!DOCTYPE html>
@@ -25,14 +23,13 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
   <meta name="author" content="" />
   <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
 
-  <title>Guarder</title>
+  <title>SERVICES</title>
 
   <!-- bootstrap core css -->
   <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
 
   <!-- fonts style -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Poppins:400,600,700&display=swap"
-    rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Poppins:400,600,700&display=swap" rel="stylesheet" />
 
   <!-- Custom styles for this template -->
   <link href="css/style.css" rel="stylesheet" />
@@ -42,12 +39,12 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
 
 <body class="sub_page">
   <div class="hero_area">
-    <!-- header section strats -->
-    <div class="hero_bg_box">
+    <!-- header section start -->
+    <!-- <div class="hero_bg_box">
       <div class="img-box">
         <img src="images/hero-bg.jpg" alt="">
       </div>
-    </div>
+    </div> -->
 
     <header class="header_section">
       <div class="header_top">
@@ -79,11 +76,10 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
           <nav class="navbar navbar-expand-lg custom_nav-container">
             <a class="navbar-brand" href="index.php">
               <span>
-                Guarder
+                Tên thương hiệu
               </span>
             </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-              aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class=""></span>
             </button>
 
@@ -91,10 +87,8 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
               <ul class="navbar-nav  ">
 
                 <!-- filter dropdown -->
-
                 <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Filter
                   </a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -121,8 +115,8 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
                 <li class="nav-item active">
                   <a class="nav-link" href="service.php"> Services </a>
                 </li>
-                <?php 
-                if($_SESSION['username'] == 'admin@gmail.com'){
+                <?php
+                if ($_SESSION['username'] == 'admin@gmail.com') {
                   echo '<li class="nav-item">
                   <a class="nav-link" href="addNew.php">Add Product</a>
                 </li>';
@@ -139,11 +133,7 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
     </header>
     <!-- end header section -->
 
-
-
     <!-- product line section -->
-
-
     <section class="team_section layout_padding">
       <div class="container">
         <div class="row">
@@ -152,7 +142,6 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
           include 'handleDB.php';
           $db = new HandleDB();
 
-
           if (isset($_POST['submit'])) {
             $search = $_POST['search'];
 
@@ -160,33 +149,29 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
 
             if ($result) {
               foreach ($result as $service) {
-                echo '<div class = "col-md-6 col-lg-4 mx-auto ">
-                <div class = "box ">
-                  <div class = "img-box" >
-                    <img src = "' . $service['url'] . '" alt = "" />
+                echo  
+                '<div class = "col-md-6 col-lg-4 mx-auto">
+                  <div class = "box" style = "background-color: #ffff; border-radius: 10px";>
+                    <div class = "img-box" >
+                      <img src = "' . $service['url'] . '" alt = "" />
+                    </div>
+                    <div class = "detail-box ">
+                      <h5>
+                        ' . $service['name'] . '
+                      </h5>
+                      <p>
+                        ' . $service['subcontent'] . '
+                      </p>
+                      <a href = "detail.php?id=' . $service['id'] . '" class = "btn btn-outline-primary" >
+                        Read More
+                      </a>
+                    </div>
                   </div>
-                  <div class = "detail-box ">
-                    <h5>
-                      ' . $service['name'] . '
-                    </h5>
-                    <p>
-                      ' . $service['subcontent'] . '
-                    </p>
-                    <a href = "detail.php?id=' . $service['id'] . '" class = "btn btn-outline-primary" >
-                      Read More
-                    </a>
-  
-  
-                  </div>
-                </div>
-              </div>';
-
+                </div>';
               }
             } else {
               echo "<p style='color: red'>Không có dữ liệu</p>";
-
             }
-
           } elseif (isset($_GET['filter'])) {
             $filter = $_GET['filter'];
 
@@ -194,8 +179,9 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
 
             if ($result) {
               foreach ($result as $service) {
-                echo '<div class = "col-md-6 col-lg-4 mx-auto ">
-                <div class = "box ">
+                echo
+                '<div class = "col-md-6 col-lg-4 mx-auto"
+                <div class = "box" style = "background-color: #ffff; border-radius: 10px";>
                   <div class = "img-box" >
                     <img src = "' . $service['url'] . '" alt = "" />
                   </div>
@@ -210,24 +196,21 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
                       Read More
                     </a>
   
-  
                   </div>
                 </div>
               </div>';
-
               }
             } else {
               echo "Không có dữ liệu";
-
             }
-
           } else {
             $result = $db->find_by_data('services', '');
 
             if ($result) {
               foreach ($result as $service) {
-                echo '<div class = "col-md-6 col-lg-4 mx-auto ">
-                <div class = "box ">
+                echo 
+                '<div class = "col-md-6 col-lg-4 mx-auto">
+                <div class = "box" style = "background-color: #ffff; border-radius: 10px";>
                   <div class = "img-box" >
                     <img src = "' . $service['url'] . '" alt = "" />
                   </div>
@@ -242,24 +225,17 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
                       Read More
                     </a>
   
-  
                   </div>
                 </div>
               </div>';
-
               }
             } else {
               echo "Không có dữ liệu";
-
             }
           }
-
           ?>
-
         </div>
-
       </div>
-
     </section>
     <!-- end product line section -->
 
@@ -324,11 +300,7 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
         </div>
       </div>
     </section>
-
     <!-- end info_section -->
-
-
-
 
     <!-- footer section -->
     <footer class="container-fluid footer_section">

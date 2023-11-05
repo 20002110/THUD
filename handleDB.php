@@ -15,7 +15,6 @@ class HandleDB {
         }
     }
 
-
     public function update($table, $data, $where) {
         $set = "";
         foreach ($data as $key => $value) {
