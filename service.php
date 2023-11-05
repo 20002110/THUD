@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 <?php
 session_start();
 
@@ -26,7 +26,7 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
   <meta name="author" content="" />
   <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
 
-  <title>Guarder</title>
+  <title>Services</title>
 
   <!-- bootstrap core css -->
   <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
