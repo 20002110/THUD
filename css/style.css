@@ -780,7 +780,6 @@ a:focus {
 }
 
 .team_section .box .detail-box {
-  position: absolute;
   width: 100%;
   color: #ffffff;
   padding: 25px 15px;
