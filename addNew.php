@@ -76,7 +76,7 @@ else{
                         <a href="" class="contact_link3">
                             <i class="fa fa-envelope" aria-hidden="true"></i>
                             <span>
-                                suppost@gmail.com
+                                support@gmail.com
                             </span>
                         </a>
                     </div>
@@ -116,7 +116,6 @@ else{
         <!-- end header section -->
 
         <!-- Add product main -->
-
         <section class="contact_section layout_padding">
             <div class="contact_bg_box">
                 <div class="img-box">
@@ -194,7 +193,6 @@ else{
                 </div>
             </div>
         </section>
-
         <!-- end Add product main -->
 
         <?php
@@ -230,11 +228,8 @@ else{
             echo "Thêm sản phẩm thành công";
 
             header("location: addNew.php");
-
         }
-
         ?>
-
 
         <!-- info section -->
         <section class="info_section ">
@@ -262,7 +257,7 @@ else{
                             <a href="" class="">
                                 <i class="fa fa-envelope" aria-hidden="true"></i>
                                 <span>
-                                    suppost@gmail.com
+                                    support@gmail.com
                                 </span>
                             </a>
                         </div>
@@ -296,12 +291,8 @@ else{
                     </div>
                 </div>
             </div>
-        </section>
-
+        </section>        
         <!-- end info_section -->
-
-
-
 
         <!-- footer section -->
         <footer class="container-fluid footer_section">
@@ -314,7 +305,6 @@ else{
         <script src="js/jquery-3.4.1.min.js"></script>
         <script src="js/bootstrap.js"></script>
         <script src="js/custom.js"></script>
-
 
 </body>
 

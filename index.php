@@ -83,12 +83,12 @@
                 <li class="nav-item">
                   <!-- <a class="nav-link" href="login.php">Log in</a> -->
                   <?php
-                    session_start();
-                    if (isset($_SESSION['username'])) {
-                      echo '<a class="nav-link" href="logout.php">Log out</a>';
-                    } else {
-                      echo '<a class="nav-link" href="login.php">Log in</a>';
-                    }
+                  session_start();
+                  if (isset($_SESSION['username'])) {
+                    echo '<a class="nav-link" href="logout.php">Log out</a>';
+                  } else {
+                    echo '<a class="nav-link" href="login.php">Log in</a>';
+                  }
                   ?>
                 </li>
               </ul>
@@ -111,17 +111,17 @@
                     <h1>
                       <i>"Tên thương hiệu"</i> <br>
                       <span>
-                        Cùng bạn trên mọi hành trình  
+                        Cùng bạn trên mọi hành trình
                       </span>
                     </h1>
                     <p>
-                      Trải nghiệm sự khác biệt của <i>"Tên thương hiệu"</i> với 
+                      Trải nghiệm sự khác biệt của <i>"Tên thương hiệu"</i> với
                       <span class="text-primary">hơn 10000</span>
                       xe rộng khắp Hà Nội và TP.Hồ Chí Minh
                     </p>
                     <div class="btn-box">
                       <a href="" class="btn-1"> Xe tự lái </a>
-                      <a href="" class="btn-2">Xe có tài xế</a> 
+                      <a href="" class="btn-2">Xe có tài xế</a>
                     </div>
                   </div>
                 </div>
@@ -136,13 +136,13 @@
                     <h1>
                       Chương trình <br>
                       <span>
-                         khuyến mãi
+                        khuyến mãi
                       </span>
                     </h1>
                     <p>
-                        Nhận nhiều 
-                        <span class="text-primary">ưu đãi</span>
-                        hấp dẫn từ <i>"Tên thương hiệu"</i> với nhiều khuyến mãi trên tất cả các dịch vụ hiện có
+                      Nhận nhiều
+                      <span class="text-primary">ưu đãi</span>
+                      hấp dẫn từ <i>"Tên thương hiệu"</i> với nhiều khuyến mãi trên tất cả các dịch vụ hiện có
                     </p>
                     <div class="btn-box">
                       <a href="" class="btn-1">Tìm hiểu ngay</a>
@@ -166,10 +166,10 @@
                       </span>
                     </h1>
                     <p>
-                        Chúng tôi cam kết về an toàn của khách hàng trong quá trình trải nghiệm dịch vụ
-                        <br>  
-                        Mọi thông tin chi tiết được nằm trong 
-                        <span class="text-primary">điều khoản dịch vụ</span>
+                      Chúng tôi cam kết về an toàn của khách hàng trong quá trình trải nghiệm dịch vụ
+                      <br>
+                      Mọi thông tin chi tiết được nằm trong
+                      <span class="text-primary">điều khoản dịch vụ</span>
                     </p>
                     <div class="btn-box">
                       <a href="" class="btn-1">Tìm hiểu ngay</a>
@@ -211,14 +211,14 @@
               </h2>
             </div>
             <p>
-                Chúng tôi quan niệm rằng, mỗi chuyến đi là một hành trình trải nghiệm và khám phá, là cơ hội để bản thân tìm hiểu 
-                những khoảnh khắc mới mẻ trong cuộc sống. Do đó, chất lượng dịch vụ, trải nghiệm người dùng là ưu tiên hàng đầu và 
-                là nguồn cảm hứng của chúng tôi xuyên suốt của trình hoạt động.
-                <br><br>
-                <i>"Tên thương hiệu"</i> là nền tảng cho thuê xe với đa dạng phân khúc, mẫu mã. Chúng tôi không chỉ dừng lại 
-                với việc kết nối với khách hàng một cách nhanh chóng, đảm bảo chất lượng xe an toàn, bên cạnh đó chúng tôi còn 
-                hướng tới trải nghiệm của khách hàng một cách tốt nhất trong quá trình trải nghiệm dịch vụ.
-                     
+              Chúng tôi quan niệm rằng, mỗi chuyến đi là một hành trình trải nghiệm và khám phá, là cơ hội để bản thân tìm hiểu
+              những khoảnh khắc mới mẻ trong cuộc sống. Do đó, chất lượng dịch vụ, trải nghiệm người dùng là ưu tiên hàng đầu và
+              là nguồn cảm hứng của chúng tôi xuyên suốt của trình hoạt động.
+              <br><br>
+              <i>"Tên thương hiệu"</i> là nền tảng cho thuê xe với đa dạng phân khúc, mẫu mã. Chúng tôi không chỉ dừng lại
+              với việc kết nối với khách hàng một cách nhanh chóng, đảm bảo chất lượng xe an toàn, bên cạnh đó chúng tôi còn
+              hướng tới trải nghiệm của khách hàng một cách tốt nhất trong quá trình trải nghiệm dịch vụ.
+
             </p>
             <!-- <div class="btn-box">
               <a href="">
@@ -283,60 +283,38 @@
     <div class="container">
       <div class="heading_container heading_center">
         <h2>
-            Xe dành cho bạn
+          Dịch vụ của chúng tôi
         </h2>
       </div>
       <div class="row">
         <div class="col-md-4 col-sm-6 mx-auto ">
           <div class="box">
             <div class="img-box">
-              <img src="images/t1.jpg" alt="">
+              <img src="images/lux_A2_resize.jpg" alt="">
             </div>
             <div class="detail-box">
-              <h5>
-                Martin Anderson
-              </h5>
-              <h6 class="">
-                supervisor
-              </h6>
+              <h3> Xe tự lái </h3>
+              <p> Quận Thanh Xuân, Hà Nội </p>
+              <div class="btn-box">
+                <a href="service.php"> Thuê xe tự lái </a>
+              </div>
             </div>
           </div>
         </div>
         <div class="col-md-4 col-sm-6 mx-auto ">
           <div class="box">
             <div class="img-box">
-              <img src="images/t2.jpg" alt="">
+              <img src="images/vf6_1_resize.jpg">
             </div>
             <div class="detail-box">
-              <h5>
-                Denny Butler
-              </h5>
-              <h6 class="">
-                supervisor
-              </h6>
+              <h3> Xe có tài xế </h3>
+              <p> Quận 1, Hồ Chí Minh </p>
+              <div class="btn-box">
+                <a href="service.php"> Thuê xe có tài xế </a>
+              </div>
             </div>
           </div>
         </div>
-        <div class="col-md-4 col-sm-6 mx-auto ">
-          <div class="box">
-            <div class="img-box">
-              <img src="images/t3.jpg" alt="">
-            </div>
-            <div class="detail-box">
-              <h5>
-                Nathan Mcpherson
-              </h5>
-              <h6 class="">
-                supervisor
-              </h6>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="btn-box">
-        <a href="service.php">
-          View All
-        </a>
       </div>
     </div>
   </section>
