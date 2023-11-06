@@ -149,7 +149,7 @@
         <div class="container">
             <div class="heading_container heading_center">
                 <h2>
-                    FORGOT PASSWORD
+                    REGISTER
                 </h2>
             </div>
             <div class="">
