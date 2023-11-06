@@ -163,7 +163,7 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
                   <div class = "img-box" >
                     <img src = "' . $service['url'] . '" alt = "" />
                   </div>
-                  <div class = "detail-box ">
+                  <div class = "detail-box " style="position: relative">
                     <h5>
                       ' . $service['name'] . '
                     </h5>
