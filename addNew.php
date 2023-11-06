@@ -7,11 +7,14 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
  header("location: login.php");
 exit;
 }
-
-if ($_SESSION['username'] != "admin@gmail.com") {
+else if ($_SESSION['username'] != "admin@gmail.com") {
  header("location: addNew.php");
-exit;
 }
+else{
+    header("location: service.php");
+    exit;
+}
+
 
 ?>
 
