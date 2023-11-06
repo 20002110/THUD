@@ -184,6 +184,7 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
               echo "<p style='color: red'>Không có dữ liệu</p>";
 
             }
+            
 
           } elseif (isset($_GET['filter'])) {
             $filter = $_GET['filter'];
