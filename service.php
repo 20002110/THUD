@@ -80,7 +80,7 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
           <nav class="navbar navbar-expand-lg custom_nav-container">
             <a class="navbar-brand" href="index.php">
               <span>
-                Guarder
+                Services
               </span>
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
