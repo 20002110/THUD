@@ -1,34 +1,31 @@
 <?php
-include 'handleDB.php';
+    include 'handleDB.php';
 
-$db = new handleDB();
+    $db = new handleDB();
 
-if (isset($_POST['login'])) {
-    $email = $_POST['email'];
-    $password = $_POST['password'];
+    if (isset($_POST['submit'])) {
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+        $confirm_password = $_POST['confirm_password'];
 
-    $data = $db->find_data("Users", "username", $email);
-
-    if ($data == false) {
-        echo "<script>alert('Email không tồn tại')</script>";
-        print_r($data);
-    } else {
-        // $password = password_hash($password, PASSWORD_DEFAULT);
-        if (password_verify($password, $data['password'])) {
-            echo "<script>alert('Đăng nhập thành công')</script>";
-            session_start();
-            $_SESSION['username'] = $email;
-            header("Location: index.php");
+        if ($db->find_data("Users", "username",$email) == false) {
+            echo "<script>alert('Email does not exist!')</script>";
         } else {
-            echo "<script>alert('Sai mật khẩu') </script>";
-            echo $password;
-            echo $data['password'];
+            if ($password != $confirm_password) {
+                echo "<script>alert('Password does not match!')</script>";
+            } else {
+                $password = password_hash($password, PASSWORD_DEFAULT);
+                $db->update("Users", "password", $password, "username" ,$email);
+                echo "<script>alert('Password changed successfully!')</script>";
+                header("Location: login.php");
+            }
         }
+
     }
 
-}
+    $db->__destruct();
 
-?>
+    ?>
 
 <!DOCTYPE html>
 <html>
@@ -45,7 +42,7 @@ if (isset($_POST['login'])) {
     <meta name="author" content="" />
     <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
 
-    <title>LOGIN</title>
+    <title>Forgot Password</title>
 
     <!-- bootstrap core css -->
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
@@ -56,18 +53,21 @@ if (isset($_POST['login'])) {
 
     <!-- Custom styles for this template -->
     <link href="css/style.css" rel="stylesheet" />
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+
     <!-- responsive style -->
     <link href="css/responsive.css" rel="stylesheet" />
 </head>
 
 <body class="sub_page">
     <div class="hero_area">
-        <!-- header section start -->
+        <!-- header section strats -->
         <div class="hero_bg_box">
             <div class="img-box">
-                <img src="images/login_bg.jpg" alt="">
+                <img src="images/hero-bg.jpg" alt="">
             </div>
         </div>
+
         <header class="header_section">
             <div class="header_top">
                 <div class="container-fluid">
@@ -98,7 +98,7 @@ if (isset($_POST['login'])) {
                     <nav class="navbar navbar-expand-lg custom_nav-container">
                         <a class="navbar-brand" href="index.html">
                             <span>
-                                Tên thương hiệu
+                                
                             </span>
                         </a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -127,49 +127,121 @@ if (isset($_POST['login'])) {
         <!-- end header section -->
     </div>
 
+
     <section class="contact_section layout_padding">
         <div class="contact_bg_box">
             <div class="img-box">
-                <img src="images/login_bg.jpg" alt="">
+                <img src="images/contact-bg.jpg" alt="">
             </div>
         </div>
         <div class="container">
             <div class="heading_container heading_center">
                 <h2>
-                    LOG IN
+                    FORGOT PASSWORD
                 </h2>
             </div>
             <div class="">
                 <div class="row">
                     <div class="col-md-7 mx-auto">
-                        <form action="" method = "post">
+                        <form method="post">
                             <div class="contact_form-container">
                                 <div>
                                     <div>
-                                        <input type="email" placeholder="Email " name = "email" id = "email" required />
+                                        <input type="email" placeholder="Email " id = "email" name = "email" required />
                                     </div>
                                     <div>
-                                        <input type="password" placeholder="Password" name="password" id = "password" required />
+                                        <input type="password" placeholder="New Password" id = "password" name = "password" required />
+                                    </div>
+                                    <div>
+                                        <input type="password" placeholder="Confirm Password" id = "confirm_password" name="confirm_password" required />
+                                    </div>
+                                    <div>
+                                        <label id="otp" style="display: none"></label>
+                                    </div>
+                                    <div>
+                                        <input type="number" placeholder="OTP" id = "in_otp" name="in_otp" style= "display: none" required />
                                     </div>
                                     <div class="btn-box ">
-                                        <button type="submit" name = "login" >
-                                            Log in
+                                        <button type="submit" name="send_otp" onclick="sendMail()" id = "send_otp">
+                                            Send OTP
                                         </button>
                                     </div>
-
-                                    <!-- dont have account  -->
-                                    <div class = "regis">
-                                        <div class="register">
-                                            Don't have account?
-                                            <a href="register.php">Register here</a>
-                                        </div>
-
-                                        <div class="register">
-                                            Forgot password?
-                                            <a href="forgot.php">Click here</a>
-                                        </div>
+                                    <div class="btn-box ">
+                                        <button type="submit" name="submit" id="submit" style="display: none">
+                                            Confirm
+                                        </button>
                                     </div>
+                                            
+                                    <script>
+                                        var password = document.getElementById("password")
+                                            , confirm_password = document.getElementById("confirm_password");
 
+                                        function validatePassword() {
+                                            if (password.value != confirm_password.value) {
+                                                confirm_password.setCustomValidity("Passwords Don't Match");
+                                            } else {
+                                                confirm_password.setCustomValidity('');
+                                            }
+                                        }
+
+                                        password.onchange = validatePassword;
+                                        confirm_password.onkeyup = validatePassword;
+
+                                    </script>
+
+                                    <script>
+                                        // emailjs
+                                        emailjs.init("6VzQcCIDbGU-WvZ0L")
+
+                                        function sendMail(contactForm) {
+                                            document.getElementById("send_otp").style.display = "none";
+                                            var receiver = document.getElementById("email").value;
+
+                                            var otp = Math.floor(Math.random() * 1000000);
+
+                                            //  set otp to variable php
+
+
+                                            var message = "Your OTP to veryfy is " + otp;
+
+                                            var templateParams = {
+                                                from_name: "Admin",
+                                                to_name: receiver,
+                                                message: message,
+                                            };
+
+                                            emailjs.send("service_xs8w0pp", "template_06kpj9m", templateParams)
+                                                .then(function (response) {
+                                                    console.log("SUCCESS!", response.status, response.text);
+                                                    //  notice "please check your email to get OTP" in a label
+                                                    document.getElementById("otp").style.display = "block";
+                                                    document.getElementById("otp").innerHTML = "Please check your email to get OTP";
+                                                    document.getElementById("in_otp").style.display = "block";
+                                                    // check otp match and display submit button
+                                                    document.getElementById("in_otp").onkeyup = function () {
+                                                        var get_otp = document.getElementById("in_otp").value;
+                                                        if (get_otp == otp) {
+                                                            document.getElementById("send_otp").style.display = "none";
+                                                            document.getElementById("otp").style.color = "green";
+                                                            document.getElementById("otp").innerHTML = "OTP matched";
+                                                            document.getElementById("submit").style.display = "block";
+                                                        }
+                                                        else {
+                                                            document.getElementById("send_otp").style.display = "block";
+                                                            document.getElementById("send_otp").innerHTML = "Send OTP again";
+                                                            document.getElementById("otp").style.color = "red";
+                                                            document.getElementById("otp").innerHTML = "OTP does not match";
+                                                            document.getElementById("submit").style.display = "none";
+                                                        }
+                                                    }
+                                                }, function (error) {
+                                                    console.log("FAILED...", error);
+                                                });
+
+                                        }
+
+
+                                    </script>
                                 </div>
                             </div>
                         </form>
@@ -178,6 +250,8 @@ if (isset($_POST['login'])) {
             </div>
         </div>
     </section>
+
+
     <!-- info section -->
     <section class="info_section ">
         <div class="container">
@@ -204,7 +278,7 @@ if (isset($_POST['login'])) {
                         <a href="" class="">
                             <i class="fa fa-envelope" aria-hidden="true"></i>
                             <span>
-                                support@gmail.com
+                                suppost@gmail.com
                             </span>
                         </a>
                     </div>
@@ -239,7 +313,12 @@ if (isset($_POST['login'])) {
             </div>
         </div>
     </section>
+
     <!-- end info_section -->
+
+
+
+
     <!-- footer section -->
     <footer class="container-fluid footer_section">
         <p>
@@ -254,4 +333,5 @@ if (isset($_POST['login'])) {
 </body>
 
 </html>
+
 

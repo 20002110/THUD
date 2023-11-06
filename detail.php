@@ -13,7 +13,7 @@
   <meta name="author" content="" />
   <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
 
-  <title>Guarder</title>
+  <title>Detail</title>
 
   <!-- bootstrap core css -->
   <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
@@ -30,13 +30,6 @@
 
 <body class="sub_page">
   <div class="hero_area">
-    <!-- header section strats -->
-    <!-- <div class="hero_bg_box">
-      <div class="img-box">
-        <img src="images/hero-bg.jpg" alt="">
-      </div>
-    </div> -->
-
     <header class="header_section">
       <div class="header_top">
         <div class="container-fluid">
@@ -67,7 +60,7 @@
           <nav class="navbar navbar-expand-lg custom_nav-container">
             <a class="navbar-brand" href="index.php">
               <span>
-                Guarder
+                
               </span>
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"

@@ -1,3 +1,4 @@
+
 <?php
 session_start();
 
@@ -6,6 +7,7 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
   header("location: login.php");
   exit;
 }
+
 
 
 ?>
@@ -25,7 +27,7 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
   <meta name="author" content="" />
   <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
 
-  <title>Guarder</title>
+  <title>Services</title>
 
   <!-- bootstrap core css -->
   <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
@@ -79,7 +81,7 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
           <nav class="navbar navbar-expand-lg custom_nav-container">
             <a class="navbar-brand" href="index.php">
               <span>
-                Guarder
+                Services
               </span>
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -139,11 +141,7 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
     </header>
     <!-- end header section -->
 
-
-
     <!-- product line section -->
-
-
     <section class="team_section layout_padding">
       <div class="container">
         <div class="row">
@@ -161,11 +159,11 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
             if ($result) {
               foreach ($result as $service) {
                 echo '<div class = "col-md-6 col-lg-4 mx-auto ">
-                <div class = "box ">
+                <div class = "box" style="background-color: #ffff; border-radius: 10px">
                   <div class = "img-box" >
                     <img src = "' . $service['url'] . '" alt = "" />
                   </div>
-                  <div class = "detail-box ">
+                  <div class = "detail-box " style="position: relative">
                     <h5>
                       ' . $service['name'] . '
                     </h5>
@@ -195,7 +193,7 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
             if ($result) {
               foreach ($result as $service) {
                 echo '<div class = "col-md-6 col-lg-4 mx-auto ">
-                <div class = "box ">
+                <div class = "box" style="background-color: #ffff; border-radius: 10px">
                   <div class = "img-box" >
                     <img src = "' . $service['url'] . '" alt = "" />
                   </div>
@@ -217,7 +215,7 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
 
               }
             } else {
-              echo "Không có dữ liệu";
+              echo "<p style='color: red'>Không có dữ liệu</p>";
 
             }
 
@@ -227,7 +225,7 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
             if ($result) {
               foreach ($result as $service) {
                 echo '<div class = "col-md-6 col-lg-4 mx-auto ">
-                <div class = "box ">
+                <div class = "box" style="background-color: #ffff; border-radius: 10px">
                   <div class = "img-box" >
                     <img src = "' . $service['url'] . '" alt = "" />
                   </div>
@@ -242,15 +240,13 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
                       Read More
                     </a>
   
-  
                   </div>
                 </div>
               </div>';
 
               }
             } else {
-              echo "Không có dữ liệu";
-
+              echo "<p style='color: red'>Không có dữ liệu</p>";
             }
           }
 
@@ -324,11 +320,7 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
         </div>
       </div>
     </section>
-
     <!-- end info_section -->
-
-
-
 
     <!-- footer section -->
     <footer class="container-fluid footer_section">
@@ -342,5 +334,4 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
     <script src="js/bootstrap.js"></script>
     <script src="js/custom.js"></script>
 </body>
-
 </html>
