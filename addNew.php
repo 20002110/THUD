@@ -262,7 +262,7 @@ else{
                             <a href="" class="">
                                 <i class="fa fa-envelope" aria-hidden="true"></i>
                                 <span>
-                                    suppost@gmail.com
+                                    support@gmail.com
                                 </span>
                             </a>
                         </div>
