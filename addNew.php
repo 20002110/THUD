@@ -10,7 +10,9 @@ exit;
 
 if ($_SESSION['username'] != "admin@gmail.com") {
  header("location: addNew.php");
-exit;
+}
+else{
+    header("location: service.php");
 }
 
 ?>
