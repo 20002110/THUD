@@ -6,7 +6,8 @@ session_start();
 if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
  header("location: login.php");
 exit;
-} 
+}
+
 if ($_SESSION['username'] != "admin@gmail.com") {
  header("location: addNew.php");
 exit;
@@ -29,7 +30,7 @@ exit;
     <meta name="author" content="" />
     <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
 
-    <title>Guarder</title>
+    <title>Add Product</title>
 
     <!-- bootstrap core css -->
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />

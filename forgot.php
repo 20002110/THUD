@@ -1,4 +1,3 @@
-
 <?php
     include 'handleDB.php';
 
@@ -10,29 +9,18 @@
         $confirm_password = $_POST['confirm_password'];
 
         if ($db->find_data("Users", "username",$email) == false) {
-            if ($password == $confirm_password) {
-
-                $password = password_hash($password, PASSWORD_DEFAULT);
-
-                $data = array(
-                    "username" => $email,
-                    "password" => $password,
-                );
-
-                if ($db->add_data("Users", $data)) {
-                    // display success message
-                    echo "Thêm thành công";
-                    header("Location: login.php");
-                    
-                } else {
-                    echo "<script>alert('Thêm thất bại')</script>";
-                }
-            } else {
-                echo "<script>alert('Mật khẩu không khớp')</script>";
-            }
+            echo "<script>alert('Email does not exist!')</script>";
         } else {
-            echo "<script>alert('Email đã tồn tại')</script>";
+            if ($password != $confirm_password) {
+                echo "<script>alert('Password does not match!')</script>";
+            } else {
+                $password = password_hash($password, PASSWORD_DEFAULT);
+                $db->update("Users", "password", $password, "username" ,$email);
+                echo "<script>alert('Password changed successfully!')</script>";
+                header("Location: login.php");
+            }
         }
+
     }
 
     $db->__destruct();
@@ -54,7 +42,7 @@
     <meta name="author" content="" />
     <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
 
-    <title>Register</title>
+    <title>Forgot Password</title>
 
     <!-- bootstrap core css -->
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
@@ -180,7 +168,7 @@
                                     </div>
                                     <div class="btn-box ">
                                         <button type="submit" name="submit" id="submit" style="display: none">
-                                            Register
+                                            Confirm
                                         </button>
                                     </div>
                                             
