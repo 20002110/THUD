@@ -2,7 +2,7 @@
 class HandleDB {
     const HOST = "localhost";
     const USER = "admin";
-    const PASSWORD = "anhquan";
+    const PASSWORD = "12112002";
     const DATABASE = "Admin";
 
     private $conn;
@@ -16,14 +16,8 @@ class HandleDB {
     }
 
 
-    public function update($table, $data, $where) {
-        $set = "";
-        foreach ($data as $key => $value) {
-            $set .= "$key='$value',";
-        }
-        $set = rtrim($set, ",");
-        $sql = "UPDATE $table SET $set WHERE $where";
-
+    public function update($table, $field, $data, $where, $key) {
+        $sql = "UPDATE $table SET $field = '$data' WHERE $where = '$key'";
         if ($this->conn->query($sql) === TRUE) {
             return true;
         } else {
