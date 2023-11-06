@@ -157,7 +157,7 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
             if ($result) {
               foreach ($result as $service) {
                 echo '<div class = "col-md-6 col-lg-4 mx-auto ">
-                <div class = "box" style="background-color= #ffff; border-radius=10px">
+                <div class = "box" style="background-color: #ffff; border-radius: 10px">
                   <div class = "img-box" >
                     <img src = "' . $service['url'] . '" alt = "" />
                   </div>
@@ -191,7 +191,7 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
             if ($result) {
               foreach ($result as $service) {
                 echo '<div class = "col-md-6 col-lg-4 mx-auto ">
-                <div class = "box" style="background-color= #ffff; border-radius=10px">
+                <div class = "box" style="background-color: #ffff; border-radius: 10px">
                   <div class = "img-box" >
                     <img src = "' . $service['url'] . '" alt = "" />
                   </div>
@@ -223,7 +223,7 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
             if ($result) {
               foreach ($result as $service) {
                 echo '<div class = "col-md-6 col-lg-4 mx-auto ">
-                <div class = "box" style="background-color= #ffff; border-radius=10px">
+                <div class = "box" style="background-color: #ffff; border-radius: 10px">
                   <div class = "img-box" >
                     <img src = "' . $service['url'] . '" alt = "" />
                   </div>
