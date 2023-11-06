@@ -10,7 +10,9 @@ exit;
 
 if ($_SESSION['username'] != "admin@gmail.com") {
  header("location: addNew.php");
-exit;
+}
+else{
+    header("location: service.php");
 }
 
 
@@ -74,7 +76,7 @@ exit;
                         <a href="" class="contact_link3">
                             <i class="fa fa-envelope" aria-hidden="true"></i>
                             <span>
-                                suppost@gmail.com
+                                support@gmail.com
                             </span>
                         </a>
                     </div>
@@ -114,7 +116,6 @@ exit;
         <!-- end header section -->
 
         <!-- Add product main -->
-
         <section class="contact_section layout_padding">
             <div class="contact_bg_box">
                 <div class="img-box">
@@ -192,7 +193,6 @@ exit;
                 </div>
             </div>
         </section>
-
         <!-- end Add product main -->
 
         <?php
@@ -228,11 +228,8 @@ exit;
             echo "Thêm sản phẩm thành công";
 
             header("location: addNew.php");
-
         }
-
         ?>
-
 
         <!-- info section -->
         <section class="info_section ">
@@ -294,12 +291,8 @@ exit;
                     </div>
                 </div>
             </div>
-        </section>
-
+        </section>        
         <!-- end info_section -->
-
-
-
 
         <!-- footer section -->
         <footer class="container-fluid footer_section">
@@ -312,7 +305,6 @@ exit;
         <script src="js/jquery-3.4.1.min.js"></script>
         <script src="js/bootstrap.js"></script>
         <script src="js/custom.js"></script>
-
 
 </body>
 

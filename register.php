@@ -12,7 +12,6 @@
         if ($db->find_data("Users", "username",$email) == false) {
             if ($password == $confirm_password) {
 
-
                 $password = password_hash($password, PASSWORD_DEFAULT);
 
                 $data = array(
@@ -25,7 +24,6 @@
                     echo "Thêm thành công";
                     header("Location: login.php");
                     
-
                 } else {
                     echo "<script>alert('Thêm thất bại')</script>";
                 }
@@ -151,7 +149,7 @@
         <div class="container">
             <div class="heading_container heading_center">
                 <h2>
-                    Register
+                    REGISTER
                 </h2>
             </div>
             <div class="">

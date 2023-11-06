@@ -8,7 +8,6 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
   exit;
 }
 
-
 ?>
 
 <!DOCTYPE html>
@@ -140,11 +139,7 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
     </header>
     <!-- end header section -->
 
-
-
     <!-- product line section -->
-
-
     <section class="team_section layout_padding">
       <div class="container">
         <div class="row">
@@ -162,7 +157,7 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
             if ($result) {
               foreach ($result as $service) {
                 echo '<div class = "col-md-6 col-lg-4 mx-auto ">
-                <div class = "box ">
+                <div class = "box" style="background-color: #ffff; border-radius: 10px">
                   <div class = "img-box" >
                     <img src = "' . $service['url'] . '" alt = "" />
                   </div>
@@ -196,7 +191,7 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
             if ($result) {
               foreach ($result as $service) {
                 echo '<div class = "col-md-6 col-lg-4 mx-auto ">
-                <div class = "box ">
+                <div class = "box" style="background-color: #ffff; border-radius: 10px">
                   <div class = "img-box" >
                     <img src = "' . $service['url'] . '" alt = "" />
                   </div>
@@ -228,7 +223,7 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
             if ($result) {
               foreach ($result as $service) {
                 echo '<div class = "col-md-6 col-lg-4 mx-auto ">
-                <div class = "box ">
+                <div class = "box" style="background-color: #ffff; border-radius: 10px">
                   <div class = "img-box" >
                     <img src = "' . $service['url'] . '" alt = "" />
                   </div>
@@ -242,7 +237,6 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
                     <a href = "detail.php?id=' . $service['id'] . '" class = "btn btn-outline-primary" >
                       Read More
                     </a>
-  
   
                   </div>
                 </div>
@@ -324,11 +318,7 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
         </div>
       </div>
     </section>
-
     <!-- end info_section -->
-
-
-
 
     <!-- footer section -->
     <footer class="container-fluid footer_section">
