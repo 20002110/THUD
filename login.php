@@ -2,12 +2,13 @@
 include 'handleDB.php';
 
 $db = new handleDB();
+$passvalid = true;
 
 if (isset($_POST['login'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    $data = $db->find_data("Users", "username", $email);
+    $data = $db->find_data("users", "username", $email);
 
     if ($data == false) {
         echo "<script>alert('Email không tồn tại')</script>";
@@ -15,14 +16,13 @@ if (isset($_POST['login'])) {
     } else {
         // $password = password_hash($password, PASSWORD_DEFAULT);
         if (password_verify($password, $data['password'])) {
-            echo "<script>alert('Đăng nhập thành công')</script>";
+            // echo "<script>alert('Đăng nhập thành công')</script>";
+            // $passvalid = true;
             session_start();
             $_SESSION['username'] = $email;
-            header("Location: index.php");
+            header("Location: service.php");
         } else {
-            echo "<script>alert('Sai mật khẩu') </script>";
-            echo $password;
-            echo $data['password'];
+           $passvalid = false;
         }
     }
 
@@ -87,7 +87,7 @@ if (isset($_POST['login'])) {
                         <a href="" class="contact_link3">
                             <i class="fa fa-envelope" aria-hidden="true"></i>
                             <span>
-                                suppost@gmail.com
+                                support@gmail.com
                             </span>
                         </a>
                     </div>
@@ -98,7 +98,7 @@ if (isset($_POST['login'])) {
                     <nav class="navbar navbar-expand-lg custom_nav-container">
                         <a class="navbar-brand" href="index.html">
                             <span>
-                                Tên thương hiệu
+                                THUD
                             </span>
                         </a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -142,23 +142,29 @@ if (isset($_POST['login'])) {
             <div class="">
                 <div class="row">
                     <div class="col-md-7 mx-auto">
-                        <form action="" method = "post">
+                        <form action="" method="post">
                             <div class="contact_form-container">
                                 <div>
                                     <div>
-                                        <input type="email" placeholder="Email " name = "email" id = "email" required />
+                                        <input type="email" placeholder="Email " name="email" id="email" required />
                                     </div>
                                     <div>
-                                        <input type="password" placeholder="Password" name="password" id = "password" required />
+                                        <input type="password" placeholder="Password" name="password" id="password"
+                                            required />
                                     </div>
+                                    <?php
+                                    if($passvalid == false) {
+                                        echo '<label style="color:red;">Wrong password</label>';
+                                    } 
+                                    ?>
                                     <div class="btn-box ">
-                                        <button type="submit" name = "login" >
+                                        <button type="submit" name="login">
                                             Log in
                                         </button>
                                     </div>
 
                                     <!-- dont have account  -->
-                                    <div class = "regis">
+                                    <div class="regis">
                                         <div class="register">
                                             Don't have account?
                                             <a href="register.php">Register here</a>
@@ -254,4 +260,3 @@ if (isset($_POST['login'])) {
 </body>
 
 </html>
-

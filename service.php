@@ -70,7 +70,7 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
             <a href="" class="contact_link3">
               <i class="fa fa-envelope" aria-hidden="true"></i>
               <span>
-                suppost@gmail.com
+                support@gmail.com
               </span>
             </a>
           </div>
@@ -101,10 +101,9 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
                   </a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="service.php">All</a>
-                    <a class="dropdown-item" href="service.php?filter=dap">Security</a>
-                    <a class="dropdown-item" href="service.php?filter=may">Cleaning</a>
-                    <a class="dropdown-item" href="service.php?filter=3">Reception</a>
-                    <a class="dropdown-item" href="service.php?filter=4">Support</a>
+                    <a class="dropdown-item" href="service.php?filter=Porsche">Porsche</a>
+                    <a class="dropdown-item" href="service.php?filter=Vinfast">Vinfast</a>
+                    <a class="dropdown-item" href="service.php?filter=Ferrari">Ferrari</a>
                   </div>
 
                   <!-- search bar -->
@@ -168,7 +167,7 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
                       ' . $service['name'] . '
                     </h5>
                     <p>
-                      ' . $service['subcontent'] . '
+                      ' . $service['content'] .  ' 
                     </p>
                     <a href = "detail.php?id=' . $service['id'] . '" class = "btn btn-outline-primary" >
                       Read More
@@ -286,7 +285,7 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
               <a href="" class="">
                 <i class="fa fa-envelope" aria-hidden="true"></i>
                 <span>
-                  suppost@gmail.com
+                  support@gmail.com
                 </span>
               </a>
             </div>
