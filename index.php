@@ -27,7 +27,7 @@
   <link href="css/responsive.css" rel="stylesheet" />
 </head>
 
-<body>
+<body>  
   <div class="hero_area">
     <!-- header section start -->
     <div class="hero_bg_box">
