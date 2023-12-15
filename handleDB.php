@@ -2,13 +2,8 @@
 class HandleDB {
     const HOST = "localhost";
     const USER = "admin";
-<<<<<<< HEAD
     const PASSWORD = "anhquan";
     const DATABASE = "MovieTicket";
-=======
-    const PASSWORD = "12112002";
-    const DATABASE = "Admin";
->>>>>>> refs/remotes/origin/KyoGren
 
     private $conn;
 

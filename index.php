@@ -25,6 +25,9 @@
   <link href="css/style.css" rel="stylesheet" />
   <!-- responsive style -->
   <link href="css/responsive.css" rel="stylesheet" />
+
+  <link rel="stylesheet" href="js/custom.js">
+
 </head>
 
 <body>
@@ -80,15 +83,22 @@
                 <li class="nav-item">
                   <a class="nav-link" href="service.php"> Services </a>
                 </li>
-                <li class="nav-item">
-                  <?php
-                  session_start();
-                  if (isset($_SESSION['username'])) {
-                    echo '<a class="nav-link" href="logout.php">Log out</a>';
-                  } else {
-                    echo '<a class="nav-link" href="login.php">Log in</a>';
-                  }
-                  ?>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    Acount
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="service.php">Your Profile</a>
+                    <?php
+                    session_start();
+                    if (isset($_SESSION['username'])) {
+                      echo '<a class="dropdown-item" href="logout.php">Log out</a>';
+                    } else {
+                      echo '<a class="dropdown-item" href="login.php">Log in</a>';
+                    }
+                    ?>
+                  </div>
                 </li>
               </ul>
             </div>

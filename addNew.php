@@ -8,13 +8,8 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])) {
     exit;
 }
 
-<<<<<<< HEAD
 if($_SESSION['username'] != "admin@gmail.com") {
     header("location: addNew.php");
-=======
-if ($_SESSION['username'] != "admin@gmail.com") {
- header("location: addNew.php");
->>>>>>> refs/remotes/origin/KyoGren
 }
 
 
@@ -100,14 +95,37 @@ if ($_SESSION['username'] != "admin@gmail.com") {
 
                         <div class="collapse navbar-collapse ml-auto" id="navbarSupportedContent">
                             <ul class="navbar-nav  ">
-                                <li class="nav-item active">
+                                <li class="nav-item">
                                     <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="service.php"> Services </a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="logout.php ">Log out</a>
+                                <?php 
+                                if($_SESSION['username'] == 'admin@gmail.com'){
+                                echo '<li class="nav-item active">
+                                <a class="nav-link" href="addNew.php">Add Product</a>
+                                </li>';
+                                }
+                                ?>
+                                <li class="nav- item">
+                                    <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false">
+                                        Acount
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="service.php">Your Profile</a>
+                                        <?php
+                                        session_start();
+                                        if (isset($_SESSION['username'])) {
+                                        echo '<a class="dropdown-item" href="logout.php">Log out</a>';
+                                        } else {
+                                        echo '<a class="dropdown-item" href="login.php">Log in</a>';
+                                        }
+                                        ?>
+                                    </div>
+                                    </li>
                                 </li>
                             </ul>
                         </div>
