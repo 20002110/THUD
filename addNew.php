@@ -8,8 +8,13 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])) {
     exit;
 }
 
+<<<<<<< HEAD
 if($_SESSION['username'] != "admin@gmail.com") {
     header("location: addNew.php");
+=======
+if ($_SESSION['username'] != "admin@gmail.com") {
+ header("location: addNew.php");
+>>>>>>> refs/remotes/origin/KyoGren
 }
 
 
