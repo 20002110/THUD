@@ -140,7 +140,11 @@ if ($_SESSION['username'] != "admin@gmail.com") {
                                             <input type="text" placeholder="location" name="content" id="content" />
                                         </div>
                                         <div>
-                                            <label for="seat">Seat</label>
+                                            <label for="name">Number of rooms </label>
+                                            <input type="number" placeholder="number of rooms" name="room" id="room" />
+                                        </div>
+                                        <div>
+                                            <label for="seat">Number of seats</label>
                                             <!-- enter number of row and column seat -->
                                             <input type="text" placeholder="number of row" name="row" id="row" />
                                             <input type="text" placeholder="number of column" name="column" id="column" />
@@ -160,26 +164,15 @@ if ($_SESSION['username'] != "admin@gmail.com") {
                                             $content = $_POST['content'];
                                             $row = $_POST['row'];
                                             $column = $_POST['column'];
+                                            $room = $_POST['room'];
 
-                                            # convert row and column to matrix seat (A1, user_id, status)
-                                            $seat = array();
-                                            for ($i = 0; $i < $row; $i++) {
-                                                for ($j = 0; $j < $column; $j++) {
-                                                    $seat[] = array(
-                                                        'seatName' => chr(65 + $i) . ($j + 1),
-                                                        'user_id' => 0,
-                                                        'status' => 0
-                                                    );
-                                                }
-                                            }
 
                                            $data = array(
                                                 'theaterName' => $name,
                                                 'location' => $content,
-                                                // 'seats' => json_encode($seat),
-                                                // 'num_row' => $row,
-                                                // 'num_column' => $column
-
+                                                'row' => $row,
+                                                'col' => $column,
+                                                'rooms' => $room,
                                             );
 
                                             if ($db->add_data('theater', $data)) {
@@ -190,10 +183,7 @@ if ($_SESSION['username'] != "admin@gmail.com") {
 
                                             $theaterID =  $db->find_data('theater','theaterName',$category)['theaterID'];
 
-                                            $data = array(
-                                                'theaterID' => $theaterID,
-                                                'seats' => json_encode($seat),
-                                            );
+
                                         }
 
                                         ?>

@@ -3,12 +3,12 @@
 session_start();
 
 
-if(!isset($_SESSION['username']) || empty($_SESSION['username'])) {
+if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
     header("location: login.php");
     exit;
 }
 
-if($_SESSION['username'] != "admin@gmail.com") {
+if ($_SESSION['username'] != "admin@gmail.com") {
     header("location: addNew.php");
 }
 
@@ -157,14 +157,15 @@ if($_SESSION['username'] != "admin@gmail.com") {
                                             // dropbox
                                             echo '<label for="category">Category</label>';
                                             echo '<select name="category" id="category" class="form-control">';
-                                            foreach($typemovivie as $key => $value) {
-                                                echo '<option value="'.$value['typeID'].' ">'.$value['typeName'].'</option>';
+                                            foreach ($typemovivie as $key => $value) {
+                                                echo '<option value="' . $value['typeName'] . ' ">' . $value['typeName'] . '</option>';
                                             }
                                             echo '</select>';
                                             ?>
                                             <!-- add new category -->
 
-                                            <button onclick="addGenre()" class = "btn btn-primary" style="padding=5px;">Add new genre</button>
+                                            <button onclick="addGenre()" class="btn btn-primary"
+                                                style="padding=5px;">Add new genre</button>
 
                                             <script>
                                                 function addGenre() {
@@ -184,7 +185,7 @@ if($_SESSION['username'] != "admin@gmail.com") {
                                         <!-- time -->
                                         <div>
                                             <label for="time">Time</label>
-                                            <input type= "number" placeholder="Time" name="time" id="time" />
+                                            <input type="text" placeholder="Time" name="time" id="time" />
                                         </div>
 
                                         <!-- language -->
@@ -196,14 +197,15 @@ if($_SESSION['username'] != "admin@gmail.com") {
                                         <!-- premiere -->
                                         <div>
                                             <label for="premiere">Premiere</label>
-                                            <input type="datetime-local" placeholder="Premiere" name="premiere"
-                                                id="premiere" />
+                                            <input type="date" placeholder="Premiere" name="premiere" id="premiere"
+                                                required />
                                         </div>
 
                                         <!-- describes -->
                                         <div>
                                             <label for="describes">Describes</label>
-                                            <textarea name="describes" id="describes" cols="30" rows="10" class = "form-control" placeholder="Describes movie"></textarea>
+                                            <textarea name="describes" id="describes" cols="30" rows="10"
+                                                class="form-control" placeholder="Describes movie"></textarea>
                                         </div>
 
                                         <!-- price -->
@@ -252,14 +254,14 @@ if($_SESSION['username'] != "admin@gmail.com") {
                                         include_once 'handleDB.php';
                                         $db = new HandleDB();
 
-                                        if($_SERVER["REQUEST_METHOD"] == "POST") {
+                                        if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                                             $file = $_FILES['file']['name'];
                                             $file_tmp = $_FILES['file']['tmp_name'];
                                             $upload_dir = "images/";
-                                            $file_path = $upload_dir.$file;
+                                            $file_path = $upload_dir . $file;
 
-                                            if(move_uploaded_file($file_tmp, $file_path)) {
+                                            if (move_uploaded_file($file_tmp, $file_path)) {
                                                 $url_image = $file_path;
                                             } else {
                                                 echo '<label style="color:red;">Add false</label>';
@@ -276,12 +278,13 @@ if($_SESSION['username'] != "admin@gmail.com") {
                                             $price = $_POST['price'];
                                             $image = $url_image;
 
-                                            if($db->find_data('TypeMovie','typeName',$category) == false) {
-                                                $db->add_data('TypeMovie', array('typeName' => $category));
-                                                $typeID = $db->find_data('TypeMovie','typeName',$category)['typeID'];
-                                            }
-                                            else {
-                                                $typeID = $db->find_data('TypeMovie','typeName',$category)['typeID'];
+                                            if ($db->find_data('TypeMovie', 'typeName', $category) == false) {
+                                                if ($db->add_data('TypeMovie', array('typeName' => $category))) {
+                                                    $typeID = $db->find_data('TypeMovie', 'typeName', $category)['typeID'];
+                                                }
+                                                // $typeID = $db->find_data('TypeMovie','typeName',$category)['typeID'];
+                                            } else {
+                                                $typeID = $db->find_data('TypeMovie', 'typeName', $category)['typeID'];
                                             }
 
 
@@ -300,16 +303,61 @@ if($_SESSION['username'] != "admin@gmail.com") {
                                                 'cost' => $price,
                                                 'image' => $image
                                             );
-                                            
 
-                                            if($db->add_data('Movies', $data)) {
+
+                                            if ($db->add_data('Movies', $data)) {
                                                 echo '<label style="color:green;">Add success</label>';
                                             } else {
                                                 echo '<label style="color:red;">Add false</label>';
                                             }
 
+                                            $all_theater = $db->findAll('theater');
+                                            $movieID = $db->find_data('Movies', 'Name', $name)['movieID'];
 
+
+
+                                            foreach ($all_theater as $key => $value) {
+                                                $theaterID = $value['theaterID'];
+                                                $time = 6;
+                                                for($k = 0; $k < $value['rooms']; $k++){
+                                                    $seat = array();
+                                                    for ($i = 0; $i < $value['row']; $i++) {
+                                                        for ($j = 0; $j < $value['col']; $j++) {
+                                                            $seat[] = array(
+                                                                'seatName' => chr(65 + $i) . ($j + 1),
+                                                                'user_id' => 0,
+                                                                'status' => 0
+                                                            );
+                                                        }
+                                                    }
+
+
+                                                $time += 2;
+                                                $data = array(
+                                                    'theaterID' => $theaterID,
+                                                    'MovieID' => $movieID,
+                                                    'time' => $time . ':00',
+                                                    'date' => $premiere,
+                                                    'seat' => json_encode($seat)
+                                                );
+
+                                             if ($db->add_data('seats', $data)) {
+                                                echo '<label style="color:green;">Add  ttt success</label>';
+                                            } else {
+                                                echo '<label style="color:red;">Add false</label>';
+                                            }
+
+                                            }
+
+
+                                            }
+                                            // if ($db->add_data('seats', $data)) {
+                                            //     echo '<label style="color:green;">Add success</label>';
+                                            // } else {
+                                            //     echo '<label style="color:red;">Add false</label>';
+                                            // }
                                         }
+
                                         ?>
                                     </div>
                                 </div>
