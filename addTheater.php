@@ -3,12 +3,12 @@
 session_start();
 
 
-if(!isset($_SESSION['username']) || empty($_SESSION['username'])) {
+if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
     header("location: login.php");
     exit;
 }
 
-if($_SESSION['username'] != "admin@gmail.com") {
+if ($_SESSION['username'] != "admin@gmail.com") {
     header("location: addNew.php");
 }
 
@@ -30,7 +30,7 @@ if($_SESSION['username'] != "admin@gmail.com") {
     <meta name="author" content="" />
     <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
 
-    <title>Add Movie</title>
+    <title>Add Theater</title>
 
     <!-- bootstrap core css -->
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
@@ -122,7 +122,7 @@ if($_SESSION['username'] != "admin@gmail.com") {
             <div class="container">
                 <div class="heading_container heading_center">
                     <h2>
-                        Add New Movie
+                        Add New Theater
                     </h2>
                 </div>
                 <div class="">
@@ -132,116 +132,20 @@ if($_SESSION['username'] != "admin@gmail.com") {
                                 <div class="contact_form-container">
                                     <div>
                                         <div>
-                                            <label for="name">Name Movie</label>
+                                            <label for="name">Name Theater</label>
                                             <input type="text" placeholder="Name" name="name" id="name" />
                                         </div>
                                         <div>
-                                            <label for="director">Director</label>
-                                            <input type="text" placeholder="Director" name="director" id="director" />
+                                            <label for="name">Location</label>
+                                            <input type="text" placeholder="location" name="content" id="content" />
                                         </div>
-                                        <!-- performer -->
                                         <div>
-                                            <label for="performer">Performer</label>
-                                            <input type="text" placeholder="Performer" name="performer"
-                                                id="performer" />
+                                            <label for="seat">Seat</label>
+                                            <!-- enter number of row and column seat -->
+                                            <input type="text" placeholder="number of row" name="row" id="row" />
+                                            <input type="text" placeholder="number of column" name="column" id="column" />
                                         </div>
-                                        <!-- category -->
-                                        <div>
-                                            <!-- dropbox -->
-                                            <?php
-                                            include_once 'handleDB.php';
-                                            $db = new HandleDB();
-
-                                            $typemovivie = $db->findAll('TypeMovie');
-
-                                            // dropbox
-                                            echo '<label for="category">Category</label>';
-                                            echo '<select name="category" id="category" class="form-control">';
-                                            foreach($typemovivie as $key => $value) {
-                                                echo '<option value="'.$value['id'].' ">'.$value['name'].'</option>';
-                                            }
-                                            echo '</select>';
-                                            ?>
-                                            <!-- add new category -->
-
-                                            <button onclick="addGenre()" class = "btn btn-primary">Add new genre</button>
-
-                                            <script>
-                                                function addGenre() {
-                                                    var genre = prompt("Nhập thể loại phim mới:");
-                                                    if (genre != null) {
-                                                        var select = document.getElementById("category");
-                                                        var option = document.createElement("option");
-                                                        option.text = genre;
-                                                        option.value = genre.toLowerCase();
-                                                        select.add(option);
-                                                    }
-                                                }
-                                            </script>
-
-                                        </div>
-
-                                        <!-- time -->
-                                        <div>
-                                            <label for="time">Time</label>
-                                            <input type="text" placeholder="Time" name="time" id="time" />
-                                        </div>
-
-                                        <!-- language -->
-                                        <div>
-                                            <label for="language">Language</label>
-                                            <input type="text" placeholder="Language" name="language" id="language" />
-                                        </div>
-
-                                        <!-- premiere -->
-                                        <div>
-                                            <label for="premiere">Premiere</label>
-                                            <input type="text" placeholder="Premiere" name="premiere" id="premiere" />
-                                        </div>
-
-                                        <!-- describes -->
-                                        <div>
-                                            <label for="describes">Describes</label>
-                                            <textarea name="describes" id="describes" cols="30" rows="10" class = "form-control" placeholder="Describes movie"></textarea>
-                                        </div>
-
-                                        <!-- price -->
-                                        <div>
-                                            <label for="price">Price</label>
-                                            <input type="text" placeholder="Price" name="price" id="price" />
-                                        </div>
-
-
-                                        <div class="img-box">
-                                            <label for="file">URL Images</label>
-                                            <input type="file" name="file" id="file" class="form-control" required>
-                                            <img src="" id="image" class="img-fluid" alt="Ảnh sản phẩm" required>
-                                        </div>
-                                        <script>
-                                            var loadFile = function (event) {
-                                                var image = document.getElementById('image');
-                                                var file = event.target.files[0];
-
-                                                // Kiểm tra file upload là file hình ảnh
-                                                var fileType = file.type;
-
-                                                if (fileType != 'image/jpeg' && fileType != 'image/png' && fileType != 'image/jpg') {
-                                                    alert("Chỉ được upload file hình ảnh");
-                                                    return;
-                                                }
-
-                                                // Tạo URL của file ảnh
-                                                var url = URL.createObjectURL(file);
-                                                console.log(url);
-
-                                                // Hiển thị ảnh
-                                                image.src = url;
-                                            };
-
-                                            // Gắn sự kiện cho thẻ input
-                                            document.getElementById('file').addEventListener('change', loadFile);
-                                        </script>
-
+                                        
                                         <div class="btn-box ">
                                             <button type="submit">
                                                 Add
@@ -251,60 +155,40 @@ if($_SESSION['username'] != "admin@gmail.com") {
                                         include_once 'handleDB.php';
                                         $db = new HandleDB();
 
-                                        if($_SERVER["REQUEST_METHOD"] == "POST") {
-
-                                            $file = $_FILES['file']['name'];
-                                            $file_tmp = $_FILES['file']['tmp_name'];
-                                            $upload_dir = "images/";
-                                            $file_path = $upload_dir.$file;
-
-                                            if(move_uploaded_file($file_tmp, $file_path)) {
-                                                $url_image = $file_path;
-                                            } else {
-                                                echo '<label style="color:red;">Add false</label>';
-                                            }
-
+                                        if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                             $name = $_POST['name'];
-                                            $director = $_POST['director'];
-                                            $performer = $_POST['performer'];
-                                            $category = $_POST['category'];
-                                            $time = $_POST['time'];
-                                            $language = $_POST['language'];
-                                            $premiere = $_POST['premiere'];
-                                            $describes = $_POST['describes'];
-                                            $price = $_POST['price'];
-                                            $image = $url_image;
+                                            $content = $_POST['content'];
+                                            $row = $_POST['row'];
+                                            $column = $_POST['column'];
 
-                                            if($db->find_data('TypeMovie','typeName',$category) == false) {
-                                                $db->add_data('TypeMovie', $category);
-                                                $typeID = $db->find_data('TypeMovie','typeName',$category)['id'];
+                                            # convert row and column to matrix seat (A1, user_id, status)
+                                            $seat = array();
+                                            for ($i = 0; $i < $row; $i++) {
+                                                for ($j = 0; $j < $column; $j++) {
+                                                    $seat[] = array(
+                                                        'seatName' => chr(65 + $i) . ($j + 1),
+                                                        'user_id' => 0,
+                                                        'status' => 0
+                                                    );
+                                                }
                                             }
 
+                                           $data = array(
+                                                'theaterName' => $name,
+                                                'location' => $content,
+                                                'seats' => json_encode($seat),
+                                                'num_row' => $row,
+                                                'num_column' => $column
 
-
-
-
-                                            $data = array(
-                                                'name' => $name,
-                                                'director' => $director,
-                                                'typeID' => $typeID,
-                                                'performer' => $performer,
-                                                'time' => $time,
-                                                'language' => $language,
-                                                'premiere' => $premiere,
-                                                'describes' => $describes,
-                                                'cost' => $price,
-                                                'image' => $image
                                             );
 
-                                            if($db->add_data('Movie', $data)) {
-                                                echo '<label style="color:green;">Add success</label>';
+                                            if ($db->add_data('theater', $data)) {
+                                                echo "<script>alert('Add theater successfully')</script>";
                                             } else {
-                                                echo '<label style="color:red;">Add false</label>';
+                                                echo "<script>alert('Add theater failed')</script>";
                                             }
-
-
                                         }
+
                                         ?>
                                     </div>
                                 </div>

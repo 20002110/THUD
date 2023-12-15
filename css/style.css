@@ -783,13 +783,12 @@ a:focus {
 }
 
 .team_section .box .detail-box {
-  /* position: absolute; */
   width: 100%;
-  color: #000000;
+  color: #f5f3f3;
   padding: 10px 10px;
   text-align: center;
   bottom: 0;
-  /* background-color: rgba(28, 28, 28, 0.75); */
+  background-color: rgba(28, 28, 28, 0.75);
 }
 
 .team_section .btn-box {

@@ -27,7 +27,7 @@
   <link href="css/responsive.css" rel="stylesheet" />
 </head>
 
-<body>  
+<body>
   <div class="hero_area">
     <!-- header section start -->
     <div class="hero_bg_box">
@@ -54,7 +54,7 @@
             <a href="" class="contact_link3">
               <i class="fa fa-envelope" aria-hidden="true"></i>
               <span>
-                suppost@gmail.com
+                support@gmail.com
               </span>
             </a>
           </div>
@@ -65,7 +65,7 @@
           <nav class="navbar navbar-expand-lg custom_nav-container">
             <a class="navbar-brand" href="index.php">
               <span>
-                <i>"TÊN THƯƠNG HIỆU"</i>
+                <i>"THUD"</i>
               </span>
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -81,7 +81,6 @@
                   <a class="nav-link" href="service.php"> Services </a>
                 </li>
                 <li class="nav-item">
-                  <!-- <a class="nav-link" href="login.php">Log in</a> -->
                   <?php
                   session_start();
                   if (isset($_SESSION['username'])) {
@@ -109,13 +108,13 @@
                 <div class="col-md-7">
                   <div class="detail-box">
                     <h1>
-                      <i>"Tên thương hiệu"</i> <br>
+                      <i>"THUD"</i> <br>
                       <span>
                         Cùng bạn trên mọi hành trình
                       </span>
                     </h1>
                     <p>
-                      Trải nghiệm sự khác biệt của <i>"Tên thương hiệu"</i> với
+                      Trải nghiệm sự khác biệt của <i>"THUD"</i> với
                       <span class="text-primary">hơn 10000</span>
                       xe rộng khắp Hà Nội và TP.Hồ Chí Minh
                     </p>
@@ -142,7 +141,7 @@
                     <p>
                       Nhận nhiều
                       <span class="text-primary">ưu đãi</span>
-                      hấp dẫn từ <i>"Tên thương hiệu"</i> với nhiều khuyến mãi trên tất cả các dịch vụ hiện có
+                      hấp dẫn từ <i>"THUD"</i> với nhiều khuyến mãi trên tất cả các dịch vụ hiện có
                     </p>
                     <div class="btn-box">
                       <a href="" class="btn-1">Tìm hiểu ngay</a>
@@ -207,7 +206,7 @@
           <div class="detail-box">
             <div class="heading_container ">
               <h2>
-                <i>"Tên thương hiệu"</i> - slogan
+                <i>"THUD"</i> - slogan
               </h2>
             </div>
             <p>
@@ -215,7 +214,7 @@
               những khoảnh khắc mới mẻ trong cuộc sống. Do đó, chất lượng dịch vụ, trải nghiệm người dùng là ưu tiên hàng đầu và
               là nguồn cảm hứng của chúng tôi xuyên suốt của trình hoạt động.
               <br><br>
-              <i>"Tên thương hiệu"</i> là nền tảng cho thuê xe với đa dạng phân khúc, mẫu mã. Chúng tôi không chỉ dừng lại
+              <i>"THUD"</i> là nền tảng cho thuê xe với đa dạng phân khúc, mẫu mã. Chúng tôi không chỉ dừng lại
               với việc kết nối với khách hàng một cách nhanh chóng, đảm bảo chất lượng xe an toàn, bên cạnh đó chúng tôi còn
               hướng tới trải nghiệm của khách hàng một cách tốt nhất trong quá trình trải nghiệm dịch vụ.
 

@@ -73,17 +73,11 @@
                 <li class="nav-item ">
                   <a class="nav-link nav-link1" href="index.php">Home <span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link nav-link1" href="about.html"> About</a>
-                </li>
                 <li class="nav-item active">
                   <a class="nav-link nav-link1" href="service.php"> Services </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link nav-link1" href="guard.html"> Guards </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link nav-link1" href="contact.html">Contact us</a>
+                  <a class="nav-link nav-link1" href="logout.php">Log Out </a>
                 </li>
               </ul>
             </div>
@@ -164,7 +158,7 @@ Bạn cũng có thể sử dụng hàm WHERE để chỉ định độ chính x�
               <a href="" class="">
                 <i class="fa fa-envelope" aria-hidden="true"></i>
                 <span>
-                  suppost@gmail.com
+                  support@gmail.com
                 </span>
               </a>
             </div>
