@@ -158,13 +158,13 @@ if($_SESSION['username'] != "admin@gmail.com") {
                                             echo '<label for="category">Category</label>';
                                             echo '<select name="category" id="category" class="form-control">';
                                             foreach($typemovivie as $key => $value) {
-                                                echo '<option value="'.$value['id'].' ">'.$value['name'].'</option>';
+                                                echo '<option value="'.$value['typeID'].' ">'.$value['typeName'].'</option>';
                                             }
                                             echo '</select>';
                                             ?>
                                             <!-- add new category -->
 
-                                            <button onclick="addGenre()" class = "btn btn-primary">Add new genre</button>
+                                            <button onclick="addGenre()" class = "btn btn-primary" style="padding=5px;">Add new genre</button>
 
                                             <script>
                                                 function addGenre() {
@@ -184,7 +184,7 @@ if($_SESSION['username'] != "admin@gmail.com") {
                                         <!-- time -->
                                         <div>
                                             <label for="time">Time</label>
-                                            <input type="text" placeholder="Time" name="time" id="time" />
+                                            <input type= "number" placeholder="Time" name="time" id="time" />
                                         </div>
 
                                         <!-- language -->
@@ -196,7 +196,8 @@ if($_SESSION['username'] != "admin@gmail.com") {
                                         <!-- premiere -->
                                         <div>
                                             <label for="premiere">Premiere</label>
-                                            <input type="text" placeholder="Premiere" name="premiere" id="premiere" />
+                                            <input type="datetime-local" placeholder="Premiere" name="premiere"
+                                                id="premiere" />
                                         </div>
 
                                         <!-- describes -->
@@ -276,8 +277,11 @@ if($_SESSION['username'] != "admin@gmail.com") {
                                             $image = $url_image;
 
                                             if($db->find_data('TypeMovie','typeName',$category) == false) {
-                                                $db->add_data('TypeMovie', $category);
-                                                $typeID = $db->find_data('TypeMovie','typeName',$category)['id'];
+                                                $db->add_data('TypeMovie', array('typeName' => $category));
+                                                $typeID = $db->find_data('TypeMovie','typeName',$category)['typeID'];
+                                            }
+                                            else {
+                                                $typeID = $db->find_data('TypeMovie','typeName',$category)['typeID'];
                                             }
 
 
@@ -285,7 +289,7 @@ if($_SESSION['username'] != "admin@gmail.com") {
 
 
                                             $data = array(
-                                                'name' => $name,
+                                                'Name' => $name,
                                                 'director' => $director,
                                                 'typeID' => $typeID,
                                                 'performer' => $performer,
@@ -296,8 +300,9 @@ if($_SESSION['username'] != "admin@gmail.com") {
                                                 'cost' => $price,
                                                 'image' => $image
                                             );
+                                            
 
-                                            if($db->add_data('Movie', $data)) {
+                                            if($db->add_data('Movies', $data)) {
                                                 echo '<label style="color:green;">Add success</label>';
                                             } else {
                                                 echo '<label style="color:red;">Add false</label>';

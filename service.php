@@ -153,23 +153,23 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
           if (isset($_POST['submit'])) {
             $search = $_POST['search'];
 
-            $result = $db->find_by_data('services', $search);
+            $result = $db->find_by_data('Movies', $search);
 
             if ($result) {
               foreach ($result as $service) {
                 echo '<div class = "col-md-6 col-lg-4 mx-auto ">
                 <div class = "box" style="background-color: #ffff; border-radius: 10px">
                   <div class = "img-box" >
-                    <img src = "' . $service['url'] . '" alt = "" />
+                    <img src = "' . $service['image'] . '" alt = "" />
                   </div>
                   <div class = "detail-box " style="position: relative">
                     <h5>
-                      ' . $service['name'] . '
+                      ' . $service['Name'] . '
                     </h5>
                     <p>
-                      ' . $service['content'] .  ' 
+                      ' . $service['director'] .  ' 
                     </p>
-                    <a href = "detail.php?id=' . $service['id'] . '" class = "btn btn-outline-primary" >
+                    <a href = "detail.php?id=' . $service['movieID'] . '" class = "btn btn-outline-primary" >
                       Read More
                     </a>
   
@@ -188,23 +188,23 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
           } elseif (isset($_GET['filter'])) {
             $filter = $_GET['filter'];
 
-            $result = $db->find_by_data('services', $filter);
+            $result = $db->find_by_data('Movies', $filter);
 
             if ($result) {
               foreach ($result as $service) {
                 echo '<div class = "col-md-6 col-lg-4 mx-auto ">
                 <div class = "box" style="background-color: #ffff; border-radius: 10px">
                   <div class = "img-box" >
-                    <img src = "' . $service['url'] . '" alt = "" />
+                    <img src = "' . $service['image'] . '" alt = "" />
                   </div>
                   <div class = "detail-box ">
                     <h5>
-                      ' . $service['name'] . '
+                      ' . $service['Name'] . '
                     </h5>
                     <p>
-                      ' . $service['content'] . '
+                      ' . $service['director'] . '
                     </p>
-                    <a href = "detail.php?id=' . $service['id'] . '" class = "btn btn-outline-primary" >
+                    <a href = "detail.php?id=' . $service['movieID'] . '" class = "btn btn-outline-primary" >
                       Read More
                     </a>
   
@@ -220,23 +220,23 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
             }
 
           } else {
-            $result = $db->find_by_data('services', '');
+            $result = $db->find_by_data('Movies', '');
 
             if ($result) {
               foreach ($result as $service) {
                 echo '<div class = "col-md-6 col-lg-4 mx-auto ">
                 <div class = "box" style="background-color: #ffff; border-radius: 10px">
                   <div class = "img-box" >
-                    <img src = "' . $service['url'] . '" alt = "" />
+                    <img src = "' . $service['image'] . '" alt = "" />
                   </div>
                   <div class = "detail-box ">
                     <h5>
-                      ' . $service['name'] . '
+                      ' . $service['Name'] . '
                     </h5>
                     <p>
-                      ' . $service['content'] . '
+                      ' . $service['director'] . '
                     </p>
-                    <a href = "detail.php?id=' . $service['id'] . '" class = "btn btn-outline-primary" >
+                    <a href = "detail.php?id=' . $service['movieID'] . '" class = "btn btn-outline-primary" >
                       Read More
                     </a>
   

@@ -60,7 +60,7 @@ class HandleDB {
 
     public function find_by_data($table, $data){
 
-        $sql = "SELECT * FROM $table WHERE name LIKE '%$data%' OR content LIKE '%$data%'";
+        $sql = "SELECT * FROM $table WHERE name LIKE '%$data%' OR describes LIKE '%$data%'";
         $result = $this->conn->query($sql);
 
         if ($result->num_rows > 0) {

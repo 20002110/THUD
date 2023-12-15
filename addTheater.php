@@ -176,9 +176,9 @@ if ($_SESSION['username'] != "admin@gmail.com") {
                                            $data = array(
                                                 'theaterName' => $name,
                                                 'location' => $content,
-                                                'seats' => json_encode($seat),
-                                                'num_row' => $row,
-                                                'num_column' => $column
+                                                // 'seats' => json_encode($seat),
+                                                // 'num_row' => $row,
+                                                // 'num_column' => $column
 
                                             );
 
@@ -187,6 +187,13 @@ if ($_SESSION['username'] != "admin@gmail.com") {
                                             } else {
                                                 echo "<script>alert('Add theater failed')</script>";
                                             }
+
+                                            $theaterID =  $db->find_data('theater','theaterName',$category)['theaterID'];
+
+                                            $data = array(
+                                                'theaterID' => $theaterID,
+                                                'seats' => json_encode($seat),
+                                            );
                                         }
 
                                         ?>

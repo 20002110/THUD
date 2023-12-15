@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: localhost:3306
--- Thời gian đã tạo: Th12 06, 2023 lúc 09:47 PM
+-- Thời gian đã tạo: Th12 15, 2023 lúc 02:45 PM
 -- Phiên bản máy phục vụ: 10.6.12-MariaDB-0ubuntu0.22.04.1
 -- Phiên bản PHP: 8.1.25
 
@@ -29,16 +29,39 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `Movies` (
   `movieID` int(255) NOT NULL,
-  `typeID` int(255) NOT NULL,
+  `typeID` int(125) NOT NULL,
   `Name` varchar(125) NOT NULL,
   `director` varchar(255) NOT NULL,
   `performer` text NOT NULL,
-  `time` time NOT NULL,
+  `time` varchar(125) NOT NULL,
   `language` varchar(125) NOT NULL,
-  `premiere` datetime NOT NULL,
+  `premiere` date NOT NULL,
   `describes` mediumtext NOT NULL,
   `cost` int(255) NOT NULL,
   `image` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `Movies`
+--
+
+INSERT INTO `Movies` (`movieID`, `typeID`, `Name`, `director`, `performer`, `time`, `language`, `premiere`, `describes`, `cost`, `image`) VALUES
+(1, 2, 'test', 'tét', 'test', '2', 'e', '2023-12-16', 'ttt', 1111, 'images/41.jpg'),
+(2, 2, 'test', 'tét', 'test', '2', 'e', '2023-12-16', 'ttt', 1111, 'images/41.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `seats`
+--
+
+CREATE TABLE `seats` (
+  `seatID` int(11) NOT NULL,
+  `time` time NOT NULL,
+  `date` date NOT NULL,
+  `theaterID` int(11) NOT NULL,
+  `MovieID` int(11) NOT NULL,
+  `seat` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`seat`))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -51,17 +74,15 @@ CREATE TABLE `theater` (
   `theaterID` int(125) NOT NULL,
   `theaterName` varchar(255) NOT NULL,
   `location` mediumtext NOT NULL,
-  `num_row` int(45) NOT NULL,
-  `num_column` int(45) NOT NULL,
-  `seats` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`seats`))
+  `rooms` int(125) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `theater`
 --
 
-INSERT INTO `theater` (`theaterID`, `theaterName`, `location`, `num_row`, `num_column`, `seats`) VALUES
-(1, 'test', 'Test subcontent', 5, 5, '[{\"seatName\":\"A1\",\"user_id\":0,\"status\":0},{\"seatName\":\"A2\",\"user_id\":0,\"status\":0},{\"seatName\":\"A3\",\"user_id\":0,\"status\":0},{\"seatName\":\"A4\",\"user_id\":0,\"status\":0},{\"seatName\":\"A5\",\"user_id\":0,\"status\":0},{\"seatName\":\"B1\",\"user_id\":0,\"status\":0},{\"seatName\":\"B2\",\"user_id\":0,\"status\":0},{\"seatName\":\"B3\",\"user_id\":0,\"status\":0},{\"seatName\":\"B4\",\"user_id\":0,\"status\":0},{\"seatName\":\"B5\",\"user_id\":0,\"status\":0},{\"seatName\":\"C1\",\"user_id\":0,\"status\":0},{\"seatName\":\"C2\",\"user_id\":0,\"status\":0},{\"seatName\":\"C3\",\"user_id\":0,\"status\":0},{\"seatName\":\"C4\",\"user_id\":0,\"status\":0},{\"seatName\":\"C5\",\"user_id\":0,\"status\":0},{\"seatName\":\"D1\",\"user_id\":0,\"status\":0},{\"seatName\":\"D2\",\"user_id\":0,\"status\":0},{\"seatName\":\"D3\",\"user_id\":0,\"status\":0},{\"seatName\":\"D4\",\"user_id\":0,\"status\":0},{\"seatName\":\"D5\",\"user_id\":0,\"status\":0},{\"seatName\":\"E1\",\"user_id\":0,\"status\":0},{\"seatName\":\"E2\",\"user_id\":0,\"status\":0},{\"seatName\":\"E3\",\"user_id\":0,\"status\":0},{\"seatName\":\"E4\",\"user_id\":0,\"status\":0},{\"seatName\":\"E5\",\"user_id\":0,\"status\":0}]');
+INSERT INTO `theater` (`theaterID`, `theaterName`, `location`, `rooms`) VALUES
+(1, 'test', 'Test subcontent', 0);
 
 -- --------------------------------------------------------
 
@@ -72,8 +93,7 @@ INSERT INTO `theater` (`theaterID`, `theaterName`, `location`, `num_row`, `num_c
 CREATE TABLE `ticket` (
   `ticketID` int(255) NOT NULL,
   `user_Id` int(11) NOT NULL,
-  `theaterID` int(11) NOT NULL,
-  `movieID` int(11) NOT NULL
+  `seatID` int(125) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -83,9 +103,17 @@ CREATE TABLE `ticket` (
 --
 
 CREATE TABLE `TypeMovie` (
-  `typeID` int(255) NOT NULL,
+  `typeID` int(125) NOT NULL,
   `typeName` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `TypeMovie`
+--
+
+INSERT INTO `TypeMovie` (`typeID`, `typeName`) VALUES
+(1, 'Hành động'),
+(2, 'tê');
 
 -- --------------------------------------------------------
 
@@ -140,6 +168,14 @@ ALTER TABLE `Movies`
   ADD KEY `typeID` (`typeID`);
 
 --
+-- Chỉ mục cho bảng `seats`
+--
+ALTER TABLE `seats`
+  ADD PRIMARY KEY (`seatID`),
+  ADD KEY `MovieID` (`MovieID`),
+  ADD KEY `theaterID` (`theaterID`);
+
+--
 -- Chỉ mục cho bảng `theater`
 --
 ALTER TABLE `theater`
@@ -150,9 +186,8 @@ ALTER TABLE `theater`
 --
 ALTER TABLE `ticket`
   ADD PRIMARY KEY (`ticketID`),
-  ADD KEY `movieID` (`movieID`),
-  ADD KEY `theaterID` (`theaterID`),
-  ADD KEY `user_Id` (`user_Id`);
+  ADD KEY `user_Id` (`user_Id`),
+  ADD KEY `seatID` (`seatID`);
 
 --
 -- Chỉ mục cho bảng `TypeMovie`
@@ -180,7 +215,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT cho bảng `Movies`
 --
 ALTER TABLE `Movies`
-  MODIFY `movieID` int(255) NOT NULL AUTO_INCREMENT;
+  MODIFY `movieID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT cho bảng `seats`
+--
+ALTER TABLE `seats`
+  MODIFY `seatID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT cho bảng `theater`
@@ -198,7 +239,7 @@ ALTER TABLE `ticket`
 -- AUTO_INCREMENT cho bảng `TypeMovie`
 --
 ALTER TABLE `TypeMovie`
-  MODIFY `typeID` int(255) NOT NULL AUTO_INCREMENT;
+  MODIFY `typeID` int(125) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT cho bảng `users`
@@ -211,12 +252,24 @@ ALTER TABLE `users`
 --
 
 --
+-- Các ràng buộc cho bảng `Movies`
+--
+ALTER TABLE `Movies`
+  ADD CONSTRAINT `Movies_ibfk_2` FOREIGN KEY (`typeID`) REFERENCES `TypeMovie` (`typeID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Các ràng buộc cho bảng `seats`
+--
+ALTER TABLE `seats`
+  ADD CONSTRAINT `seats_ibfk_1` FOREIGN KEY (`MovieID`) REFERENCES `Movies` (`movieID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `seats_ibfk_2` FOREIGN KEY (`theaterID`) REFERENCES `theater` (`theaterID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Các ràng buộc cho bảng `ticket`
 --
 ALTER TABLE `ticket`
-  ADD CONSTRAINT `ticket_ibfk_1` FOREIGN KEY (`movieID`) REFERENCES `Movies` (`movieID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `ticket_ibfk_2` FOREIGN KEY (`theaterID`) REFERENCES `theater` (`theaterID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `ticket_ibfk_3` FOREIGN KEY (`user_Id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `ticket_ibfk_3` FOREIGN KEY (`user_Id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `ticket_ibfk_4` FOREIGN KEY (`seatID`) REFERENCES `seats` (`seatID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Các ràng buộc cho bảng `userInfor`
