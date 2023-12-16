@@ -17,15 +17,18 @@
         $phoneNumber = $_POST['phoneNumber'];
         $birthDay = $_POST['birthDay'];
         $address = $_POST['address'];
+        $sex = $_POST['sex'];
+        echo $sex;
+        $data = array(
+            "user_id" => $userID,
+            "fullName" => $fullName,
+            "phone" => $phoneNumber,
+            "date_of_birth" => $birthDay,
+            "address" => $address,
+        );
 
         if (!isset($foreign_userID) || empty($foreign_userID)) {
-            $data = array(
-                "user_id" => $userID,
-                "fullName" => $fullName,
-                "phone" => $phoneNumber,
-                "date_of_birth" => $birthDay,
-                "address" => $address
-            );
+
             if ($db->add_data("userInfor", $data)) {
                 echo "<script>alert('Chỉnh sửa thành công')</script>";           
             } else {
@@ -33,21 +36,16 @@
             }
         }
         else{
-            $data = array(
-                "fullName" => $fullName,
-                "phone" => $phoneNumber,
-                "date_of_birth" => $birthDay,
-                "address" => $address
-            );
-
-            if ($db->update_infor("userInfor", $data, $userID)) {
-                echo "<script>alert('Chỉnh sửa thành công')</script>";           
+            if     ($db->update("userInfor", "fullName", $fullName,"user_id", $userID)
+                and $db->update("userInfor", "phone", $phoneNumber,"user_id", $userID)
+                and $db->update("userInfor", "date_of_birth", $birthDay,"user_id", $userID)
+                and $db->update("userInfor", "address", $address,"user_id", $userID)) 
+            {
+                echo "<script>alert('Cập nhật thành công')</script>";           
             } else {
-                echo "<script>alert('update thất bại')</script>";
+                echo "<script>alert('Cập nhật thất bại')</script>";
             }
-
         }    
-
     }
 
 ?>
@@ -125,7 +123,6 @@
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                         <a class="dropdown-item" href="view_profile.php">Your Profile</a>
                                         <?php
-                                        session_start();
                                         if (isset($_SESSION['username'])) {
                                             echo '<a class="dropdown-item" href="logout.php">Log out</a>';
                                         } else {
@@ -148,7 +145,6 @@
     $userPhone = $db->find_data('userInfor','user_id',$userID)['phone'];
     $userBirthday = $db->find_data('userInfor','user_id',$userID)['date_of_birth'];
     $userAddress = $db->find_data('userInfor','user_id',$userID)['address'];
-
  ?>
     <section style="font-family: 'JetBrains Mono Medium'">
         <div class="hero_bg_box">
@@ -183,27 +179,15 @@
                                     <label> Ngày sinh </label>
                                     <input type="date" name="birthDay" value="<?php echo $userBirthday ?>" readonly class="form-control" required="required">
                                 </div>
-
+                                
                                 <div class="form-group mt-2">
-                                    <label> Giới tính </label>  
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                                        <label class="form-check-label" for="flexRadioDefault1">
-                                            Nam
-                                        </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-                                        <label class="form-check-label" for="flexRadioDefault1">
-                                            Nữ
-                                        </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-                                        <label class="form-check-label" for="flexRadioDefault1">
-                                            None
-                                        </label>
-                                    </div>
+                                    <label> Giới tính </label><br>
+                                    <input type="radio" name="male" value="male">
+                                    <label for="male">Nam</label> &emsp;
+                                    <input type="radio" name="female" value="female">
+                                    <label for="female">Nữ</label> &emsp;
+                                    <input type="radio" name="none" value="none" checked>
+                                    <label for="none">None </label>
                                 </div>
 
                                 <div class="form-group mt-2">
@@ -238,7 +222,7 @@
 
                                 <div class="form-group mt-2">
                                     <label>Số điện thoại</label> 
-                                    <input type="number" name="phoneNumber" id=phoneNumber class="form-control" required="required">
+                                    <input type="text" name="phoneNumber" id=phoneNumber class="form-control" required="required">
                                 </div>
 
                                 <div class="form-group mt-2">
