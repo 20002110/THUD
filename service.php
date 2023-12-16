@@ -8,6 +8,8 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
   exit;
 }
 
+
+
 ?>
 
 <!DOCTYPE html>
@@ -68,7 +70,7 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
             <a href="" class="contact_link3">
               <i class="fa fa-envelope" aria-hidden="true"></i>
               <span>
-                suppost@gmail.com
+                support@gmail.com
               </span>
             </a>
           </div>
@@ -79,7 +81,7 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
           <nav class="navbar navbar-expand-lg custom_nav-container">
             <a class="navbar-brand" href="index.php">
               <span>
-                Guarder
+                Services
               </span>
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -99,10 +101,9 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
                   </a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="service.php">All</a>
-                    <a class="dropdown-item" href="service.php?filter=dap">Security</a>
-                    <a class="dropdown-item" href="service.php?filter=may">Cleaning</a>
-                    <a class="dropdown-item" href="service.php?filter=3">Reception</a>
-                    <a class="dropdown-item" href="service.php?filter=4">Support</a>
+                    <a class="dropdown-item" href="service.php?filter=Porsche">Porsche</a>
+                    <a class="dropdown-item" href="service.php?filter=Vinfast">Vinfast</a>
+                    <a class="dropdown-item" href="service.php?filter=Ferrari">Ferrari</a>
                   </div>
 
                   <!-- search bar -->
@@ -124,8 +125,11 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
                 <?php 
                 if($_SESSION['username'] == 'admin@gmail.com'){
                   echo '<li class="nav-item">
-                  <a class="nav-link" href="addNew.php">Add Product</a>
-                </li>';
+                          <a class="nav-link" href="addNew.php">Add Product</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="manageMovie.php">Manage Product</a>
+                        </li>';
                 }
                 ?>
                 <li class="nav-item">
@@ -152,23 +156,23 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
           if (isset($_POST['submit'])) {
             $search = $_POST['search'];
 
-            $result = $db->find_by_data('services', $search);
+            $result = $db->find_by_data('Movies', $search);
 
             if ($result) {
               foreach ($result as $service) {
                 echo '<div class = "col-md-6 col-lg-4 mx-auto ">
-                <div class = "box" style="background-color= #ffff; border-radius=10px">
+                <div class = "box" style="background-color: #ffff; border-radius: 10px">
                   <div class = "img-box" >
-                    <img src = "' . $service['url'] . '" alt = "" />
+                    <img src = "' . $service['image'] . '" alt = "" />
                   </div>
-                  <div class = "detail-box ">
+                  <div class = "detail-box " style="position: relative">
                     <h5>
-                      ' . $service['name'] . '
+                      ' . $service['Name'] . '
                     </h5>
                     <p>
-                      ' . $service['subcontent'] . '
+                      ' . $service['director'] .  ' 
                     </p>
-                    <a href = "detail.php?id=' . $service['id'] . '" class = "btn btn-outline-primary" >
+                    <a href = "detail.php?id=' . $service['movieID'] . '" class = "btn btn-outline-primary" >
                       Read More
                     </a>
   
@@ -182,27 +186,28 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
               echo "<p style='color: red'>Không có dữ liệu</p>";
 
             }
+            
 
           } elseif (isset($_GET['filter'])) {
             $filter = $_GET['filter'];
 
-            $result = $db->find_by_data('services', $filter);
+            $result = $db->find_by_data('Movies', $filter);
 
             if ($result) {
               foreach ($result as $service) {
                 echo '<div class = "col-md-6 col-lg-4 mx-auto ">
-                <div class = "box" style="background-color= #ffff; border-radius=10px">
+                <div class = "box" style="background-color: #ffff; border-radius: 10px">
                   <div class = "img-box" >
-                    <img src = "' . $service['url'] . '" alt = "" />
+                    <img src = "' . $service['image'] . '" alt = "" />
                   </div>
                   <div class = "detail-box ">
                     <h5>
-                      ' . $service['name'] . '
+                      ' . $service['Name'] . '
                     </h5>
                     <p>
-                      ' . $service['content'] . '
+                      ' . $service['director'] . '
                     </p>
-                    <a href = "detail.php?id=' . $service['id'] . '" class = "btn btn-outline-primary" >
+                    <a href = "detail.php?id=' . $service['movieID'] . '" class = "btn btn-outline-primary" >
                       Read More
                     </a>
   
@@ -218,23 +223,23 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
             }
 
           } else {
-            $result = $db->find_by_data('services', '');
+            $result = $db->find_by_data('Movies', '');
 
             if ($result) {
               foreach ($result as $service) {
                 echo '<div class = "col-md-6 col-lg-4 mx-auto ">
-                <div class = "box" style="background-color= #ffff; border-radius=10px">
+                <div class = "box" style="background-color: #ffff; border-radius: 10px">
                   <div class = "img-box" >
-                    <img src = "' . $service['url'] . '" alt = "" />
+                    <img src = "' . $service['image'] . '" alt = "" />
                   </div>
                   <div class = "detail-box ">
                     <h5>
-                      ' . $service['name'] . '
+                      ' . $service['Name'] . '
                     </h5>
                     <p>
-                      ' . $service['content'] . '
+                      ' . $service['director'] . '
                     </p>
-                    <a href = "detail.php?id=' . $service['id'] . '" class = "btn btn-outline-primary" >
+                    <a href = "detail.php?id=' . $service['movieID'] . '" class = "btn btn-outline-primary" >
                       Read More
                     </a>
   
@@ -283,7 +288,7 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
               <a href="" class="">
                 <i class="fa fa-envelope" aria-hidden="true"></i>
                 <span>
-                  suppost@gmail.com
+                  support@gmail.com
                 </span>
               </a>
             </div>

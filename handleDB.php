@@ -1,9 +1,9 @@
 <?php 
 class HandleDB {
     const HOST = "localhost";
-    const USER = "admin";
-    const PASSWORD = "anhquan";
-    const DATABASE = "Admin";
+    const USER = "root";
+    const PASSWORD = "";
+    const DATABASE = "movieticket";
 
     private $conn;
 
@@ -15,9 +15,24 @@ class HandleDB {
         }
     }
 
+    public function getConnection() {
+        return $this->conn;
+    }
+    
+    public function update($table, $data, $where, $key) {
 
-    public function update($table, $field, $data, $where, $key) {
-        $sql = "UPDATE $table SET $field = '$data' WHERE $where = '$key'";
+        // Create an array of column-value pairs
+        $columnValuePairs = array();
+        foreach ($data as $column => $value) {
+            $columnValuePairs[] = "$column = '$value'";
+        }
+
+        // Join the column-value pairs into a comma-separated string
+        $setClause = implode(', ', $columnValuePairs);
+
+        // Construct the SQL query
+        $sql = "UPDATE $table SET $setClause WHERE $where = '$key'";
+
         if ($this->conn->query($sql) === TRUE) {
             return true;
         } else {
@@ -25,9 +40,11 @@ class HandleDB {
         }
     }
 
-    public function delete($table, $where) {
-        $sql = "DELETE FROM $table WHERE $where";
 
+    public function delete($table, $key, $value) {
+
+        $sql = "DELETE FROM $table WHERE $key = '$value'";
+        
         if ($this->conn->query($sql) === TRUE) {
             return true;
         } else {
@@ -60,7 +77,23 @@ class HandleDB {
 
     public function find_by_data($table, $data){
 
-        $sql = "SELECT * FROM $table WHERE name LIKE '%$data%' OR content LIKE '%$data%'";
+        $sql = "SELECT * FROM $table WHERE name LIKE '%$data%' OR describes LIKE '%$data%'";
+        $result = $this->conn->query($sql);
+
+        if ($result->num_rows > 0) {
+            $rows = array();
+            while ($row = $result->fetch_assoc()) {
+                $rows[] = $row;
+            }
+            return $rows;
+        } else {
+            return false;
+        }
+
+    }
+
+    public function find_movie($table, $column, $data){
+        $sql = "SELECT * FROM $table WHERE $column = '$data'";
         $result = $this->conn->query($sql);
 
         if ($result->num_rows > 0) {

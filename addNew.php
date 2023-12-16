@@ -4,15 +4,12 @@ session_start();
 
 
 if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
- header("location: login.php");
-exit;
-}
-else if ($_SESSION['username'] != "admin@gmail.com") {
- header("location: addNew.php");
-}
-else{
-    header("location: service.php");
+    header("location: login.php");
     exit;
+}
+
+if ($_SESSION['username'] != "admin@gmail.com") {
+    header("location: service.php");
 }
 
 
@@ -33,7 +30,7 @@ else{
     <meta name="author" content="" />
     <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
 
-    <title>Add Product</title>
+    <title>Add Movie</title>
 
     <!-- bootstrap core css -->
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
@@ -87,7 +84,7 @@ else{
                     <nav class="navbar navbar-expand-lg custom_nav-container">
                         <a class="navbar-brand" href="index.php">
                             <span>
-                                Guarder
+                                THUD
                             </span>
                         </a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -98,11 +95,25 @@ else{
 
                         <div class="collapse navbar-collapse ml-auto" id="navbarSupportedContent">
                             <ul class="navbar-nav  ">
-                                <li class="nav-item active">
-                                    <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
+                                <li class="nav-item dropdown ">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Theater
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="addTheater.php">Add Theater</a>
+                                        <a class="dropdown-item" href="listTheater.php">List Theater</a>
+                                    </div>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="service.php"> Services </a>
+                                <li class="nav-item dropdown active">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Movies
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="addNew.php">Add Movies</a>
+                                        <a class="dropdown-item" href="listMovies.php">List Movies</a>
+                                    </div>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="logout.php ">Log out</a>
@@ -125,33 +136,101 @@ else{
             <div class="container">
                 <div class="heading_container heading_center">
                     <h2>
-                        Add New Product
+                        Add New Movie
                     </h2>
                 </div>
                 <div class="">
                     <div class="row">
                         <div class="col-md-7 mx-auto">
-                            <form action="" method = "post" enctype="multipart/form-data">
+                            <form action="" method="post" enctype="multipart/form-data">
                                 <div class="contact_form-container">
                                     <div>
                                         <div>
-                                            <label for="name">Name Product</label>
+                                            <label for="name">Name Movie</label>
                                             <input type="text" placeholder="Name" name="name" id="name" />
                                         </div>
                                         <div>
-                                            <label for="name">SubContent</label>
-                                            <input type="text" placeholder="Subcontent" name="content" id="content" />
+                                            <label for="director">Director</label>
+                                            <input type="text" placeholder="Director" name="director" id="director" />
                                         </div>
+                                        <!-- performer -->
                                         <div>
-                                            <label for="discribe">Product Discribe</label>
-                                            <textarea name="discribe" id = "discribe" cols="30" rows="10" class="form-control" placeholder="Describe" required></textarea>
+                                            <label for="performer">Performer</label>
+                                            <input type="text" placeholder="Performer" name="performer"
+                                                id="performer" />
                                         </div>
+                                        <!-- category -->
+                                        <div>
+                                            <!-- dropbox -->
+                                            <?php
+                                            include_once 'handleDB.php';
+                                            $db = new HandleDB();
+
+                                            $typemovivie = $db->findAll('TypeMovie');
+
+                                            // dropbox
+                                            echo '<label for="category">Category</label>';
+                                            echo '<select name="category" id="category" class="form-control">';
+                                            foreach ($typemovivie as $key => $value) {
+                                                echo '<option value="' . $value['typeName'] . ' ">' . $value['typeName'] . '</option>';
+                                            }
+                                            echo '</select>';
+                                            ?>
+                                            <!-- add new category -->
+
+                                            <button onclick="addGenre()" class="btn btn-primary"
+                                                >Add new genre</button>
+
+                                            <script>
+                                                function addGenre() {
+                                                    var genre = prompt("Nhập thể loại phim mới:");
+                                                    if (genre != null) {
+                                                        var select = document.getElementById("category");
+                                                        var option = document.createElement("option");
+                                                        option.text = genre;
+                                                        option.value = genre.toLowerCase();
+                                                        select.add(option);
+                                                    }
+                                                }
+                                            </script>
+
+                                        </div>
+
+                                        <!-- time -->
+                                        <div>
+                                            <label for="time">Time</label>
+                                            <input type="text" placeholder="Time" name="time" id="time" />
+                                        </div>
+
+                                        <!-- language -->
+                                        <div>
+                                            <label for="language">Language</label>
+                                            <input type="text" placeholder="Language" name="language" id="language" />
+                                        </div>
+
+                                        <!-- premiere -->
+                                        <div>
+                                            <label for="premiere">Premiere</label>
+                                            <input type="date" placeholder="Premiere" name="premiere" id="premiere"
+                                                required />
+                                        </div>
+
+                                        <!-- describes -->
+                                        <div>
+                                            <label for="describes">Describes</label>
+                                            <textarea name="describes" id="describes" cols="30" rows="10"
+                                                class="form-control" placeholder="Describes movie"></textarea>
+                                        </div>
+
+                                        <!-- price -->
                                         <div>
                                             <label for="price">Price</label>
-                                            <input type="number" placeholder="Price" name="price" id="price" />
+                                            <input type="text" placeholder="Price" name="price" id="price" />
                                         </div>
+
+
                                         <div class="img-box">
-                                            <label for="file">URL hình ảnh</label>
+                                            <label for="file">URL Images</label>
                                             <input type="file" name="file" id="file" class="form-control" required>
                                             <img src="" id="image" class="img-fluid" alt="Ảnh sản phẩm" required>
                                         </div>
@@ -185,6 +264,122 @@ else{
                                                 Add
                                             </button>
                                         </div>
+                                        <?php
+                                        include_once 'handleDB.php';
+                                        $db = new HandleDB();
+
+                                        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+                                            $file = $_FILES['file']['name'];
+                                            $file_tmp = $_FILES['file']['tmp_name'];
+                                            $upload_dir = "images/";
+                                            $file_path = $upload_dir . $file;
+
+                                            if (move_uploaded_file($file_tmp, $file_path)) {
+                                                $url_image = $file_path;
+                                            } else {
+                                                echo '<label style="color:red;">Add false</label>';
+                                            }
+
+                                            $name = $_POST['name'];
+                                            $director = $_POST['director'];
+                                            $performer = $_POST['performer'];
+                                            $category = $_POST['category'];
+                                            $time = $_POST['time'];
+                                            $language = $_POST['language'];
+                                            $premiere = $_POST['premiere'];
+                                            $describes = $_POST['describes'];
+                                            $price = $_POST['price'];
+                                            $image = $url_image;
+
+                                            if ($db->find_data('TypeMovie', 'typeName', $category) == false) {
+                                                if ($db->add_data('TypeMovie', array('typeName' => $category))) {
+                                                    $typeID = $db->find_data('TypeMovie', 'typeName', $category)['typeID'];
+                                                } else {
+                                                    echo '<label style="color:red;">Add false</label>';
+                                                    die();
+                                                }
+
+                                            } else {
+                                                $typeID = $db->find_data('TypeMovie', 'typeName', $category)['typeID'];
+                                            }
+
+
+
+
+
+                                            $data = array(
+                                                'Name' => $name,
+                                                'director' => $director,
+                                                'typeID' => $typeID,
+                                                'performer' => $performer,
+                                                'time' => $time,
+                                                'language' => $language,
+                                                'premiere' => $premiere,
+                                                'describes' => $describes,
+                                                'cost' => $price,
+                                                'image' => $image
+                                            );
+
+
+
+                                            try {
+                                                $db->add_data('Movies', $data);
+                                            } catch (Exception $e) {
+                                                echo '<label style="color:red;">Add false</label>';
+                                                die();
+                                            }
+
+                                            $all_theater = $db->findAll('theater');
+                                            $movieID = $db->find_data('Movies', 'Name', $name)['movieID'];
+
+
+
+                                            foreach ($all_theater as $key => $value) {
+                                                $theaterID = $value['theaterID'];
+                                                $time = 6;
+                                                for ($k = 0; $k < $value['rooms']; $k++) {
+                                                    $seat = array();
+                                                    for ($i = 0; $i < $value['row']; $i++) {
+                                                        for ($j = 0; $j < $value['col']; $j++) {
+                                                            $seat[] = array(
+                                                                'seatName' => chr(65 + $i) . ($j + 1),
+                                                                'user_id' => 0,
+                                                                'status' => 0
+                                                            );
+                                                        }
+                                                    }
+
+
+                                                    $time += 2;
+                                                    $data = array(
+                                                        'theaterID' => $theaterID,
+                                                        'MovieID' => $movieID,
+                                                        'time' => $time . ':00',
+                                                        'date' => $premiere,
+                                                        'seat' => json_encode($seat)
+                                                    );
+
+                                                    //  if ($db->add_data('seats', $data)) {
+                                                    //     echo '<label style="color:green;">Add  ttt success</label>';
+                                                    // } else {
+                                                    //     echo '<label style="color:red;">Add false</label>';
+                                                    // }
+                                        
+                                                    try {
+                                                        $db->add_data('seats', $data);
+                                                    } catch (Exception $e) {
+                                                        echo '<label style="color:red;">Add false</label>';
+                                                        die();
+                                                    }
+                                                }
+
+
+                                            }
+                                            echo '<label style="color:green;">Add success</label>';
+                                        }
+
+                                        ?>
                                     </div>
                                 </div>
                             </form>
@@ -195,41 +390,7 @@ else{
         </section>
         <!-- end Add product main -->
 
-        <?php
-        include_once 'handleDB.php';
-        $db = new HandleDB();
 
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $name = $_POST['name'];
-            $subcontent = $_POST['content'];
-            $describe = $_POST['discribe'];
-            $price = $_POST['price'];
-            $file = $_FILES['file']['name'];
-            $file_tmp = $_FILES['file']['tmp_name'];
-            $upload_dir = "images/";
-            $file_path = $upload_dir . $file;
-
-            if(move_uploaded_file($file_tmp, $file_path)){
-                $url_image = $file_path;
-            } else {
-                echo "Upload file thất bại";
-            }
-
-            $data = array(
-                "name" => $name,
-                "content" => $describe,
-                "url" => $url_image,
-                "cost" => $price,
-                "subcontent" => $subcontent
-            );
-
-            $db->add_data("services", $data);
-
-            echo "Thêm sản phẩm thành công";
-
-            header("location: addNew.php");
-        }
-        ?>
 
         <!-- info section -->
         <section class="info_section ">
@@ -291,7 +452,7 @@ else{
                     </div>
                 </div>
             </div>
-        </section>        
+        </section>
         <!-- end info_section -->
 
         <!-- footer section -->
