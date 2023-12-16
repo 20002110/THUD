@@ -220,7 +220,13 @@ strong {
 }
 
 small, .small {
-  font-size: 0.875em;
+  font-size: 0.9em;
+
+}
+
+.small span{
+  font-size: 1.3em;
+  color: #0c1cfa;
 }
 
 mark, .mark {

@@ -1,16 +1,4 @@
 
-<?php
-session_start();
-
-if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
-  echo "Bạn chưa đăng nhập";
-  header("location: login.php");
-  exit;
-}
-
-
-
-?>
 
 <!DOCTYPE html>
 <html>
@@ -27,7 +15,7 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
   <meta name="author" content="" />
   <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
 
-  <title>Services</title>
+  <title> Films </title>
 
   <!-- bootstrap core css -->
   <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
@@ -81,7 +69,7 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
           <nav class="navbar navbar-expand-lg custom_nav-container">
             <a class="navbar-brand" href="index.php">
               <span>
-                Services
+                Films
               </span>
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -120,7 +108,7 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
                   <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item active">
-                  <a class="nav-link" href="service.php"> Services </a>
+                  <a class="nav-link" href="service.php"> Films </a>
                 </li>
                 <?php 
                 if($_SESSION['username'] == 'admin@gmail.com'){
@@ -160,7 +148,7 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
                 echo '<div class = "col-md-6 col-lg-4 mx-auto ">
                 <div class = "box" style="background-color: #ffff; border-radius: 10px">
                   <div class = "img-box" >
-                    <img src = "' . $service['image'] . '" alt = "" />
+                    <img src = "' . $service['image'] . '" alt = "..." style="width: 265px; height: 390px; object-fit: cover;"  />
                   </div>
                   <div class = "detail-box " style="position: relative">
                     <h5>
@@ -172,10 +160,15 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
                     <a href = "detail.php?id=' . $service['movieID'] . '" class = "btn btn-outline-primary" >
                       Read More
                     </a>
+
   
   
                   </div>
-                </div>
+                  <script>
+                  // auto resize image to fit the box 265x390
+
+                  </script>
+                </div>  
               </div>';
 
               }
@@ -195,7 +188,7 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
                 echo '<div class = "col-md-6 col-lg-4 mx-auto ">
                 <div class = "box" style="background-color: #ffff; border-radius: 10px">
                   <div class = "img-box" >
-                    <img src = "' . $service['image'] . '" alt = "" />
+                    <img src = "' . $service['image'] . '" alt = "..." style="width: 265px; height: 390px; object-fit: cover;"  />
                   </div>
                   <div class = "detail-box ">
                     <h5>
@@ -227,7 +220,7 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
                 echo '<div class = "col-md-6 col-lg-4 mx-auto ">
                 <div class = "box" style="background-color: #ffff; border-radius: 10px">
                   <div class = "img-box" >
-                    <img src = "' . $service['image'] . '" alt = "" />
+                    <img src = "' . $service['image'] . '" alt = "" style="width: 265px; height: 390px; object-fit: cover;"  />
                   </div>
                   <div class = "detail-box ">
                     <h5>
@@ -237,7 +230,7 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
                       ' . $service['director'] . '
                     </p>
                     <a href = "detail.php?id=' . $service['movieID'] . '" class = "btn btn-outline-primary" >
-                      Read More
+                      Chi tiết
                     </a>
   
                   </div>

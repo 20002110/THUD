@@ -25,7 +25,7 @@ $film = $db->find_data('Movies', 'movieID', $id);
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <meta name="description" content="" />
   <meta name="author" content="" />
-  <title>Shop Film - Start Bootstrap Template</title>
+  <title><?php echo $film['Name'] ?></title>
   <!-- Favicon-->
   <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
   <!-- Bootstrap icons-->
@@ -55,60 +55,8 @@ $film = $db->find_data('Movies', 'movieID', $id);
         <!-- <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0"
             src="https://dummyimage.com/600x700/dee2e6/6c757d.jpg" alt="..." /></div> -->
           <?php
-          echo '<div class="col-md-6" ><img class="card-img-top mb-5 mb-md-0" id = "img" src="' . $film['image'] . '" alt="..." /></div>';
+          echo '<div class="col-md-6" ><img class="card-img-top mb-5 mb-md-0" id = "img" src="' . $film['image'] . '" alt="..."  style="width: 500px; height: 715px; object-fit: cover;" /></div>';
           ?>
-
-<script>
-//        auto resize image to 600x700
-
-            var image = document.getElementById('img');
-
-            // auto resize image to fit content image
-            var reader = new FileReader();
-
-            reader.onload = function () {
-                var dataURL = reader.result;
-                var output = new Image();
-                output.src = dataURL;
-                output.onload = function () {
-                    var canvas = document.createElement('canvas');
-                    var ctx = canvas.getContext("2d");
-                    ctx.drawImage(output, 0, 0);
-
-                    var MAX_WIDTH = 600;
-                    var MAX_HEIGHT = 700;
-                    var width = output.width;
-                    var height = output.height;
-
-                    if (width > height) {
-                        if (width > MAX_WIDTH) {
-                            height *= MAX_WIDTH / width;
-                            width = MAX_WIDTH;
-                        }
-                    } else {
-                        if (height > MAX_HEIGHT) {
-                            width *= MAX_HEIGHT / height;
-                            height = MAX_HEIGHT;
-                        }
-                    }
-                    canvas.width = width;
-                    canvas.height = height;
-                    var ctx = canvas.getContext("2d");
-                    ctx.drawImage(output, 0, 0, width, height);
-
-                    var dataurl = canvas.toDataURL(fileType);
-                    image.src = dataurl;
-                }
-            };
-
-            reader.readAsDataURL(file);
-
-
-
-          </script>
-
-
-
 
         <div class="col-md-6 text-center text-md-start">
           <!-- <h1 class="display-5 fw-bolder">Movie Name</h1 -->
@@ -119,20 +67,20 @@ $film = $db->find_data('Movies', 'movieID', $id);
           $category = $db->find_data('TypeMovie', 'typeID', $film['typeID']);
 
           echo '<p class="lead">' . $film['describes'] . '</p>';
-          echo '<div class="small mb-1">Diễn viên: ' . $film['performer'] . '</div>';
-          echo '<div class="small mb-1">Thể loại: ' . $category['typeName'] . '</div>';
-          echo '<div class="small mb-1">Đạo diễn: ' . $film['director'] . '</div>';
-          echo '<div class="small mb-1">ngôn ngữ: ' . $film['language'] . '</div>';
-          echo '<div class="small mb-1">Ngày công chiếu: ' . $film['premiere'] . '</div>';
-          echo '<div class="small mb-1">Thời lượng: ' . $film['time'] . '</div>';
+          echo '<div class="small mb-1"><span >Diễn viên:  </span>' . $film['performer'] . '</div> ';
+          echo '<div class="small mb-1"><span >Thể loại:  </span>' . $category['typeName'] . '</div>';
+          echo '<div class="small mb-1"><span >Đạo diễn:  </span>' . $film['director'] . '</div>';
+          echo '<div class="small mb-1"><span >Ngôn ngữ:  </span>' . $film['language'] . '</div>';
+          echo '<div class="small mb-1"><span >Ngày khởi chiếu:  </span> ' . $film['premiere'] . '</div>';
+          echo '<div class="small mb-1"><span>Thời lượng:  </span>' . $film['time'] . '</div>';
 
 
           ?>
 
           <div class="d-flex">
-            <button class="btn btn-outline-light flex-shrink-0" type="button">
+            <button class="btn btn-outline-light flex-shrink-0" type="button" >
               <i class="bi-cart-fill me-1"></i>
-              Mua vé
+              <a href="booking.php?id=<?php echo $film['movieID'] ?>" class = "text-decoration-none" style="color: white">Đặt vé</a>
             </button>
           </div><br>
           <div class="d-xxl-inline-flexex">

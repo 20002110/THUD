@@ -282,7 +282,11 @@ if ($_SESSION['username'] != "admin@gmail.com") {
                                                 if ($db->add_data('TypeMovie', array('typeName' => $category))) {
                                                     $typeID = $db->find_data('TypeMovie', 'typeName', $category)['typeID'];
                                                 }
-                                                // $typeID = $db->find_data('TypeMovie','typeName',$category)['typeID'];
+                                                else{
+                                                    echo '<label style="color:red;">Add false</label>';
+                                                    die();
+                                                }
+                                                
                                             } else {
                                                 $typeID = $db->find_data('TypeMovie', 'typeName', $category)['typeID'];
                                             }
@@ -305,10 +309,12 @@ if ($_SESSION['username'] != "admin@gmail.com") {
                                             );
 
 
-                                            if ($db->add_data('Movies', $data)) {
-                                                echo '<label style="color:green;">Add success</label>';
-                                            } else {
+
+                                            try {
+                                                $db->add_data('Movies', $data);
+                                            } catch (Exception $e) {
                                                 echo '<label style="color:red;">Add false</label>';
+                                                die();
                                             }
 
                                             $all_theater = $db->findAll('theater');
@@ -319,7 +325,7 @@ if ($_SESSION['username'] != "admin@gmail.com") {
                                             foreach ($all_theater as $key => $value) {
                                                 $theaterID = $value['theaterID'];
                                                 $time = 6;
-                                                for($k = 0; $k < $value['rooms']; $k++){
+                                                for ($k = 0; $k < $value['rooms']; $k++) {
                                                     $seat = array();
                                                     for ($i = 0; $i < $value['row']; $i++) {
                                                         for ($j = 0; $j < $value['col']; $j++) {
@@ -332,30 +338,32 @@ if ($_SESSION['username'] != "admin@gmail.com") {
                                                     }
 
 
-                                                $time += 2;
-                                                $data = array(
-                                                    'theaterID' => $theaterID,
-                                                    'MovieID' => $movieID,
-                                                    'time' => $time . ':00',
-                                                    'date' => $premiere,
-                                                    'seat' => json_encode($seat)
-                                                );
+                                                    $time += 2;
+                                                    $data = array(
+                                                        'theaterID' => $theaterID,
+                                                        'MovieID' => $movieID,
+                                                        'time' => $time . ':00',
+                                                        'date' => $premiere,
+                                                        'seat' => json_encode($seat)
+                                                    );
 
-                                             if ($db->add_data('seats', $data)) {
-                                                echo '<label style="color:green;">Add  ttt success</label>';
-                                            } else {
-                                                echo '<label style="color:red;">Add false</label>';
+                                                    //  if ($db->add_data('seats', $data)) {
+                                                    //     echo '<label style="color:green;">Add  ttt success</label>';
+                                                    // } else {
+                                                    //     echo '<label style="color:red;">Add false</label>';
+                                                    // }
+                                        
+                                                    try {
+                                                        $db->add_data('seats', $data);
+                                                    } catch (Exception $e) {
+                                                        echo '<label style="color:red;">Add false</label>';
+                                                        die();
+                                                    }
+                                                }
+
+
                                             }
-
-                                            }
-
-
-                                            }
-                                            // if ($db->add_data('seats', $data)) {
-                                            //     echo '<label style="color:green;">Add success</label>';
-                                            // } else {
-                                            //     echo '<label style="color:red;">Add false</label>';
-                                            // }
+                                            echo '<label style="color:green;">Add success</label>';
                                         }
 
                                         ?>

@@ -1,5 +1,6 @@
-<?php 
-class HandleDB {
+<?php
+class HandleDB
+{
     const HOST = "localhost";
     const USER = "admin";
     const PASSWORD = "12112002";
@@ -7,7 +8,8 @@ class HandleDB {
 
     private $conn;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->conn = new mysqli(self::HOST, self::USER, self::PASSWORD, self::DATABASE);
 
         if ($this->conn->connect_error) {
@@ -16,7 +18,18 @@ class HandleDB {
     }
 
 
-    public function update($table, $field, $data, $where, $key) {
+    public function update($table, $field, $data, $where, $key)
+    {
+        /**
+         * Updates a record in the specified table based on the given condition.
+         *
+         * @param string $table The name of the table to update.
+         * @param string $field The name of the field to update.
+         * @param mixed $data The new data to be set for the field.
+         * @param string $where The condition to match for updating the record.
+         * @param string $key The primary key of the record to update.
+         * @return void
+         */
         $sql = "UPDATE $table SET $field = '$data' WHERE $where = '$key'";
         if ($this->conn->query($sql) === TRUE) {
             return true;
@@ -25,7 +38,8 @@ class HandleDB {
         }
     }
 
-    public function delete($table, $where) {
+    public function delete($table, $where)
+    {
         $sql = "DELETE FROM $table WHERE $where";
 
         if ($this->conn->query($sql) === TRUE) {
@@ -35,7 +49,8 @@ class HandleDB {
         }
     }
 
-    public function find($table, $where) {
+    public function find($table, $where)
+    {
         $sql = "SELECT * FROM $table WHERE $where";
         $result = $this->conn->query($sql);
 
@@ -46,7 +61,8 @@ class HandleDB {
         }
     }
 
-    public function find_data($table, $column, $data){
+    public function find_data($table, $column, $data)
+    {
         $sql = "SELECT * FROM $table WHERE $column = '$data'";
         $result = $this->conn->query($sql);
 
@@ -58,7 +74,8 @@ class HandleDB {
 
     }
 
-    public function find_by_data($table, $data){
+    public function find_by_data($table, $data)
+    {
 
         $sql = "SELECT * FROM $table WHERE name LIKE '%$data%' OR describes LIKE '%$data%'";
         $result = $this->conn->query($sql);
@@ -75,7 +92,8 @@ class HandleDB {
 
     }
 
-    public function find_movie($table, $column, $data){
+    public function find_movie($table, $column, $data)
+    {
         $sql = "SELECT * FROM $table WHERE $column = '$data'";
         $result = $this->conn->query($sql);
 
@@ -91,7 +109,8 @@ class HandleDB {
 
     }
 
-    public function findAll($table) {
+    public function findAll($table)
+    {
         $sql = "SELECT * FROM $table";
         $result = $this->conn->query($sql);
 
@@ -106,12 +125,14 @@ class HandleDB {
         }
     }
 
-    public function __destruct() {
+    public function __destruct()
+    {
         $this->conn->close();
     }
 
 
-    public function add_data($table, $data) {
+    public function add_data($table, $data)
+    {
         $columns = implode(", ", array_keys($data));
         $values = "'" . implode("', '", array_values($data)) . "'";
         $sql = "INSERT INTO $table ($columns) VALUES ($values)";
