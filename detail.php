@@ -80,7 +80,7 @@ $film = $db->find_data('Movies', 'movieID', $id);
           <div class="d-flex">
             <button class="btn btn-outline-light flex-shrink-0" type="button" >
               <i class="bi-cart-fill me-1"></i>
-              <a href="booking.php?id=<?php echo $film['movieID'] ?>" class = "text-decoration-none" style="color: white">Đặt vé</a>
+              <a href="book.php?id=<?php echo $film['movieID'] ?>" class = "text-decoration-none" style="color: white">Đặt vé</a>
             </button>
           </div><br>
           <div class="d-xxl-inline-flexex">

@@ -9,7 +9,7 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
 }
 
 if ($_SESSION['username'] != "admin@gmail.com") {
-    header("location: addNew.php");
+    header("location: service.php");
 }
 
 
@@ -95,11 +95,26 @@ if ($_SESSION['username'] != "admin@gmail.com") {
 
                         <div class="collapse navbar-collapse ml-auto" id="navbarSupportedContent">
                             <ul class="navbar-nav  ">
-                                <li class="nav-item active">
-                                    <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
+
+                                <li class="nav-item dropdown active">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Theater
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="addTheater.php">Add Theater</a>
+                                        <a class="dropdown-item" href="listTheater.php">List Theater</a>
+                                    </div>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="service.php"> Services </a>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Movies
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="addNew.php">Add Movies</a>
+                                        <a class="dropdown-item" href="listMovies.php">List Movies</a>
+                                    </div>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="logout.php ">Log out</a>
@@ -147,9 +162,10 @@ if ($_SESSION['username'] != "admin@gmail.com") {
                                             <label for="seat">Number of seats</label>
                                             <!-- enter number of row and column seat -->
                                             <input type="text" placeholder="number of row" name="row" id="row" />
-                                            <input type="text" placeholder="number of column" name="column" id="column" />
+                                            <input type="text" placeholder="number of column" name="column"
+                                                id="column" />
                                         </div>
-                                        
+
                                         <div class="btn-box ">
                                             <button type="submit">
                                                 Add
@@ -167,7 +183,7 @@ if ($_SESSION['username'] != "admin@gmail.com") {
                                             $room = $_POST['room'];
 
 
-                                           $data = array(
+                                            $data = array(
                                                 'theaterName' => $name,
                                                 'location' => $content,
                                                 'row' => $row,
@@ -181,7 +197,7 @@ if ($_SESSION['username'] != "admin@gmail.com") {
                                                 echo "<script>alert('Add theater failed')</script>";
                                             }
 
-                                            $theaterID =  $db->find_data('theater','theaterName',$category)['theaterID'];
+                                            $theaterID = $db->find_data('theater', 'theaterName', $category)['theaterID'];
 
 
                                         }

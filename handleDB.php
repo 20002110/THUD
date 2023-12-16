@@ -18,19 +18,31 @@ class HandleDB
     }
 
 
-    public function update($table, $field, $data, $where, $key)
+    public function update($table,  $data, $where, $key)
     {
         /**
          * Updates a record in the specified table based on the given condition.
          *
          * @param string $table The name of the table to update.
-         * @param string $field The name of the field to update.
          * @param mixed $data The new data to be set for the field.
          * @param string $where The condition to match for updating the record.
          * @param string $key The primary key of the record to update.
          * @return void
          */
+        $columns = implode(", ", array_keys($data));
+        $values = "'" . implode("', '", array_values($data)) . "'";
+        $sql = "UPDATE $table SET $columns = $values WHERE $where = '$key'";
+        
+        if ($this->conn->query($sql) === TRUE) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function update_one($table, $field, $data,$where, $key){
         $sql = "UPDATE $table SET $field = '$data' WHERE $where = '$key'";
+
         if ($this->conn->query($sql) === TRUE) {
             return true;
         } else {
@@ -74,10 +86,47 @@ class HandleDB
 
     }
 
+    public function find_one($table, $column, $data)
+    {
+        $sql = "SELECT * FROM $table WHERE $column LIKE '%$data%'";
+        $result = $this->conn->query($sql);
+
+        if ($result->num_rows > 0) {
+            $rows = array();
+            while ($row = $result->fetch_assoc()) {
+                $rows[] = $row;
+            }
+            return $rows;
+        } else {
+            return false;
+        }
+    }
+
     public function find_by_data($table, $data)
     {
 
         $sql = "SELECT * FROM $table WHERE name LIKE '%$data%' OR describes LIKE '%$data%'";
+        $result = $this->conn->query($sql);
+
+        if ($result->num_rows > 0) {
+            $rows = array();
+            while ($row = $result->fetch_assoc()) {
+                $rows[] = $row;
+            }
+            return $rows;
+        } else {
+            return false;
+        }
+
+    }
+
+    public function find_by_array($table, $array)
+    {
+        $sql = "SELECT * FROM $table WHERE ";
+        foreach ($array as $key => $value) {
+            $sql .= "$key = '$value' AND ";
+        }
+        $sql = substr($sql, 0, -4);
         $result = $this->conn->query($sql);
 
         if ($result->num_rows > 0) {

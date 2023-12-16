@@ -1,4 +1,6 @@
-
+<?php
+session_start();
+?>
 
 <!DOCTYPE html>
 <html>
@@ -93,6 +95,7 @@
                     <a class="dropdown-item" href="service.php?filter=Vinfast">Vinfast</a>
                     <a class="dropdown-item" href="service.php?filter=Ferrari">Ferrari</a>
                   </div>
+                </li>
 
                   <!-- search bar -->
                 <li class="nav-item">
@@ -103,6 +106,7 @@
                       <!-- <input type ="submit"  class="fa fa-search"  value=""> -->
                     </form>
                   </div>
+                </li>
 
                 <li class="nav-item ">
                   <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
@@ -110,10 +114,10 @@
                 <li class="nav-item active">
                   <a class="nav-link" href="service.php"> Films </a>
                 </li>
-                <?php 
-                if($_SESSION['username'] == 'admin@gmail.com'){
+                <?php
+                if ($_SESSION['username'] == 'admin@gmail.com') {
                   echo '<li class="nav-item">
-                  <a class="nav-link" href="addNew.php">Add Product</a>
+                  <a class="nav-link" href="addNew.php"> Manager </a>
                 </li>';
                 }
                 ?>
@@ -155,7 +159,7 @@
                       ' . $service['Name'] . '
                     </h5>
                     <p>
-                      ' . $service['director'] .  ' 
+                      ' . $service['director'] . ' 
                     </p>
                     <a href = "detail.php?id=' . $service['movieID'] . '" class = "btn btn-outline-primary" >
                       Read More
@@ -176,7 +180,7 @@
               echo "<p style='color: red'>Không có dữ liệu</p>";
 
             }
-            
+
 
           } elseif (isset($_GET['filter'])) {
             $filter = $_GET['filter'];
@@ -327,4 +331,5 @@
     <script src="js/bootstrap.js"></script>
     <script src="js/custom.js"></script>
 </body>
+
 </html>
