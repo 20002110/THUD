@@ -89,7 +89,7 @@
                     Acount
                   </a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="service.php">Your Profile</a>
+                    <a class="dropdown-item" href="view_profile.php">Your Profile</a>
                     <?php
                     session_start();
                     if (isset($_SESSION['username'])) {

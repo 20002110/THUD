@@ -94,7 +94,6 @@ class HandleDB {
         $this->conn->close();
     }
 
-
     public function add_data($table, $data) {
         $columns = implode(", ", array_keys($data));
         $values = "'" . implode("', '", array_values($data)) . "'";
@@ -106,7 +105,16 @@ class HandleDB {
             return false;
         }
     }
+    public function update_infor($table, $data, $id) {
+        $columns = implode(", ", array_keys($data));
+        $values = "'" . implode("', '", array_values($data)) . "'";
+        $sql = "UPDATE {$table} SET {$columns}={$values} WHERE {$id}";
+        
+        if ($this->conn->query($sql) === TRUE) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
-
-
 ?>

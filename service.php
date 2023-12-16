@@ -1,15 +1,10 @@
-
 <?php
 session_start();
-
 if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
   echo "Bạn chưa đăng nhập";
   header("location: login.php");
   exit;
 }
-
-
-
 ?>
 
 <!DOCTYPE html>
@@ -130,25 +125,22 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
                 </li>';
                 }
                 ?>
-
-                <li class="nav- item">
-                  <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                      aria-haspopup="true" aria-expanded="false">
-                      Acount
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                      <a class="dropdown-item" href="service.php">Your Profile</a>
-                      <?php
-                      session_start();
-                      if (isset($_SESSION['username'])) {
-                        echo '<a class="dropdown-item" href="logout.php">Log out</a>';
-                      } else {
-                        echo '<a class="dropdown-item" href="login.php">Log in</a>';
-                      }
-                      ?>
-                    </div>
-                  </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    Acount
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="view_profile.php">Your Profile</a>
+                    <?php
+                    session_start();
+                    if (isset($_SESSION['username'])) {
+                      echo '<a class="dropdown-item" href="logout.php">Log out</a>';
+                    } else {
+                      echo '<a class="dropdown-item" href="login.php">Log in</a>';
+                    }
+                    ?>
+                  </div>
                 </li>
               </ul>
             </div>
@@ -164,8 +156,8 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
         <div class="row">
           <?php
 
-          include 'handleDB.php';
-          $db = new HandleDB();
+            include 'handleDB.php';
+            $db = new HandleDB();
 
 
           if (isset($_POST['submit'])) {
