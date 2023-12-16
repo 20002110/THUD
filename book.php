@@ -111,57 +111,14 @@ $id = $_GET['id'];
                         var xhttp = new XMLHttpRequest();
                         xhttp.onreadystatechange = function () {
                             if (this.readyState == 4 && this.status == 200) {
-                                console.log(this.responseText);
-                                var theatersData = JSON.parse(this.responseText);
-
-                                var theatersHTML = "";
-                                for (var theater in theatersData) {
-                                    theatersHTML += "<div class = \"mb-3\"><span class = \"fw-bold\">" + theater + "</span><br><div id = \"showing-time1\" class = \"btn-group\" role = \"group\" style = \"color: whitesmoke\">";
-
-                                    for (var showingTime in theatersData[theater]) {
-                                        theatersHTML += "<input type = \"radio\" class = \"btn-check\" name = \"showingTime\" id = \"showingTime1\" value = \"" + theatersData[theater][showingTime] + "\" autocomplete = \"off\" required><label class = \"btn btn-outline-secondary\" for = \"showingTime1\">" + theatersData[theater][showingTime] + "</label>";
-                                    }
-                                    theatersHTML += "</div></div>"
-                                }
-                                document.getElementById("theaters").innerHTML = theatersHTML;
-
+                                document.getElementById("theaters").innerHTML = this.responseText;
                             }
                         };
 
-                        xhttp.open("GET", "book.php?city=" + selectedCity + "&date=" + date + "&id=" + id, true);
+                        xhttp.open("GET", "city.php?city=" + selectedCity + "&date=" + date + "&id=" + id, true);
                         xhttp.send();
                     }
                 </script>
-                <?php
-                if (isset($_GET['city'])) {
-                    // $city = $_GET['city'];
-                    $city = 'Hà Nội' ;  
-                    $theaters = $db->find_one('theater', 'location', $city);
-                    $data = array();
-                    foreach ($theaters as $theater) {
-                        $data[] = $theater['theaterName'];
-                        $theaterID = $theater['theaterID'];
-                        $date = $_GET['date'];
-                        $showingTimes = $db->find_by_array('seats', array('theaterID' => $theaterID, 'date' => $date));
-                        $subdata = array();
-                        foreach ($showingTimes as $showingTime) {
-                            $subdata[] = $showingTime['showingTime'];
-
-                        }
-                        # set key as theater name and value as array of showing times
-                        $data[$theater['theaterName']] = $subdata;
-
-                    }
-
-                    # json encode data to pass to javascript
-                    header('Content-Type: application/json'); // Set the content type to JSON
-                    $json = json_encode($data);
-                    echo $json;
-
-
-                }
-
-                ?>
 
 
             </div>
