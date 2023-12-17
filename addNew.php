@@ -333,50 +333,53 @@ if ($_SESSION['username'] != "admin@gmail.com") {
                                             $all_theater = $db->findAll('theater');
                                             $movieID = $db->find_data('Movies', 'Name', $name)['movieID'];
 
+                                            $today = date("Y-m-d");
+
+                                            for ($day = 0; $day < 7; $day++) {
+                                                $premiere = date('Y-m-d', strtotime($today . ' + ' . $day . ' days'));
+                                                foreach ($all_theater as $key => $value) {
+                                                    $theaterID = $value['theaterID'];
+                                                    $time = 6;
+                                                    for ($k = 0; $k < $value['rooms']; $k++) {
+                                                        $seat = array();
+                                                        for ($i = 0; $i < $value['row']; $i++) {
+                                                            for ($j = 0; $j < $value['col']; $j++) {
+                                                                $seat[] = array(
+                                                                    'seatName' => chr(65 + $i) . ($j + 1),
+                                                                    'user_id' => 0,
+                                                                    'status' => 0
+                                                                );
+                                                            }
+                                                        }
 
 
-                                            foreach ($all_theater as $key => $value) {
-                                                $theaterID = $value['theaterID'];
-                                                $time = 6;
-                                                for ($k = 0; $k < $value['rooms']; $k++) {
-                                                    $seat = array();
-                                                    for ($i = 0; $i < $value['row']; $i++) {
-                                                        for ($j = 0; $j < $value['col']; $j++) {
-                                                            $seat[] = array(
-                                                                'seatName' => chr(65 + $i) . ($j + 1),
-                                                                'user_id' => 0,
-                                                                'status' => 0
-                                                            );
+                                                        $time += 2;
+                                                        $data = array(
+                                                            'theaterID' => $theaterID,
+                                                            'MovieID' => $movieID,
+                                                            'time' => $time . ':00',
+                                                            'date' => $premiere,
+                                                            'seat' => json_encode($seat)
+                                                        );
+
+                                                        //  if ($db->add_data('seats', $data)) {
+                                                        //     echo '<label style="color:green;">Add  ttt success</label>';
+                                                        // } else {
+                                                        //     echo '<label style="color:red;">Add false</label>';
+                                                        // }
+                                        
+                                                        try {
+                                                            $db->add_data('seats', $data);
+                                                        } catch (Exception $e) {
+                                                            echo '<label style="color:red;">Add false</label>';
+                                                            die();
                                                         }
                                                     }
 
 
-                                                    $time += 2;
-                                                    $data = array(
-                                                        'theaterID' => $theaterID,
-                                                        'MovieID' => $movieID,
-                                                        'time' => $time . ':00',
-                                                        'date' => $premiere,
-                                                        'seat' => json_encode($seat)
-                                                    );
-
-                                                    //  if ($db->add_data('seats', $data)) {
-                                                    //     echo '<label style="color:green;">Add  ttt success</label>';
-                                                    // } else {
-                                                    //     echo '<label style="color:red;">Add false</label>';
-                                                    // }
-                                        
-                                                    try {
-                                                        $db->add_data('seats', $data);
-                                                    } catch (Exception $e) {
-                                                        echo '<label style="color:red;">Add false</label>';
-                                                        die();
-                                                    }
                                                 }
-
-
+                                                echo '<label style="color:green;">Add success</label>';
                                             }
-                                            echo '<label style="color:green;">Add success</label>';
                                         }
 
                                         ?>

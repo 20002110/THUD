@@ -20,6 +20,7 @@ if (isset($_POST['login'])) {
             // $passvalid = true;
             session_start();
             $_SESSION['username'] = $email;
+            $_SESSION['userID'] = $data['user_id'];
             header("Location: service.php");
         } else {
            $passvalid = false;

@@ -73,6 +73,7 @@ class HandleDB
         }
     }
 
+
     public function find_data($table, $column, $data)
     {
         $sql = "SELECT * FROM $table WHERE $column = '$data'";

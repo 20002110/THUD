@@ -12,6 +12,52 @@ $id = $_GET['id'];
 
 ?>
 
+<?php
+if (isset($_POST['submit'])) {
+    $selectedSeat = $_POST['selectedSeat']; 
+    $seatID = $_POST['seatID'];
+    $userID = $_SESSION['userID'];
+
+    $seatmap = $db->find_data('seats', 'seatID', $seatID);
+    $seatMap = $seatmap['seat'];
+    $seatMap = json_decode($seatMap, true);
+    $newSeatMap = array();
+    foreach ($seatMap as $seat) {
+        // if ($seat['seatName'] == $selectedSeat) {
+        //     $seat['user_id'] = $userID;
+        //     $seat['status'] = 1;
+        // }
+        foreach ($selectedSeat as $selected) {
+            if ($seat['seatName'] == $selected) {
+                $seat['user_id'] = $userID;
+                $seat['status'] = 1;
+            }
+        }
+        $newSeatMap[] = $seat;
+    }
+
+    $newSeatMap = json_encode($newSeatMap);
+    if ($db->update('seats',  array('seat' => $newSeatMap),'seatID', $seatID)) {
+        echo "<script>alert('Đặt vé thành công 1111');</script>";
+    } else {
+        echo "<script>alert('Đặt vé thất bại 11111');</script>";
+    }
+
+    $data = array(
+        'user_id' => $userID,
+        'seatID' => $seatID,
+    );
+    $db->add_data('ticket', $data);
+
+    $tiketID = $db->find_by_array('ticket', array('user_id' => $userID, 'seatID' => $seatID));
+
+    // header("location: ticket.php?id=$tiketID");
+    echo "<script>alert('Đặt vé thành công!');</script>";
+
+}
+
+?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -47,22 +93,22 @@ $id = $_GET['id'];
 <body class="container mt-5 bg-dark text-center" style="color: whitesmoke">
 
     <h1 class="text-center mb-4">Booking</h1>
-    <form action="booking.php" method="post">
+    <form method="post">
 
         <div class="mb-3">
             <h3>Chọn ngày xem:</h3>
             <!-- <input type="date" id="date" name="date" class="form-control text-center  mx-auto" style="width: 218px"> -->
             <div class="form-check form-check-inline">
-            <?php
-            $today = date("Y-m-d");
-            for ($i = 0; $i < 7; $i++) {
-                $date = date('Y-m-d', strtotime($today . ' + ' . $i . ' days'));
-                echo "<div class=\"form-check form-check-inline center\">
+                <?php
+                $today = date("Y-m-d");
+                for ($i = 0; $i < 7; $i++) {
+                    $date = date('Y-m-d', strtotime($today . ' + ' . $i . ' days'));
+                    echo "<div class=\"form-check form-check-inline center\">
                 <input class=\"form-check-input\" type=\"radio\" name=\"date\" id=\"date\" value=\"$date\">
                 <label class=\"form-check-label\" for=\"date\">$date</label>
             </div>";
-            }
-            ?>
+                }
+                ?>
             </div>
 
         </div>
@@ -72,7 +118,7 @@ $id = $_GET['id'];
             <div id="city">
                 <select name="city" id="city" class="form-select" aria-label="Default select example"
                     onchange="getTheaters()">
-                    <option value="" selected>Chọn thành phố</option>
+                    <option value="" selected>Chọn địa chỉ rạp phim</option>
                     <?php
                     $Theater = $db->findAll('theater');
                     $cities = array();
@@ -99,11 +145,13 @@ $id = $_GET['id'];
         <div class="mb-3">
             <h3>Cụm rạp:</h3>
             <div id="theaters" class="text-center">
- 
+
                 <script>
 
                     function getTheaters() {
-                        var selectedCity = document.getElementById("city").value;
+                        // get city from select 
+                        var selectedCity = document.getElementsByName('city')[0].value;
+                        // console.log(selectedCity);
                         // get date from radio button
                         var date = document.querySelector('input[name="date"]:checked').value;
                         var id = <?php echo $id ?>;
@@ -128,28 +176,47 @@ $id = $_GET['id'];
         <div class="mb-3">
             <h3>Chọn chỗ ngồi:</h3>
             <div id="seatMap">
-                <?php
-                $totalRows = 5;
-                $seatsPerRow = 10;
 
-                for ($row = 1; $row <= $totalRows; $row++) {
-                    echo "<div class=\"seat-row\">";
-                    for ($seat = 1; $seat <= $seatsPerRow; $seat++) {
-                        echo "<label class=\"seat btn btn-outline-secondary\">
-            <input type=\"radio\" name=\"selectedSeat\" value=\"$row-$seat\">
-            <span class=\"seat-label\">$row-$seat</span>
-            </label>";
+                <script type="text/javascript">
+                    function getSeatMap(selectedTime) {
+                        var showingTime = selectedTime.id;
+                        console.log(showingTime);
+
+                        var xhttp = new XMLHttpRequest();
+                        xhttp.onreadystatechange = function () {
+                            if (this.readyState == 4 && this.status == 200) {
+                                document.getElementById("seatMap").innerHTML = this.responseText;
+                                // console.log(this.responseText);
+                            }
+                        };
+
+                        xhttp.open("GET", "seatmap.php?seatID=" + showingTime, true);
+                        xhttp.send();
                     }
-                    echo "</div>";
-                }
-                ?>
+
+                </script>
+
+            </div>
+            <div>
+                <label class="seat btn btn-outline-secondary mx-5">
+                    (A,B)
+                    <span class="seat-label" style="color: green">VIP</span>
+                </label>
+                <label class="seat btn btn-outline-secondary mx-5">
+                    (C,D...)
+                    <span class="seat-label" style="color: green">Normal</span>
+                </label>
+                <label class="seat btn btn-outline-secondary mx-5" style="color: red">
+                    (RED)
+                    <span class="seat-label" style="color: red">Booked</span>
+                </label>
+
             </div>
         </div>
         <hr>
         <div class="text-center">
-            <button type="submit" class="btn btn-success">Đặt vé</button>
+            <button type="submit" class="btn btn-success" name="submit">Đặt vé</button>
         </div>
-
     </form>
     <br>
 </body>
