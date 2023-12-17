@@ -78,7 +78,7 @@ $userID = $_SESSION['userID'];
         $seatMap = json_decode($seatMap, true);
         $seatName = array();
         foreach ($seatMap as $seat) {
-            if ($seat['user_id'] == $id && $seat['TicketID'] == $id) {
+            if ($seat['user_id'] == $userID) {// && $seat['TicketID'] == $id) {
                 $seatName[] = $seat['seatName'];
             }
         }

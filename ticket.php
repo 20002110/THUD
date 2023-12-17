@@ -184,8 +184,8 @@ $id = $_SESSION['userID'];
                                 <td>'.$time.'</td>
                                 <td>'.$totalprice. ' VND</td>
                                 <td>
-                                    <a href="show_ticket.php?id='.$id.'" class="text-light"><button class="btn btn-primary">Detail</button></a>
-                                    <a href="delete_ticket.php?id='.$id.'" class="text-light"><button class="btn btn-danger">Delete</button></a>
+                                    <a href="show_ticket.php?id='.$ticket['ticketID'].'" class="text-light"><button class="btn btn-primary">Detail</button></a>
+                                    <a href="delete_ticket.php?id='.$ticket['ticketID'].'" class="text-light"><button class="btn btn-danger">Delete</button></a>
                                 </td>
                               </tr>';
                         
