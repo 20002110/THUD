@@ -13,7 +13,7 @@ $id = $_GET['id'];
 ?>
 
 <?php
-if (isset($_POST['submit'])) {
+if (isset($_POST['submit'])) {  
     $selectedSeat = $_POST['selectedSeat']; 
     $seatID = $_POST['seatID'];
     $userID = $_SESSION['userID'];
@@ -38,21 +38,22 @@ if (isset($_POST['submit'])) {
 
     $newSeatMap = json_encode($newSeatMap);
     if ($db->update('seats',  array('seat' => $newSeatMap),'seatID', $seatID)) {
-        echo "<script>alert('Đặt vé thành công 1111');</script>";
+        
+        $data = array(
+            'user_id' => $userID,
+            'seatID' => $seatID,
+        );
+        $db->add_data('ticket', $data);
+    
+        $ticketID = $db->find_last_row('ticket', 'ticketID');
+    
+        header("location: ticket.php?id=$tiketID");
+       
     } else {
-        echo "<script>alert('Đặt vé thất bại 11111');</script>";
+        echo "<script>alert('Đặt vé thất bại');</script>";
     }
 
-    $data = array(
-        'user_id' => $userID,
-        'seatID' => $seatID,
-    );
-    $db->add_data('ticket', $data);
 
-    $tiketID = $db->find_by_array('ticket', array('user_id' => $userID, 'seatID' => $seatID));
-
-    // header("location: ticket.php?id=$tiketID");
-    echo "<script>alert('Đặt vé thành công!');</script>";
 
 }
 

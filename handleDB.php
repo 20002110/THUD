@@ -18,7 +18,7 @@ class HandleDB
     }
 
 
-    public function update($table,  $data, $where, $key)
+    public function update($table, $data, $where, $key)
     {
         /**
          * Updates a record in the specified table based on the given condition.
@@ -32,7 +32,7 @@ class HandleDB
         $columns = implode(", ", array_keys($data));
         $values = "'" . implode("', '", array_values($data)) . "'";
         $sql = "UPDATE $table SET $columns = $values WHERE $where = '$key'";
-        
+        echo $sql;
         if ($this->conn->query($sql) === TRUE) {
             return true;
         } else {
@@ -40,7 +40,40 @@ class HandleDB
         }
     }
 
-    public function update_one($table, $field, $data,$where, $key){
+
+    public function update_movie($table, $data, $where, $k)
+    {
+
+        /**
+         * Updates a record in the specified table based on the given condition.
+         *
+         * @param string $table The name of the table to update.
+         * @param string $data The column-value pairs to update in the format "column1=value1, column2=value2, ...".
+         * @param string $where The condition to match for updating the record.
+         * @param string $key The value to match in the specified column for updating the record.
+         * @return bool Returns true if the record is successfully updated, false otherwise.
+         */
+
+
+        $string = "";
+        foreach ($data as $key => $value) {
+            $string .= "$key = '$value', ";
+        }
+
+        $string = substr($string, 0, -2);
+
+        $sql = "UPDATE $table SET $string WHERE $where = '$k'";
+
+        // echo '<script>alert("' . $sql . '")</script>';
+        if ($this->conn->query($sql) === TRUE) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function update_one($table, $field, $data, $where, $key)
+    {
         $sql = "UPDATE $table SET $field = '$data' WHERE $where = '$key'";
 
         if ($this->conn->query($sql) === TRUE) {
@@ -50,9 +83,9 @@ class HandleDB
         }
     }
 
-    public function delete($table, $where)
+    public function delete($table, $where, $key)
     {
-        $sql = "DELETE FROM $table WHERE $where";
+        $sql = "DELETE FROM $table WHERE $where = '$key'";
 
         if ($this->conn->query($sql) === TRUE) {
             return true;
@@ -74,9 +107,23 @@ class HandleDB
     }
 
 
+
     public function find_data($table, $column, $data)
     {
         $sql = "SELECT * FROM $table WHERE $column = '$data'";
+        $result = $this->conn->query($sql);
+
+        if ($result->num_rows > 0) {
+            return $result->fetch_assoc();
+        } else {
+            return false;
+        }
+
+    }
+
+    public function find_last_row($table, $column)
+    {
+        $sql = "SELECT * FROM $table ORDER BY $column DESC LIMIT 1";
         $result = $this->conn->query($sql);
 
         if ($result->num_rows > 0) {

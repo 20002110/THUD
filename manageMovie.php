@@ -8,9 +8,9 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
     exit;
 }
 
-include_once 'handleDB.php';
-$db = new HandleDB();
-$id = $SESSION['userID'];
+if ($_SESSION['username'] != "admin@gmail.com") {
+    header("location: service.php");
+}
 
 
 ?>
@@ -114,7 +114,7 @@ $id = $SESSION['userID'];
 
        <!-- Body Start -->
 <div class="container py-5">
-    <a href="addNew.php" class="text-light"><button class="btn btn-primary my-5">Book Ticket</button></a>
+    <a href="addNew.php" class="text-light"><button class="btn btn-primary my-5">Add New Movie</button></a>
         <!-- start echo message to user -->
         <?php
 				if(isset($message)) {
@@ -132,10 +132,16 @@ $id = $SESSION['userID'];
                 <tr>
                     <th scope="col">No.</th>
                     <th scope="col">Name Movie</th>
-                    <th scope="col">Location</th>
-                    <th scope="col">Date</th>
+                    <th scope="col">Director</th>
+                    <!-- <th scope="col">Performer</th> -->
+                    <th scope="col">Category</th>
                     <th scope="col">Time</th>
+                    <th scope="col">Language</th>
+                    <th scope="col">Premiere</th>
+                    <!-- <th scope="col">Describes</th> -->
                     <th scope="col">Price</th>
+                    <th scope="col">Images</th>
+                    <th scope="col">Operations</th>
                 </tr>
             </thead>
             <tbody>
@@ -171,8 +177,8 @@ $id = $SESSION['userID'];
                                     <td>'.$premiere.'</td>
                                     <td>'.$cost.'</td>
                                     <td>
-                                        <a href="show_ticket.php?id='.$id.'" class="text-light"><button class="btn btn-primary">Detail</button></a>
-                                        <a href="delete_ticket.php?id='.$id.'" class="text-light"><button class="btn btn-danger">Delete</button></a>
+                                        <a href="updateMovie.php?updateid='.$id.'" class="text-light"><button class="btn btn-primary">Update</button></a>
+                                        <a href="deleteMovie.php?deleteid='.$id.'" class="text-light"><button class="btn btn-danger">Delete</button></a>
                                     </td>
                                   </tr>';
                             

@@ -97,7 +97,7 @@ session_start();
                   </div>
                 </li>
 
-                  <!-- search bar -->
+                <!-- search bar -->
                 <li class="nav-item">
                   <div class="search-container">
                     <form method="post" action="">
@@ -121,9 +121,24 @@ session_start();
                 </li>';
                 }
                 ?>
-                <li class="nav-item">
-                  <a class="nav-link" href="logout.php">Log out</a>
-                </li>
+                <?php
+                session_start();
+                if (isset($_SESSION['username'])) {
+                  echo '  <li class="nav-item dropdown ">  
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        ' . $_SESSION['username'] . '
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="view_profile.php">Profile</a>
+                        <a class="dropdown-item" href="logout.php">Log out</a>
+                    </div>
+                </li>';
+
+                } else {
+                  echo '<a class="nav-link" href="login.php">Log in</a>';
+                }
+                ?>
               </ul>
             </div>
           </nav>

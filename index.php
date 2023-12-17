@@ -19,7 +19,8 @@
   <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
 
   <!-- fonts style -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Poppins:400,600,700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Poppins:400,600,700&display=swap"
+    rel="stylesheet" />
 
   <!-- Custom styles for this template -->
   <link href="css/style.css" rel="stylesheet" />
@@ -68,7 +69,8 @@
                 <i>"THUD"</i>
               </span>
             </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class=""></span>
             </button>
 
@@ -80,17 +82,24 @@
                 <li class="nav-item">
                   <a class="nav-link" href="service.php"> Films </a>
                 </li>
-                <li class="nav-item">
-                  <!-- <a class="nav-link" href="login.php">Log in</a> -->
-                  <?php
-                  session_start();
-                  if (isset($_SESSION['username'])) {
-                    echo '<a class="nav-link" href="logout.php">Log out</a>';
-                  } else {
-                    echo '<a class="nav-link" href="login.php">Log in</a>';
-                  }
-                  ?>
-                </li>
+                <?php
+                session_start();
+                if (isset($_SESSION['username'])) {
+                  echo '  <li class="nav-item dropdown ">  
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        ' . $_SESSION['username'] . '
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="view_profile.php">Profile</a>
+                        <a class="dropdown-item" href="logout.php">Log out</a>
+                    </div>
+                </li>';
+
+                } else {
+                  echo '<a class="nav-link" href="login.php">Log in</a>';
+                }
+                ?>
               </ul>
             </div>
           </nav>
@@ -211,12 +220,15 @@
               </h2>
             </div>
             <p>
-              Chúng tôi quan niệm rằng, mỗi chuyến đi là một hành trình trải nghiệm và khám phá, là cơ hội để bản thân tìm hiểu
-              những khoảnh khắc mới mẻ trong cuộc sống. Do đó, chất lượng dịch vụ, trải nghiệm người dùng là ưu tiên hàng đầu và
+              Chúng tôi quan niệm rằng, mỗi chuyến đi là một hành trình trải nghiệm và khám phá, là cơ hội để bản thân
+              tìm hiểu
+              những khoảnh khắc mới mẻ trong cuộc sống. Do đó, chất lượng dịch vụ, trải nghiệm người dùng là ưu tiên
+              hàng đầu và
               là nguồn cảm hứng của chúng tôi xuyên suốt của trình hoạt động.
               <br><br>
               <i>"THUD"</i> là nền tảng cho thuê xe với đa dạng phân khúc, mẫu mã. Chúng tôi không chỉ dừng lại
-              với việc kết nối với khách hàng một cách nhanh chóng, đảm bảo chất lượng xe an toàn, bên cạnh đó chúng tôi còn
+              với việc kết nối với khách hàng một cách nhanh chóng, đảm bảo chất lượng xe an toàn, bên cạnh đó chúng tôi
+              còn
               hướng tới trải nghiệm của khách hàng một cách tốt nhất trong quá trình trải nghiệm dịch vụ.
 
             </p>
