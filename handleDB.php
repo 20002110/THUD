@@ -32,7 +32,7 @@ class HandleDB
         $columns = implode(", ", array_keys($data));
         $values = "'" . implode("', '", array_values($data)) . "'";
         $sql = "UPDATE $table SET $columns = $values WHERE $where = '$key'";
-        echo $sql;
+        // echo $sql;
         if ($this->conn->query($sql) === TRUE) {
             return true;
         } else {
@@ -153,7 +153,7 @@ class HandleDB
     public function find_by_data($table, $data)
     {
 
-        $sql = "SELECT * FROM $table WHERE name LIKE '%$data%' OR describes LIKE '%$data%'";
+        $sql = "SELECT * FROM $table WHERE Name LIKE '%$data%' OR performer LIKE '%$data%'OR director LIKE '%$data%' ";
         $result = $this->conn->query($sql);
 
         if ($result->num_rows > 0) {

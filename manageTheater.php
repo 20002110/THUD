@@ -8,7 +8,9 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
     exit;
 }
 
-$id = $_SESSION['userID'];
+if ($_SESSION['username'] != "admin@gmail.com") {
+    header("location: service.php");
+}
 
 
 ?>
@@ -28,7 +30,7 @@ $id = $_SESSION['userID'];
     <meta name="author" content="" />
     <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
 
-    <title>Manage Movie</title>
+    <title>Manage Theater</title>
 
     <!-- bootstrap core css -->
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
@@ -97,7 +99,7 @@ $id = $_SESSION['userID'];
                                     <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="service.php"> Films </a>
+                                    <a class="nav-link" href="service.php"> Services </a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="logout.php ">Log out</a>
@@ -112,7 +114,7 @@ $id = $_SESSION['userID'];
 
        <!-- Body Start -->
 <div class="container py-5">
-    <a href="addNew.php" class="text-light"><button class="btn btn-primary my-5">Book Ticket</button></a>
+    <a href="addTheater.php" class="text-light"><button class="btn btn-primary my-5">Add New Theater</button></a>
         <!-- start echo message to user -->
         <?php
 				if(isset($message)) {
@@ -129,67 +131,43 @@ $id = $_SESSION['userID'];
             <thead class="table-success align-middle thead-dark">
                 <tr>
                     <th scope="col">No.</th>
-                    <th scope="col">Name Movie</th>
-                    <th scope="col">Theater</th>
-                    <th scope="col">Date</th>
-                    <th scope="col">Time</th>
-                    <th scope="col">Price</th>
-                    <th scope="col">Action</th>
+                    <th scope="col">Name Theater</th>
+                    <th scope="col">Location</th>
+                    <th scope="col">Number of rooms</th>
+                    <th scope="col">Number of seat per row</th>
+                    <th scope="col">Number of seat per col</th>
+                    <th scope="col">Operations</th>
                 </tr>
             </thead>
             <tbody>
                 <?php
                     include 'handleDB.php';
                     $db = new HandleDB();
-                    $tickets = $db->find_one('ticket', 'user_id', $id);
+                    $theaters = $db->findAll('theater');
                     $status = 1;
-                    foreach($tickets as $ticket) {
-                        $seatID = $ticket['seatID'];
-                        $seat = $db->find_data('seats', 'seatID', $seatID);
-                        $movieID = $seat['MovieID'];
-                        $theaterID = $seat['theaterID'];
-                        $time = $seat['time'];
-                        $date = $seat['date'];
-                        $seatMap = $seat['seat'];
-                        $seatMap = json_decode($seatMap, true);
-                        $seatName = array();
-                        foreach ($seatMap as $seat) {
-                            if ($seat['user_id'] == $id) {
-                                $seatName[] = $seat['seatName'];
-                            }
-                        }
-                        $seatName = implode(', ', $seatName);
-                        $movie = $db->find_data('Movies', 'MovieID', $movieID);
-                        $name_movie = $movie['Name'];
-                        $location = $db->find_data('theater', 'theaterID', $theaterID);
-                        $location = $location['theaterName'];
-                        $price = $movie['cost'];
-                        $totalprice = 0;
-                        // calculate price if user book more than 1 ticket
-                        $seatName = explode(', ', $seatName);
-                        foreach ($seatName as $seat) {
-                            // check if seat is VIP or not by A,B character in seat name
-                            if ($seat[0] == 'A' || $seat[0] == 'B') {
-                                $totalprice += $price * 1.5;
-                            } else {
-                                $totalprice += $price;
-                            }
-                        }
+                    foreach ($theaters as $theater) {
 
-                        echo '<tr>
-                                <th scope="row">'.$status.'</th>
-                                <td>'.$name_movie.'</td>
-                                <td>'.$location.'</td>
-                                <td>'.$date.'</td>
-                                <td>'.$time.'</td>
-                                <td>'.$totalprice. ' VND</td>
-                                <td>
-                                    <a href="show_ticket.php?id='.$id.'" class="text-light"><button class="btn btn-primary">Detail</button></a>
-                                    <a href="delete_ticket.php?id='.$id.'" class="text-light"><button class="btn btn-danger">Delete</button></a>
-                                </td>
-                              </tr>';
-                        
-                        $status++;
+                            $id = $theater['theaterID'];
+                            $theaterName = $theater['theaterName'];
+                            $location= $theater['location'];
+                            $rooms = $theater['rooms'];
+                            $row = $theater['row'];
+                            $col = $theater['col'];
+
+                            echo '<tr>
+                                    <th scope="row">'.$status.'</th>
+                                    <td>'.$theaterName.'</td>
+                                    <td>'.$location.'</td>
+                                    <td>'.$rooms.'</td>
+                                    <td>'.$row.'</td>
+                                    <td>'.$col.'</td>
+                                    <td>
+                                        <a href="updateTheater.php?updateid='.$id.'" class="text-light"><button class="btn btn-primary">Update</button></a>
+                                        <a href="deleteTheater.php?deleteid='.$id.'" class="text-light"><button class="btn btn-danger">Delete</button></a>
+                                    </td>
+                                  </tr>';
+                            
+                            $status++;
                     }
                     
                 ?>

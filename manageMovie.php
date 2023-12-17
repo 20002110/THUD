@@ -140,7 +140,7 @@ if ($_SESSION['username'] != "admin@gmail.com") {
                     <th scope="col">Premiere</th>
                     <!-- <th scope="col">Describes</th> -->
                     <th scope="col">Price</th>
-                    <th scope="col">Images</th>
+                    <!-- <th scope="col">Images</th> -->
                     <th scope="col">Operations</th>
                 </tr>
             </thead>

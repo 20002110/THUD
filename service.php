@@ -114,6 +114,9 @@ session_start();
                 <li class="nav-item active">
                   <a class="nav-link" href="service.php"> Films </a>
                 </li>
+                <li class="nav-item ">
+                  <a class="nav-link" href="ticket.php"> my ticket </a>
+                </li>
                 <?php
                 if ($_SESSION['username'] == 'admin@gmail.com') {
                   echo '<li class="nav-item">
@@ -136,7 +139,9 @@ session_start();
                 </li>';
 
                 } else {
-                  echo '<a class="nav-link" href="login.php">Log in</a>';
+                  echo '<li class="nav-item">
+                  <a class="nav-link" href="login.php"> Login </a>
+                </li>';
                 }
                 ?>
               </ul>

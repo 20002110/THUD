@@ -102,7 +102,7 @@ if ($_SESSION['username'] != "admin@gmail.com") {
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                         <a class="dropdown-item" href="addTheater.php">Add Theater</a>
-                                        <a class="dropdown-item" href="">List Theater</a>
+                                        <a class="dropdown-item" href="manageTheater.php">List Theater</a>
                                     </div>
                                 </li>
                                 <li class="nav-item dropdown active">
@@ -347,7 +347,8 @@ if ($_SESSION['username'] != "admin@gmail.com") {
                                                                 $seat[] = array(
                                                                     'seatName' => chr(65 + $i) . ($j + 1),
                                                                     'user_id' => 0,
-                                                                    'status' => 0
+                                                                    'status' => 0,
+                                                                    'tiketID' => -1
                                                                 );
                                                             }
                                                         }

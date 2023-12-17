@@ -103,7 +103,7 @@ if ($_SESSION['username'] != "admin@gmail.com") {
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                         <a class="dropdown-item" href="addTheater.php">Add Theater</a>
-                                        <a class="dropdown-item" href="listTheater.php">List Theater</a>
+                                        <a class="dropdown-item" href="manageTheater.php">List Theater</a>
                                     </div>
                                 </li>
                                 <li class="nav-item dropdown">
@@ -113,7 +113,7 @@ if ($_SESSION['username'] != "admin@gmail.com") {
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                         <a class="dropdown-item" href="addNew.php">Add Movies</a>
-                                        <a class="dropdown-item" href="listMovies.php">List Movies</a>
+                                        <a class="dropdown-item" href="manageMovie.php">List Movies</a>
                                     </div>
                                 </li>
                                 <li class="nav-item">

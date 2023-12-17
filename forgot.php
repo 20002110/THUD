@@ -205,6 +205,7 @@
                                             var message = "Your OTP to veryfy is " + otp;
 
                                             var templateParams = {
+                                                title : "OTP to verify",
                                                 from_name: "Admin",
                                                 to_name: receiver,
                                                 message: message,

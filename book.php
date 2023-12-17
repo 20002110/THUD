@@ -10,6 +10,7 @@ include_once 'handleDB.php';
 $db = new HandleDB();
 $id = $_GET['id'];
 
+
 ?>
 
 <?php
@@ -22,6 +23,10 @@ if (isset($_POST['submit'])) {
     $seatMap = $seatmap['seat'];
     $seatMap = json_decode($seatMap, true);
     $newSeatMap = array();
+
+    $ticketID = $db->find_last_row('ticket', 'ticketID');
+    $ticketID = $ticketID['ticketID'] + 1;
+
     foreach ($seatMap as $seat) {
         // if ($seat['seatName'] == $selectedSeat) {
         //     $seat['user_id'] = $userID;
@@ -31,6 +36,7 @@ if (isset($_POST['submit'])) {
             if ($seat['seatName'] == $selected) {
                 $seat['user_id'] = $userID;
                 $seat['status'] = 1;
+                $seat['tiketID'] = $tiketID;
             }
         }
         $newSeatMap[] = $seat;
@@ -43,12 +49,54 @@ if (isset($_POST['submit'])) {
             'user_id' => $userID,
             'seatID' => $seatID,
         );
-        $db->add_data('ticket', $data);
+
+
+
+ 
+        
+     if($db->add_data('ticket', $data)){
+        echo '
+        <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+        <script>
+        // emailjs
+        emailjs.init("6VzQcCIDbGU-WvZ0L")
+
+        function sendMail(email) {
+            var receiver = email;
+
+            var link = "https://danhnt.me/show_ticket.php?id=" + ' . $ticketID . ';
+
+          
+
+
+            var message = "Your ticket has been booked successfully. Please click the link below to view your ticket: " + link;
+
+            var templateParams = {
+                title : "Xác nhận đặt vé thành công",
+                from_name: "Cinema Admin",
+                to_name: receiver,
+                message: message,
+            };
+
+            emailjs.send("service_xs8w0pp", "template_06kpj9m", templateParams)
+                .then(function (response) {
+                    console.log("SUCCESS!", response.status, response.text);
+                
+                    
+                }, function (error) {
+                    console.log("FAILED...", error);
+                });
+
+        }
+
+
+    </script>';
+
+        echo '<script>sendMail("' . $_SESSION['username'] . '")</script>';
+
     
-        $ticketID = $db->find_last_row('ticket', 'ticketID');
-    
-        header("location: ticket.php?id=$tiketID");
-       
+        header("location: show_ticket.php?id=$tiketID");
+     }
     } else {
         echo "<script>alert('Đặt vé thất bại');</script>";
     }
@@ -73,6 +121,7 @@ if (isset($_POST['submit'])) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
         integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <style>
         /* Custom CSS for button hover and active states */
         .btn-primary:hover,
@@ -89,6 +138,9 @@ if (isset($_POST['submit'])) {
             border-color: #198754;
         }
     </style>
+
+
+
 </head>
 
 <body class="container mt-5 bg-dark text-center" style="color: whitesmoke">

@@ -97,7 +97,9 @@
                 </li>';
 
                 } else {
-                  echo '<a class="nav-link" href="login.php">Log in</a>';
+                  echo '<li class="nav-item">
+                  <a class="nav-link" href="login.php"> Login </a>
+                </li>';
                 }
                 ?>
               </ul>

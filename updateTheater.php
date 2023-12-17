@@ -8,10 +8,53 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
     exit;
 }
 
-$id = $_SESSION['userID'];
+if ($_SESSION['username'] != "admin@gmail.com") {
+    header("location: service.php");
+}
+
+include_once 'handleDB.php';
+$db = new HandleDB();
+
+$theaterID = $_GET['updateid'];
+$theater= $db->find_data('theater', 'theaterID', $theaterID);
 
 
 ?>
+
+<?php
+
+
+if (isset($_POST['submit'])) {
+
+    $theaterName = $_POST['theaterName'];
+    $location = $_POST['location'];
+    $rooms = $_POST['rooms'];
+    $row = $_POST['row'];
+    $col = $_POST['col'];
+
+    $data = array(
+        'theaterName' => $theaterName,
+        'location' => $location,
+        'rooms' => $rooms,
+        'row' => $row,
+        'col' => $col,
+    );
+
+
+
+
+    if ($db->update_movie('theater', $data, 'theaterID', $theaterID)) {
+
+        // echo '<label style="color:green;">Add success</label>';
+        header("location: manageTheater.php");
+    } else {
+        echo '<label style="color:red;">update false</label>';
+    }
+
+}
+?>
+
+
 
 <!DOCTYPE html>
 <html>
@@ -28,7 +71,7 @@ $id = $_SESSION['userID'];
     <meta name="author" content="" />
     <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
 
-    <title>Manage Movie</title>
+    <title>Update Theater</title>
 
     <!-- bootstrap core css -->
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
@@ -93,11 +136,25 @@ $id = $_SESSION['userID'];
 
                         <div class="collapse navbar-collapse ml-auto" id="navbarSupportedContent">
                             <ul class="navbar-nav  ">
-                                <li class="nav-item active">
-                                    <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
+                                <li class="nav-item dropdown ">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Theater
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="addTheater.php">Add Theater</a>
+                                        <a class="dropdown-item" href="manageTheater.php">List Theater</a>
+                                    </div>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="service.php"> Films </a>
+                                <li class="nav-item dropdown active">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Movies
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="addNew.php">Add Movies</a>
+                                        <a class="dropdown-item" href="manageMovie.php">List Movies</a>
+                                    </div>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="logout.php ">Log out</a>
@@ -110,98 +167,68 @@ $id = $_SESSION['userID'];
         </header>
         <!-- end header section -->
 
-       <!-- Body Start -->
-<div class="container py-5">
-    <a href="addNew.php" class="text-light"><button class="btn btn-primary my-5">Book Ticket</button></a>
-        <!-- start echo message to user -->
-        <?php
-				if(isset($message)) {
-					foreach($message as $message) {
-						echo '<div class="alert alert-danger" role="alert">
-							'.$message.'
-						</div>';
-					}
-				}
-		?>
-		<!-- end echo mesaage to user -->
-        <div>
-        <table class="table align-middle table-striped  text-white">
-            <thead class="table-success align-middle thead-dark">
-                <tr>
-                    <th scope="col">No.</th>
-                    <th scope="col">Name Movie</th>
-                    <th scope="col">Theater</th>
-                    <th scope="col">Date</th>
-                    <th scope="col">Time</th>
-                    <th scope="col">Price</th>
-                    <th scope="col">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                    include 'handleDB.php';
-                    $db = new HandleDB();
-                    $tickets = $db->find_one('ticket', 'user_id', $id);
-                    $status = 1;
-                    foreach($tickets as $ticket) {
-                        $seatID = $ticket['seatID'];
-                        $seat = $db->find_data('seats', 'seatID', $seatID);
-                        $movieID = $seat['MovieID'];
-                        $theaterID = $seat['theaterID'];
-                        $time = $seat['time'];
-                        $date = $seat['date'];
-                        $seatMap = $seat['seat'];
-                        $seatMap = json_decode($seatMap, true);
-                        $seatName = array();
-                        foreach ($seatMap as $seat) {
-                            if ($seat['user_id'] == $id) {
-                                $seatName[] = $seat['seatName'];
-                            }
-                        }
-                        $seatName = implode(', ', $seatName);
-                        $movie = $db->find_data('Movies', 'MovieID', $movieID);
-                        $name_movie = $movie['Name'];
-                        $location = $db->find_data('theater', 'theaterID', $theaterID);
-                        $location = $location['theaterName'];
-                        $price = $movie['cost'];
-                        $totalprice = 0;
-                        // calculate price if user book more than 1 ticket
-                        $seatName = explode(', ', $seatName);
-                        foreach ($seatName as $seat) {
-                            // check if seat is VIP or not by A,B character in seat name
-                            if ($seat[0] == 'A' || $seat[0] == 'B') {
-                                $totalprice += $price * 1.5;
-                            } else {
-                                $totalprice += $price;
-                            }
-                        }
+        <!-- Add product main -->
+        <section class="contact_section layout_padding">
+            <div class="contact_bg_box">
+                <div class="img-box">
+                    <img src="images/contact-bg.jpg" alt="">
+                </div>
+            </div>
+            <div class="container">
+                <div class="heading_container heading_center">
+                    <h2>
+                        Update Theater
+                    </h2>
+                </div>
+                <div class="">
+                    <div class="row">
+                        <div class="col-md-7 mx-auto">
+                            <form action="" method="post" enctype="multipart/form-data">
+                                <div class="contact_form-container">
+                                    <div>
+                                        <!-- Theater name -->
+                                        <div>
+                                            <label for="theaterName">Name Theater</label>
+                                            <input type="text" placeholder="Name of Theater" name="theaterName" id="theaterName"
+                                                value="<?php echo $theater['theaterName'] ?>" />
+                                        </div>
+                                        <!-- Location -->
+                                        <div>
+                                            <label for="location">Location</label>
+                                            <input type="text" placeholder="Location" name="location" id="location"
+                                                value="<?php echo $theater['location'] ?>" />
+                                        </div>
+                                        <!-- rooms -->
+                                        <div>
+                                            <label for="rooms">Rooms</label>
+                                            <input type="text" placeholder="number of Rooms" name="rooms" id="rooms"
+                                                value="<?php echo $theater['rooms'] ?>" />
+                                        </div>
 
-                        echo '<tr>
-                                <th scope="row">'.$status.'</th>
-                                <td>'.$name_movie.'</td>
-                                <td>'.$location.'</td>
-                                <td>'.$date.'</td>
-                                <td>'.$time.'</td>
-                                <td>'.$totalprice. ' VND</td>
-                                <td>
-                                    <a href="show_ticket.php?id='.$id.'" class="text-light"><button class="btn btn-primary">Detail</button></a>
-                                    <a href="delete_ticket.php?id='.$id.'" class="text-light"><button class="btn btn-danger">Delete</button></a>
-                                </td>
-                              </tr>';
-                        
-                        $status++;
-                    }
-                    
-                ?>
-                
-            </tbody>
-        </table>
-    </div>
-        
-        
-        
-</div>
-<!-- Body End -->
+                                        <!-- row and col -->
+                                        <div>
+                                            <label for="seat">Number of seats</label>
+                                            <input type="text" placeholder="number of row" name="row" id="row"
+                                                value="<?php echo $theater['row'] ?>" />
+                                            <input type="text" placeholder="number of column" name="col" id="col"
+                                                value="<?php echo $theater['col'] ?>" />
+                                        </div>
+
+                                        <div class="btn-box ">
+                                            <button type="submit" class="btn btn-primary" name="submit">
+                                                Update
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- end Add product main -->
+
 
 
         <!-- info section -->
