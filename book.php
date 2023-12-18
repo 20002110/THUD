@@ -24,9 +24,8 @@ if (isset($_POST['submit'])) {
     $seatMap = json_decode($seatMap, true);
     $newSeatMap = array();
 
-    $ticketID = $db->find_last_row('ticket', 'ticketID');
-    $ticketID = $ticketID['ticketID'] + 1;
-
+    $ticket = $db->find_last_row('ticket', 'ticketID');
+    $ticketID = $ticket['ticketID'] + 1;
     foreach ($seatMap as $seat) {
         // if ($seat['seatName'] == $selectedSeat) {
         //     $seat['user_id'] = $userID;
@@ -36,7 +35,7 @@ if (isset($_POST['submit'])) {
             if ($seat['seatName'] == $selected) {
                 $seat['user_id'] = $userID;
                 $seat['status'] = 1;
-                $seat['tiketID'] = $tiketID;
+                $seat['ticketID'] = $ticketID;
             }
         }
         $newSeatMap[] = $seat;
@@ -58,6 +57,8 @@ if (isset($_POST['submit'])) {
             echo '
         <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
         <script>
+
+
         // emailjs
         emailjs.init("6VzQcCIDbGU-WvZ0L")
 
@@ -66,7 +67,7 @@ if (isset($_POST['submit'])) {
 
             var link = "https://danhnt.me/show_ticket.php?id=" + ' . $ticketID . ';
 
-          
+            console.log(link);
 
 
             var message = "Your ticket has been booked successfully. Please click the link below to view your ticket: " + link;
@@ -82,7 +83,9 @@ if (isset($_POST['submit'])) {
                 .then(function (response) {
                     console.log("SUCCESS!", response.status, response.text);
                 
-                    
+                    // redirect to show_ticket.php
+                    window.location.href = "show_ticket.php?id=" + ' . $ticketID . ';
+                
                 }, function (error) {
                     console.log("FAILED...", error);
                 });
@@ -91,11 +94,11 @@ if (isset($_POST['submit'])) {
 
 
     </script>';
-
+                
             echo '<script>sendMail("' . $_SESSION['username'] . '")</script>';
+            // echo "<script>alert('Đặt vé thành công');</script>";
 
-
-            header("location: show_ticket.php?id=$tiketID");
+            // header("location: show_ticket.php?id=$ticketID");
         }
     } else {
         echo "<script>alert('Đặt vé thất bại');</script>";
@@ -138,8 +141,9 @@ if (isset($_POST['submit'])) {
             border-color: #198754;
         }
     </style>
-
-
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="js/bootstrap.js"></script>
+   <!-- <script src="js/custom.js"></script> -->
 
 </head>
 
@@ -305,9 +309,6 @@ if (isset($_POST['submit'])) {
     </form>
     <br>
 
-    <script src="js/jquery-3.4.1.min.js"></script>
-    <script src="js/bootstrap.js"></script>
-    <script src="js/custom.js"></script>
 
 </body>
 

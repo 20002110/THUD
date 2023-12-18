@@ -278,6 +278,7 @@ if ($_SESSION['username'] != "admin@gmail.com") {
                                             if (move_uploaded_file($file_tmp, $file_path)) {
                                                 $url_image = $file_path;
                                             } else {
+                                                // $url_image = $file_path;
                                                 echo '<label style="color:red;">Add false</label>';
                                             }
 
@@ -348,7 +349,7 @@ if ($_SESSION['username'] != "admin@gmail.com") {
                                                                     'seatName' => chr(65 + $i) . ($j + 1),
                                                                     'user_id' => 0,
                                                                     'status' => 0,
-                                                                    'tiketID' => -1
+                                                                    'ticketID' => -1
                                                                 );
                                                             }
                                                         }

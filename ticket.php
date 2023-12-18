@@ -133,7 +133,7 @@ $id = $_SESSION['userID'];
                     <th scope="col">Theater</th>
                     <th scope="col">Date</th>
                     <th scope="col">Time</th>
-                    <th scope="col">Price</th>
+                    <!-- <th scope="col">Price</th> -->
                     <th scope="col">Action</th>
                 </tr>
             </thead>
@@ -167,14 +167,14 @@ $id = $_SESSION['userID'];
                         $totalprice = 0;
                         // calculate price if user book more than 1 ticket
                         $seatName = explode(', ', $seatName);
-                        foreach ($seatName as $seat) {
-                            // check if seat is VIP or not by A,B character in seat name
-                            if ($seat[0] == 'A' || $seat[0] == 'B') {
-                                $totalprice += $price * 1.5;
-                            } else {
-                                $totalprice += $price;
-                            }
-                        }
+                        // foreach ($seatName as $seat) {
+                        //     // check if seat is VIP or not by A,B character in seat name
+                        //     if ($seat[0] == 'A' || $seat[0] == 'B') {
+                        //         $totalprice += $price * 1.5;
+                        //     } else {
+                        //         $totalprice += $price;
+                        //     }
+                        // }
 
                         echo '<tr>
                                 <th scope="row">'.$status.'</th>
@@ -182,10 +182,9 @@ $id = $_SESSION['userID'];
                                 <td>'.$location.'</td>
                                 <td>'.$date.'</td>
                                 <td>'.$time.'</td>
-                                <td>'.$totalprice. ' VND</td>
                                 <td>
                                     <a href="show_ticket.php?id='.$ticket['ticketID'].'" class="text-light"><button class="btn btn-primary">Detail</button></a>
-                                    <a href="delete_ticket.php?id='.$ticket['ticketID'].'" class="text-light"><button class="btn btn-danger">Delete</button></a>
+                                    <a href="cancelTicket.php?id='.$ticket['ticketID'].'" class="text-light"><button class="btn btn-danger">Cancel</button></a>
                                 </td>
                               </tr>';
                         

@@ -183,7 +183,7 @@ $db = new HandleDB();
                   <div class = "img-box" >
                     <img src = "' . $service['image'] . '" alt = "..." style="width: 265px; height: 390px; object-fit: cover;"  />
                   </div>
-                  <div class = "detail-box " style="position: relative">
+                  <div class = "detail-box ">
                     <h5>
                       ' . $service['Name'] . '
                     </h5>
