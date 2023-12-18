@@ -14,8 +14,8 @@ $id = $_GET['id'];
 ?>
 
 <?php
-if (isset($_POST['submit'])) {  
-    $selectedSeat = $_POST['selectedSeat']; 
+if (isset($_POST['submit'])) {
+    $selectedSeat = $_POST['selectedSeat'];
     $seatID = $_POST['seatID'];
     $userID = $_SESSION['userID'];
 
@@ -43,8 +43,8 @@ if (isset($_POST['submit'])) {
     }
 
     $newSeatMap = json_encode($newSeatMap);
-    if ($db->update('seats',  array('seat' => $newSeatMap),'seatID', $seatID)) {
-        
+    if ($db->update('seats', array('seat' => $newSeatMap), 'seatID', $seatID)) {
+
         $data = array(
             'user_id' => $userID,
             'seatID' => $seatID,
@@ -52,10 +52,10 @@ if (isset($_POST['submit'])) {
 
 
 
- 
-        
-     if($db->add_data('ticket', $data)){
-        echo '
+
+
+        if ($db->add_data('ticket', $data)) {
+            echo '
         <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
         <script>
         // emailjs
@@ -92,11 +92,11 @@ if (isset($_POST['submit'])) {
 
     </script>';
 
-        echo '<script>sendMail("' . $_SESSION['username'] . '")</script>';
+            echo '<script>sendMail("' . $_SESSION['username'] . '")</script>';
 
-    
-        header("location: show_ticket.php?id=$tiketID");
-     }
+
+            header("location: show_ticket.php?id=$tiketID");
+        }
     } else {
         echo "<script>alert('Đặt vé thất bại');</script>";
     }
@@ -144,6 +144,23 @@ if (isset($_POST['submit'])) {
 </head>
 
 <body class="container mt-5 bg-dark text-center" style="color: whitesmoke">
+    <!-- navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Home</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse " id="navbarNav">
+                <ul class="navbar-nav ml-auto float-right">
+                    <li class="nav-item ">
+                        <a class="nav-link" href="#">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
     <h1 class="text-center mb-4">Booking</h1>
     <form method="post">
@@ -167,7 +184,7 @@ if (isset($_POST['submit'])) {
         </div>
         <hr>
         <div class="mb-3">
-            <h3>Thành phố:</h3>
+            <h3>Chọn địa chỉ rạp phim:</h3>
             <div id="city">
                 <select name="city" id="city" class="form-select" aria-label="Default select example"
                     onchange="getTheaters()">
@@ -272,6 +289,7 @@ if (isset($_POST['submit'])) {
         </div>
     </form>
     <br>
+    
 </body>
 
 </html>
