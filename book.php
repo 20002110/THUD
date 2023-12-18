@@ -143,20 +143,35 @@ if (isset($_POST['submit'])) {
 
 </head>
 
-<body class="container mt-5 bg-dark text-center" style="color: whitesmoke">
+<body class="container  bg-dark text-center" style="color: whitesmoke">
     <!-- navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top ">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Home</a>
+            <a class="navbar-brand" href="index.php">Home</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse " id="navbarNav">
-                <ul class="navbar-nav ml-auto float-right">
+                <ul class="navbar-nav float-end" style="margin-left: auto!important;">
                     <li class="nav-item ">
-                        <a class="nav-link" href="#">Logout</a>
+                        <a class="nav-link" href="service.php"> Films</a>
                     </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="ticket.php">My Tickets</a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <?php echo $_SESSION['username'] ?>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="view_profile.php">Profile</a>
+                            <a class="dropdown-item" href="logout.php">Log out</a>
+                        </div>
+                    </li>
+
                 </ul>
             </div>
         </div>
@@ -289,7 +304,19 @@ if (isset($_POST['submit'])) {
         </div>
     </form>
     <br>
-    
+
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/custom.js"></script>
+
 </body>
+
+<!-- footer
+<footer class="py-5 bg-dark">
+    <div class="container">
+        <p class="m-0 text-center text-white">Cinema &copy; 2021</p>
+    </div>
+</footer> -->
+
 
 </html>

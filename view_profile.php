@@ -40,7 +40,7 @@
                 "address" => $address
             );
 
-            if ($db->update("userInfor", $data, "user_id", $userID)) {
+            if ($db->update_movie("userInfor", $data, "user_id", $userID)) {
                 echo "<script>alert('Chỉnh sửa thành công')</script>";           
             } else {
                 echo "<script>alert('update thất bại')</script>";
