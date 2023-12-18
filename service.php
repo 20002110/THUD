@@ -1,13 +1,5 @@
 <?php
 session_start();
-<<<<<<< HEAD
-if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
-  echo "Bạn chưa đăng nhập";
-  header("location: login.php");
-  exit;
-}
-=======
->>>>>>> danhnt
 ?>
 
 <!DOCTYPE html>
@@ -79,11 +71,7 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
           <nav class="navbar navbar-expand-lg custom_nav-container">
             <a class="navbar-brand" href="index.php">
               <span>
-<<<<<<< HEAD
-                Services
-=======
                 Films
->>>>>>> danhnt
               </span>
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -157,26 +145,6 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
                 </li>';
                 }
                 ?>
-<<<<<<< HEAD
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
-                    Acount
-                  </a>
-                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="view_profile.php">Your Profile</a>
-                    <?php
-                    session_start();
-                    if (isset($_SESSION['username'])) {
-                      echo '<a class="dropdown-item" href="logout.php">Log out</a>';
-                    } else {
-                      echo '<a class="dropdown-item" href="login.php">Log in</a>';
-                    }
-                    ?>
-                  </div>
-                </li>
-=======
->>>>>>> danhnt
               </ul>
             </div>
           </nav>
@@ -212,11 +180,7 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
                       ' . $service['Name'] . '
                     </h5>
                     <p>
-<<<<<<< HEAD
-                      ' . $service['content'] .  ' 
-=======
                       ' . $service['director'] . ' 
->>>>>>> danhnt
                     </p>
                     <a href = "detail.php?id=' . $service['movieID'] . '" class = "btn btn-outline-primary" >
                       Read More

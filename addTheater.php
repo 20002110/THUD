@@ -9,11 +9,8 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
 }
 
 if ($_SESSION['username'] != "admin@gmail.com") {
-<<<<<<< HEAD
     header("location: addNew.php");
-=======
     header("location: service.php");
->>>>>>> danhnt
 }
 
 
@@ -99,13 +96,6 @@ if ($_SESSION['username'] != "admin@gmail.com") {
 
                         <div class="collapse navbar-collapse ml-auto" id="navbarSupportedContent">
                             <ul class="navbar-nav  ">
-<<<<<<< HEAD
-                                <li class="nav-item active">
-                                    <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="service.php"> Services </a>
-=======
 
                                 <li class="nav-item dropdown active">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -126,7 +116,6 @@ if ($_SESSION['username'] != "admin@gmail.com") {
                                         <a class="dropdown-item" href="addNew.php">Add Movies</a>
                                         <a class="dropdown-item" href="manageMovie.php">List Movies</a>
                                     </div>
->>>>>>> danhnt
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="logout.php ">Log out</a>
@@ -167,14 +156,6 @@ if ($_SESSION['username'] != "admin@gmail.com") {
                                             <input type="text" placeholder="location" name="content" id="content" />
                                         </div>
                                         <div>
-<<<<<<< HEAD
-                                            <label for="seat">Seat</label>
-                                            <!-- enter number of row and column seat -->
-                                            <input type="text" placeholder="number of row" name="row" id="row" />
-                                            <input type="text" placeholder="number of column" name="column" id="column" />
-                                        </div>
-                                        
-=======
                                             <label for="name">Number of rooms </label>
                                             <input type="number" placeholder="number of rooms" name="room" id="room" />
                                         </div>
@@ -186,7 +167,6 @@ if ($_SESSION['username'] != "admin@gmail.com") {
                                                 id="column" />
                                         </div>
 
->>>>>>> danhnt
                                         <div class="btn-box ">
                                             <button type="submit">
                                                 Add
@@ -201,28 +181,6 @@ if ($_SESSION['username'] != "admin@gmail.com") {
                                             $content = $_POST['content'];
                                             $row = $_POST['row'];
                                             $column = $_POST['column'];
-<<<<<<< HEAD
-
-                                            # convert row and column to matrix seat (A1, user_id, status)
-                                            $seat = array();
-                                            for ($i = 0; $i < $row; $i++) {
-                                                for ($j = 0; $j < $column; $j++) {
-                                                    $seat[] = array(
-                                                        'seatName' => chr(65 + $i) . ($j + 1),
-                                                        'user_id' => 0,
-                                                        'status' => 0
-                                                    );
-                                                }
-                                            }
-
-                                           $data = array(
-                                                'theaterName' => $name,
-                                                'location' => $content,
-                                                'seats' => json_encode($seat),
-                                                'num_row' => $row,
-                                                'num_column' => $column
-
-=======
                                             $room = $_POST['room'];
 
 
@@ -232,7 +190,6 @@ if ($_SESSION['username'] != "admin@gmail.com") {
                                                 'row' => $row,
                                                 'col' => $column,
                                                 'rooms' => $room,
->>>>>>> danhnt
                                             );
 
                                             if ($db->add_data('theater', $data)) {
@@ -240,13 +197,10 @@ if ($_SESSION['username'] != "admin@gmail.com") {
                                             } else {
                                                 echo "<script>alert('Add theater failed')</script>";
                                             }
-<<<<<<< HEAD
-=======
 
                                             $theaterID = $db->find_data('theater', 'theaterName', $category)['theaterID'];
 
 
->>>>>>> danhnt
                                         }
 
                                         ?>

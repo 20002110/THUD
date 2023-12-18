@@ -83,28 +83,7 @@
                   <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-<<<<<<< HEAD
-                  <a class="nav-link" href="service.php"> Services </a>
-                </li>
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
-                    Acount
-                  </a>
-                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="view_profile.php">Your Profile</a>
-                    <?php
-                    session_start();
-                    if (isset($_SESSION['username'])) {
-                      echo '<a class="dropdown-item" href="logout.php">Log out</a>';
-                    } else {
-                      echo '<a class="dropdown-item" href="login.php">Log in</a>';
-                    }
-                    ?>
-                  </div>
-=======
                   <a class="nav-link" href="service.php"> Films </a>
->>>>>>> danhnt
                 </li>
                 <?php
                 session_start();
@@ -253,12 +232,8 @@
               là nguồn cảm hứng của chúng tôi xuyên suốt của trình hoạt động.
               <br><br>
               <i>"THUD"</i> là nền tảng cho thuê xe với đa dạng phân khúc, mẫu mã. Chúng tôi không chỉ dừng lại
-<<<<<<< HEAD
-              với việc kết nối với khách hàng một cách nhanh chóng, đảm bảo chất lượng xe an toàn, bên cạnh đó chúng tôi còn
-=======
               với việc kết nối với khách hàng một cách nhanh chóng, đảm bảo chất lượng xe an toàn, bên cạnh đó chúng tôi
               còn
->>>>>>> danhnt
               hướng tới trải nghiệm của khách hàng một cách tốt nhất trong quá trình trải nghiệm dịch vụ.
 
             </p>
