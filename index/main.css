@@ -13,6 +13,10 @@ body {
   font-weight:400px;
 }
 
+.h2, .p {
+  color: whitesmoke !important;
+}
+
 ul li {
   list-style: none;
 }
@@ -306,6 +310,10 @@ ul.sub-menu {
   padding-left: 0;
 }
 
+.img-responsive {
+  /*width: 1024px;*/
+  /*height: 1980px*/
+}
 
 .navbar-nav li ul.sub-menu li{
   padding: 10px 20px 0 ;
@@ -649,8 +657,12 @@ ul.sub-menu {
   color: #FE980F ;
 }
 
+.left {
+  left: -80px;
+}
+
 .right {
-  right: 0;
+  right: -100px;
 }
 
 .category-products {
