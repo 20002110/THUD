@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?php
     include 'handleDB.php';
 
@@ -25,3 +26,5 @@
     $db->__destruct();
 
 ?>
+=======
+>>>>>>> danhnt

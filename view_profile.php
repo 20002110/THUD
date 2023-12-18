@@ -17,6 +17,7 @@
         $phoneNumber = $_POST['phoneNumber'];
         $birthDay = $_POST['birthDay'];
         $address = $_POST['address'];
+<<<<<<< HEAD
         $sex = $_POST['sex'];
         echo $sex;
         $data = array(
@@ -29,6 +30,17 @@
 
         if (!isset($foreign_userID) || empty($foreign_userID)) {
 
+=======
+
+        if (!isset($foreign_userID) || empty($foreign_userID)) {
+            $data = array(
+                "user_id" => $userID,
+                "fullName" => $fullName,
+                "phone" => $phoneNumber,
+                "date_of_birth" => $birthDay,
+                "address" => $address
+            );
+>>>>>>> danhnt
             if ($db->add_data("userInfor", $data)) {
                 echo "<script>alert('Chỉnh sửa thành công')</script>";           
             } else {
@@ -36,6 +48,7 @@
             }
         }
         else{
+<<<<<<< HEAD
             if     ($db->update("userInfor", "fullName", $fullName,"user_id", $userID)
                 and $db->update("userInfor", "phone", $phoneNumber,"user_id", $userID)
                 and $db->update("userInfor", "date_of_birth", $birthDay,"user_id", $userID)
@@ -46,6 +59,23 @@
                 echo "<script>alert('Cập nhật thất bại')</script>";
             }
         }    
+=======
+            $data = array(
+                "fullName" => $fullName,
+                "phone" => $phoneNumber,
+                "date_of_birth" => $birthDay,
+                "address" => $address
+            );
+
+            if ($db->update("userInfor", $data, "user_id", $userID)) {
+                echo "<script>alert('Chỉnh sửa thành công')</script>";           
+            } else {
+                echo "<script>alert('update thất bại')</script>";
+            }
+
+        }    
+
+>>>>>>> danhnt
     }
 
 ?>
@@ -114,7 +144,11 @@
                                     <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
                                 </li>
                                 <li class="nav-item">
+<<<<<<< HEAD
                                     <a class="nav-link" href="service.php"> Services </a>
+=======
+                                    <a class="nav-link" href="service.php"> Films </a>
+>>>>>>> danhnt
                                 </li>
                                 <li class="nav-item dropdown active">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -123,6 +157,10 @@
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                         <a class="dropdown-item" href="view_profile.php">Your Profile</a>
                                         <?php
+<<<<<<< HEAD
+=======
+                                        session_start();
+>>>>>>> danhnt
                                         if (isset($_SESSION['username'])) {
                                             echo '<a class="dropdown-item" href="logout.php">Log out</a>';
                                         } else {
@@ -145,6 +183,10 @@
     $userPhone = $db->find_data('userInfor','user_id',$userID)['phone'];
     $userBirthday = $db->find_data('userInfor','user_id',$userID)['date_of_birth'];
     $userAddress = $db->find_data('userInfor','user_id',$userID)['address'];
+<<<<<<< HEAD
+=======
+
+>>>>>>> danhnt
  ?>
     <section style="font-family: 'JetBrains Mono Medium'">
         <div class="hero_bg_box">
@@ -179,6 +221,7 @@
                                     <label> Ngày sinh </label>
                                     <input type="date" name="birthDay" value="<?php echo $userBirthday ?>" readonly class="form-control" required="required">
                                 </div>
+<<<<<<< HEAD
                                 
                                 <div class="form-group mt-2">
                                     <label> Giới tính </label><br>
@@ -188,6 +231,29 @@
                                     <label for="female">Nữ</label> &emsp;
                                     <input type="radio" name="none" value="none" checked>
                                     <label for="none">None </label>
+=======
+
+                                <div class="form-group mt-2">
+                                    <label> Giới tính </label>  
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                        <label class="form-check-label" for="flexRadioDefault1">
+                                            Nam
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                                        <label class="form-check-label" for="flexRadioDefault1">
+                                            Nữ
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                                        <label class="form-check-label" for="flexRadioDefault1">
+                                            None
+                                        </label>
+                                    </div>
+>>>>>>> danhnt
                                 </div>
 
                                 <div class="form-group mt-2">
@@ -222,7 +288,11 @@
 
                                 <div class="form-group mt-2">
                                     <label>Số điện thoại</label> 
+<<<<<<< HEAD
                                     <input type="text" name="phoneNumber" id=phoneNumber class="form-control" required="required">
+=======
+                                    <input type="number" name="phoneNumber" id=phoneNumber class="form-control" required="required">
+>>>>>>> danhnt
                                 </div>
 
                                 <div class="form-group mt-2">

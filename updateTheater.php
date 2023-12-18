@@ -9,15 +9,52 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
 }
 
 if ($_SESSION['username'] != "admin@gmail.com") {
-<<<<<<< HEAD
-    header("location: addNew.php");
-=======
     header("location: service.php");
->>>>>>> danhnt
 }
+
+include_once 'handleDB.php';
+$db = new HandleDB();
+
+$theaterID = $_GET['updateid'];
+$theater= $db->find_data('theater', 'theaterID', $theaterID);
 
 
 ?>
+
+<?php
+
+
+if (isset($_POST['submit'])) {
+
+    $theaterName = $_POST['theaterName'];
+    $location = $_POST['location'];
+    $rooms = $_POST['rooms'];
+    $row = $_POST['row'];
+    $col = $_POST['col'];
+
+    $data = array(
+        'theaterName' => $theaterName,
+        'location' => $location,
+        'rooms' => $rooms,
+        'row' => $row,
+        'col' => $col,
+    );
+
+
+
+
+    if ($db->update_movie('theater', $data, 'theaterID', $theaterID)) {
+
+        // echo '<label style="color:green;">Add success</label>';
+        header("location: manageTheater.php");
+    } else {
+        echo '<label style="color:red;">update false</label>';
+    }
+
+}
+?>
+
+
 
 <!DOCTYPE html>
 <html>
@@ -34,7 +71,7 @@ if ($_SESSION['username'] != "admin@gmail.com") {
     <meta name="author" content="" />
     <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
 
-    <title>Add Theater</title>
+    <title>Update Theater</title>
 
     <!-- bootstrap core css -->
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
@@ -99,15 +136,7 @@ if ($_SESSION['username'] != "admin@gmail.com") {
 
                         <div class="collapse navbar-collapse ml-auto" id="navbarSupportedContent">
                             <ul class="navbar-nav  ">
-<<<<<<< HEAD
-                                <li class="nav-item active">
-                                    <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="service.php"> Services </a>
-=======
-
-                                <li class="nav-item dropdown active">
+                                <li class="nav-item dropdown ">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         Theater
@@ -117,7 +146,7 @@ if ($_SESSION['username'] != "admin@gmail.com") {
                                         <a class="dropdown-item" href="manageTheater.php">List Theater</a>
                                     </div>
                                 </li>
-                                <li class="nav-item dropdown">
+                                <li class="nav-item dropdown active">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         Movies
@@ -126,7 +155,6 @@ if ($_SESSION['username'] != "admin@gmail.com") {
                                         <a class="dropdown-item" href="addNew.php">Add Movies</a>
                                         <a class="dropdown-item" href="manageMovie.php">List Movies</a>
                                     </div>
->>>>>>> danhnt
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="logout.php ">Log out</a>
@@ -149,7 +177,7 @@ if ($_SESSION['username'] != "admin@gmail.com") {
             <div class="container">
                 <div class="heading_container heading_center">
                     <h2>
-                        Add New Theater
+                        Update Theater
                     </h2>
                 </div>
                 <div class="">
@@ -158,98 +186,39 @@ if ($_SESSION['username'] != "admin@gmail.com") {
                             <form action="" method="post" enctype="multipart/form-data">
                                 <div class="contact_form-container">
                                     <div>
+                                        <!-- Theater name -->
                                         <div>
-                                            <label for="name">Name Theater</label>
-                                            <input type="text" placeholder="Name" name="name" id="name" />
+                                            <label for="theaterName">Name Theater</label>
+                                            <input type="text" placeholder="Name of Theater" name="theaterName" id="theaterName"
+                                                value="<?php echo $theater['theaterName'] ?>" />
                                         </div>
+                                        <!-- Location -->
                                         <div>
-                                            <label for="name">Location</label>
-                                            <input type="text" placeholder="location" name="content" id="content" />
+                                            <label for="location">Location</label>
+                                            <input type="text" placeholder="Location" name="location" id="location"
+                                                value="<?php echo $theater['location'] ?>" />
                                         </div>
+                                        <!-- rooms -->
                                         <div>
-<<<<<<< HEAD
-                                            <label for="seat">Seat</label>
-                                            <!-- enter number of row and column seat -->
-                                            <input type="text" placeholder="number of row" name="row" id="row" />
-                                            <input type="text" placeholder="number of column" name="column" id="column" />
+                                            <label for="rooms">Rooms</label>
+                                            <input type="text" placeholder="number of Rooms" name="rooms" id="rooms"
+                                                value="<?php echo $theater['rooms'] ?>" />
                                         </div>
-                                        
-=======
-                                            <label for="name">Number of rooms </label>
-                                            <input type="number" placeholder="number of rooms" name="room" id="room" />
-                                        </div>
+
+                                        <!-- row and col -->
                                         <div>
                                             <label for="seat">Number of seats</label>
-                                            <!-- enter number of row and column seat -->
-                                            <input type="text" placeholder="number of row" name="row" id="row" />
-                                            <input type="text" placeholder="number of column" name="column"
-                                                id="column" />
+                                            <input type="text" placeholder="number of row" name="row" id="row"
+                                                value="<?php echo $theater['row'] ?>" />
+                                            <input type="text" placeholder="number of column" name="col" id="col"
+                                                value="<?php echo $theater['col'] ?>" />
                                         </div>
 
->>>>>>> danhnt
                                         <div class="btn-box ">
-                                            <button type="submit">
-                                                Add
+                                            <button type="submit" class="btn btn-primary" name="submit">
+                                                Update
                                             </button>
                                         </div>
-                                        <?php
-                                        include_once 'handleDB.php';
-                                        $db = new HandleDB();
-
-                                        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                                            $name = $_POST['name'];
-                                            $content = $_POST['content'];
-                                            $row = $_POST['row'];
-                                            $column = $_POST['column'];
-<<<<<<< HEAD
-
-                                            # convert row and column to matrix seat (A1, user_id, status)
-                                            $seat = array();
-                                            for ($i = 0; $i < $row; $i++) {
-                                                for ($j = 0; $j < $column; $j++) {
-                                                    $seat[] = array(
-                                                        'seatName' => chr(65 + $i) . ($j + 1),
-                                                        'user_id' => 0,
-                                                        'status' => 0
-                                                    );
-                                                }
-                                            }
-
-                                           $data = array(
-                                                'theaterName' => $name,
-                                                'location' => $content,
-                                                'seats' => json_encode($seat),
-                                                'num_row' => $row,
-                                                'num_column' => $column
-
-=======
-                                            $room = $_POST['room'];
-
-
-                                            $data = array(
-                                                'theaterName' => $name,
-                                                'location' => $content,
-                                                'row' => $row,
-                                                'col' => $column,
-                                                'rooms' => $room,
->>>>>>> danhnt
-                                            );
-
-                                            if ($db->add_data('theater', $data)) {
-                                                echo "<script>alert('Add theater successfully')</script>";
-                                            } else {
-                                                echo "<script>alert('Add theater failed')</script>";
-                                            }
-<<<<<<< HEAD
-=======
-
-                                            $theaterID = $db->find_data('theater', 'theaterName', $category)['theaterID'];
-
-
->>>>>>> danhnt
-                                        }
-
-                                        ?>
                                     </div>
                                 </div>
                             </form>

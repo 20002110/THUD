@@ -20,6 +20,10 @@ if (isset($_POST['login'])) {
             // $passvalid = true;
             session_start();
             $_SESSION['username'] = $email;
+<<<<<<< HEAD
+=======
+            $_SESSION['userID'] = $data['user_id'];
+>>>>>>> danhnt
             header("Location: service.php");
         } else {
            $passvalid = false;
@@ -113,7 +117,7 @@ if (isset($_POST['login'])) {
                                     <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="service.php"> Services </a>
+                                    <a class="nav-link" href="service.php"> Films </a>
                                 </li>
                                 <li class="nav-item active">
                                     <a class="nav-link" href="login.php">Log in</a>

@@ -1,10 +1,13 @@
 <?php
 session_start();
+<<<<<<< HEAD
 if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
   echo "Bạn chưa đăng nhập";
   header("location: login.php");
   exit;
 }
+=======
+>>>>>>> danhnt
 ?>
 
 <!DOCTYPE html>
@@ -22,7 +25,7 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
   <meta name="author" content="" />
   <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
 
-  <title>Services</title>
+  <title> Films </title>
 
   <!-- bootstrap core css -->
   <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
@@ -76,7 +79,11 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
           <nav class="navbar navbar-expand-lg custom_nav-container">
             <a class="navbar-brand" href="index.php">
               <span>
+<<<<<<< HEAD
                 Services
+=======
+                Films
+>>>>>>> danhnt
               </span>
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -100,8 +107,9 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
                     <a class="dropdown-item" href="service.php?filter=Vinfast">Vinfast</a>
                     <a class="dropdown-item" href="service.php?filter=Ferrari">Ferrari</a>
                   </div>
+                </li>
 
-                  <!-- search bar -->
+                <!-- search bar -->
                 <li class="nav-item">
                   <div class="search-container">
                     <form method="post" action="">
@@ -110,21 +118,46 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
                       <!-- <input type ="submit"  class="fa fa-search"  value=""> -->
                     </form>
                   </div>
+                </li>
 
                 <li class="nav-item ">
                   <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
                 </li>
 
                 <li class="nav-item active">
-                  <a class="nav-link" href="service.php"> Services </a>
+                  <a class="nav-link" href="service.php"> Films </a>
                 </li>
-                <?php 
-                if($_SESSION['username'] == 'admin@gmail.com'){
+                <li class="nav-item ">
+                  <a class="nav-link" href="ticket.php"> my ticket </a>
+                </li>
+                <?php
+                if ($_SESSION['username'] == 'admin@gmail.com') {
                   echo '<li class="nav-item">
-                  <a class="nav-link" href="addNew.php">Add Product</a>
+                  <a class="nav-link" href="addNew.php"> Manager </a>
                 </li>';
                 }
                 ?>
+                <?php
+                session_start();
+                if (isset($_SESSION['username'])) {
+                  echo '  <li class="nav-item dropdown ">  
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        ' . $_SESSION['username'] . '
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="view_profile.php">Profile</a>
+                        <a class="dropdown-item" href="logout.php">Log out</a>
+                    </div>
+                </li>';
+
+                } else {
+                  echo '<li class="nav-item">
+                  <a class="nav-link" href="login.php"> Login </a>
+                </li>';
+                }
+                ?>
+<<<<<<< HEAD
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
@@ -142,6 +175,8 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
                     ?>
                   </div>
                 </li>
+=======
+>>>>>>> danhnt
               </ul>
             </div>
           </nav>
@@ -163,29 +198,38 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
           if (isset($_POST['submit'])) {
             $search = $_POST['search'];
 
-            $result = $db->find_by_data('services', $search);
+            $result = $db->find_by_data('Movies', $search);
 
             if ($result) {
               foreach ($result as $service) {
                 echo '<div class = "col-md-6 col-lg-4 mx-auto ">
                 <div class = "box" style="background-color: #ffff; border-radius: 10px">
                   <div class = "img-box" >
-                    <img src = "' . $service['url'] . '" alt = "" />
+                    <img src = "' . $service['image'] . '" alt = "..." style="width: 265px; height: 390px; object-fit: cover;"  />
                   </div>
                   <div class = "detail-box " style="position: relative">
                     <h5>
-                      ' . $service['name'] . '
+                      ' . $service['Name'] . '
                     </h5>
                     <p>
+<<<<<<< HEAD
                       ' . $service['content'] .  ' 
+=======
+                      ' . $service['director'] . ' 
+>>>>>>> danhnt
                     </p>
-                    <a href = "detail.php?id=' . $service['id'] . '" class = "btn btn-outline-primary" >
+                    <a href = "detail.php?id=' . $service['movieID'] . '" class = "btn btn-outline-primary" >
                       Read More
                     </a>
+
   
   
                   </div>
-                </div>
+                  <script>
+                  // auto resize image to fit the box 265x390
+
+                  </script>
+                </div>  
               </div>';
 
               }
@@ -195,26 +239,27 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
             }
             
 
+
           } elseif (isset($_GET['filter'])) {
             $filter = $_GET['filter'];
 
-            $result = $db->find_by_data('services', $filter);
+            $result = $db->find_by_data('Movies', $filter);
 
             if ($result) {
               foreach ($result as $service) {
                 echo '<div class = "col-md-6 col-lg-4 mx-auto ">
                 <div class = "box" style="background-color: #ffff; border-radius: 10px">
                   <div class = "img-box" >
-                    <img src = "' . $service['url'] . '" alt = "" />
+                    <img src = "' . $service['image'] . '" alt = "..." style="width: 265px; height: 390px; object-fit: cover;"  />
                   </div>
                   <div class = "detail-box ">
                     <h5>
-                      ' . $service['name'] . '
+                      ' . $service['Name'] . '
                     </h5>
                     <p>
-                      ' . $service['content'] . '
+                      ' . $service['director'] . '
                     </p>
-                    <a href = "detail.php?id=' . $service['id'] . '" class = "btn btn-outline-primary" >
+                    <a href = "detail.php?id=' . $service['movieID'] . '" class = "btn btn-outline-primary" >
                       Read More
                     </a>
   
@@ -230,24 +275,24 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
             }
 
           } else {
-            $result = $db->find_by_data('services', '');
+            $result = $db->find_by_data('Movies', '');
 
             if ($result) {
               foreach ($result as $service) {
                 echo '<div class = "col-md-6 col-lg-4 mx-auto ">
                 <div class = "box" style="background-color: #ffff; border-radius: 10px">
                   <div class = "img-box" >
-                    <img src = "' . $service['url'] . '" alt = "" />
+                    <img src = "' . $service['image'] . '" alt = "" style="width: 265px; height: 390px; object-fit: cover;"  />
                   </div>
                   <div class = "detail-box ">
                     <h5>
-                      ' . $service['name'] . '
+                      ' . $service['Name'] . '
                     </h5>
                     <p>
-                      ' . $service['content'] . '
+                      ' . $service['director'] . '
                     </p>
-                    <a href = "detail.php?id=' . $service['id'] . '" class = "btn btn-outline-primary" >
-                      Read More
+                    <a href = "detail.php?id=' . $service['movieID'] . '" class = "btn btn-outline-primary" >
+                      Chi tiết
                     </a>
   
                   </div>
@@ -344,4 +389,5 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
     <script src="js/bootstrap.js"></script>
     <script src="js/custom.js"></script>
 </body>
+
 </html>
