@@ -383,7 +383,13 @@ h4, .h4 {
 }
 
 h5, .h5 {
-  font-size: 1.25rem;
+  font-size: 1.1rem;
+  height: 55px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 
 h6, .h6 {
@@ -1516,15 +1522,18 @@ pre code {
 .table {
   width: 100%;
   margin-bottom: 1rem;
-  color: #212529;
+  color: #f4f5f7;
+  text-align: center;
+
 }
 
 .table th,
 .table td {
-  padding: 0.75rem;
+  padding: 0.5rem;
   vertical-align: top;
   border-top: 1px solid #dee2e6;
 }
+
 
 .table thead th {
   vertical-align: bottom;
@@ -1537,7 +1546,7 @@ pre code {
 
 .table-sm th,
 .table-sm td {
-  padding: 0.3rem;
+  padding: 0.1rem;
 }
 
 .table-bordered {
@@ -1566,7 +1575,7 @@ pre code {
 }
 
 .table-hover tbody tr:hover {
-  color: #212529;
+  color: #5c5d5e;
   background-color: rgba(0, 0, 0, 0.075);
 }
 
@@ -2694,8 +2703,8 @@ fieldset:disabled a.btn {
 }
 
 .btn-outline-primary {
-  color: #000000;
-  border-color: #000000;
+  color: #007bff;
+  border-color: #007bff;
 }
 
 .btn-outline-primary:hover {

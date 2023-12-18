@@ -8,14 +8,14 @@
         $password = $_POST['password'];
         $confirm_password = $_POST['confirm_password'];
 
-        if ($db->find_data("Users", "username",$email) == false) {
+        if ($db->find_data("users", "username",$email) == false) {
             echo "<script>alert('Email does not exist!')</script>";
         } else {
             if ($password != $confirm_password) {
                 echo "<script>alert('Password does not match!')</script>";
             } else {
                 $password = password_hash($password, PASSWORD_DEFAULT);
-                $db->update("Users", "password", $password, "username" ,$email);
+                $db->update_one("users", "password", $password, "username" ,$email);
                 echo "<script>alert('Password changed successfully!')</script>";
                 header("Location: login.php");
             }
@@ -205,6 +205,7 @@
                                             var message = "Your OTP to veryfy is " + otp;
 
                                             var templateParams = {
+                                                title : "OTP to verify",
                                                 from_name: "Admin",
                                                 to_name: receiver,
                                                 message: message,

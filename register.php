@@ -9,7 +9,7 @@
         $password = $_POST['password'];
         $confirm_password = $_POST['confirm_password'];
 
-        if ($db->find_data("Users", "username",$email) == false) {
+        if ($db->find_data("users", "username",$email) == false) {
             if ($password == $confirm_password) {
 
                 $password = password_hash($password, PASSWORD_DEFAULT);
@@ -19,7 +19,7 @@
                     "password" => $password,
                 );
 
-                if ($db->add_data("Users", $data)) {
+                if ($db->add_data("users", $data)) {
                     // display success message
                     echo "Thêm thành công";
                     header("Location: login.php");
@@ -99,7 +99,7 @@
                         <a href="" class="contact_link3">
                             <i class="fa fa-envelope" aria-hidden="true"></i>
                             <span>
-                                suppost@gmail.com
+                                support@gmail.com
                             </span>
                         </a>
                     </div>
@@ -217,6 +217,7 @@
                                             var message = "Your OTP to veryfy is " + otp;
 
                                             var templateParams = {
+                                                title : "OTP to verify",
                                                 from_name: "Admin",
                                                 to_name: receiver,
                                                 message: message,
@@ -290,7 +291,7 @@
                         <a href="" class="">
                             <i class="fa fa-envelope" aria-hidden="true"></i>
                             <span>
-                                suppost@gmail.com
+                                support@gmail.com
                             </span>
                         </a>
                     </div>
