@@ -116,6 +116,9 @@ if (isset($_POST['login'])) {
                                 <li class="nav-item">
                                     <a class="nav-link" href="service.php"> Films </a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="ticket.php"> my ticket </a>
+                                </li>
                                 <li class="nav-item active">
                                     <a class="nav-link" href="login.php">Log in</a>
                                 </li>

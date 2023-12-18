@@ -85,6 +85,9 @@
                 <li class="nav-item">
                   <a class="nav-link" href="service.php"> Films </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="ticket.php"> my ticket </a>
+                </li>
                 <?php
                 session_start();
                 if (isset($_SESSION['username'])) {
