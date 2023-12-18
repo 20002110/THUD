@@ -94,17 +94,6 @@ class HandleDB
         }
     }
 
-    public function find($table, $where)
-    {
-        $sql = "SELECT * FROM $table WHERE $where";
-        $result = $this->conn->query($sql);
-
-        if ($result->num_rows > 0) {
-            return $result->fetch_assoc();
-        } else {
-            return false;
-        }
-    }
 
 
 
