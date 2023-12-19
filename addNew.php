@@ -179,7 +179,7 @@ if ($_SESSION['username'] != "admin@gmail.com") {
                                             <!-- add new category -->
 
                                             <button onclick="addGenre()" class="btn btn-primary"
-                                                style="padding=5px;">Add new genre</button>
+                                                style="padding:5px;">Add new genre</button>
 
                                             <script>
                                                 function addGenre() {
