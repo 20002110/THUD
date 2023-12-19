@@ -125,7 +125,7 @@ if (isset($_POST['submit'])) {
                     <nav class="navbar navbar-expand-lg custom_nav-container">
                         <a class="navbar-brand" href="index.php">
                             <span>
-                                THUD
+                            CGV*
                             </span>
                         </a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse"

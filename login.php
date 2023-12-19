@@ -99,7 +99,7 @@ if (isset($_POST['login'])) {
                     <nav class="navbar navbar-expand-lg custom_nav-container">
                         <a class="navbar-brand" href="index.html">
                             <span>
-                                THUD
+                            CGV*
                             </span>
                         </a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse"

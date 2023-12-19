@@ -66,7 +66,7 @@
           <nav class="navbar navbar-expand-lg custom_nav-container ">
             <a class="navbar-brand" href="index.php">
               <span>
-                <i>"THUD"</i>
+                <i>CGV*</i>
               </span>
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -125,6 +125,7 @@
       <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
           <div class="carousel-item active">
+          <h2> <strong> Chào mừng đến với CGV* </strong> </h2>
             <div class="container">
               <div class="row">
                 <div class="col-md-10">
@@ -134,6 +135,7 @@
             </div>
           </div>
           <div class="carousel-item ">
+          <h2> <strong> Ưu đãi </strong> </h2>
             <div class="container">
               <div class="row">
                 <div class="col-md-10">
@@ -143,6 +145,7 @@
             </div>
           </div>
           <div class="carousel-item ">
+          <h2> <strong> Ưu đãi </strong> </h2>
             <div class="container">
               <div class="row">
                 <div class="col-md-10">

@@ -74,7 +74,7 @@ $db = new HandleDB();
           <nav class="navbar navbar-expand-lg custom_nav-container">
             <a class="navbar-brand" href="index.php">
               <span>
-                Films
+                CGV*
               </span>
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
