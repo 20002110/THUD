@@ -163,7 +163,39 @@ if ($_SESSION['username'] != "admin@gmail.com") {
                                     <td>'.$col.'</td>
                                     <td>
                                         <a href="updateTheater.php?updateid='.$id.'" class="text-light"><button class="btn btn-primary">Update</button></a>
-                                        <a href="deleteTheater.php?deleteid='.$id.'" class="text-light"><button class="btn btn-danger">Delete</button></a>
+                                        <a class="text-light">
+                                            <button class="btn btn-danger" data-toggle="modal" data-target="#popup_Modal">
+                                                Delete  
+                                            </button>                                              
+                                        </a>
+                                        <div class="modal fade" id="popup_Modal" >
+                                            <div class="modal-dialog">
+                                                <div class="modal-content bg-dark">
+                                        
+                                                    <!-- Modal Header -->
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title">Thông báo</h4>
+                                                        <button type="button" class=" close" data-dismiss="modal">&times;</button>
+                                                    </div>
+                                                
+                                                    <!-- Modal body -->
+                                                    <div class="modal-body">
+                                                        Bạn thực sự muốn xóa rạp?
+                                                    </div>
+                                            
+                                                    <!-- Modal footer -->
+                                                    <div class="modal-footer" >
+                
+                                                    <a href="deleteTheater.php?deleteid='.$id.'">
+                                                        <button class="btn btn-danger" >
+                                                            Đồng ý
+                                                        </button>                                              
+                                                    </a>
+                                                    </div>
+                                            
+                                                </div>
+                                            </div>
+                                        </div>
                                     </td>
                                   </tr>';
                             
