@@ -156,9 +156,9 @@
 
 
   <!-- team section -->
-  <section class="py-5 bg-light team_section layout_padding" style="color: black">
+  <section class="py-5 team_section layout_padding" style="background-color: #101010;">
     <div class="container px-4 px-lg-5 mt-5">
-      <h2 class="fw-bolder mb-4 text-center">Phim Hot</h2>
+      <h2 class="fw-bolder mb-4 text-center text-white">Phim Hot</h2>
       <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
         <!-- <div class="col mb-5">
           <div class="card h-100">
@@ -184,7 +184,7 @@
         include_once('handleDB.php');
         $db = new handleDB();
         $films = $db->findALL('Movies');
-        
+
         $i = 0;
 
         foreach ($films as $film) {
@@ -226,22 +226,47 @@
     </div>
   </section>
   <!-- end team section -->
+  <section style="background-color: #101010;" class="py-5 team_section layout_padding text-center">
+    <div class="container bg-dark info_section" style="min-height:100px;">
+      <h1 class="text-center">Các cụm rạp</h1>
+      <hr color="white" />
+      <?php
+      include_once('handleDB.php');
+      $db = new handleDB();
+      $theaters = $db->findALL('theater');
 
-  <div class="container bg-dark info_section" style="min-height:100px;">
-        <h1 class="text-center">CINEMAS</h1><hr color="white"/>
-        <?php
-        include_once('handleDB.php');
-        $db = new handleDB();
-        $theaters = $db->findALL('theater');
-        foreach ($theaters as $theater) {
-          echo '<div class="row">
-                  <div class="col-md-3">
-                    <h3>' . $theater['theaterName'] . '</h3>
-                  </div>
-                </div>';
+      $cities = array();
+      foreach ($theaters as $theater) {
+        #split cities from location
+        $location = explode(',', $theater['location']);
+        $city = end($location);
+        # remove first space and convert to uppercase
+        $city = strtoupper(ltrim($city));
+
+        if (!in_array($city, $cities)) {
+          $cities[] = $city;
         }
-        ?>
-  </div>
+
+      }
+      foreach ($cities as $c) {
+        $theaters = $db->find_one('theater', 'location', $c);
+        echo '<div class="row">
+                <div class="col-md-3">
+                  <h6>' . $c . ' : </h6>
+                </div>';
+        foreach ($theaters as $theater) {
+          echo '
+                  <div class="col-md-3">
+                    <p>' . $theater['theaterName'] . '</p>
+                  </div>';
+        }
+        echo '</div>';
+      }
+
+      ?>
+
+    </div>
+  </section>
 
   <!-- info section -->
   <section class="info_section ">

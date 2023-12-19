@@ -93,15 +93,26 @@ $id = $_SESSION['userID'];
 
                         <div class="collapse navbar-collapse ml-auto" id="navbarSupportedContent">
                             <ul class="navbar-nav  ">
-                                <li class="nav-item active">
+                                <li class="nav-item ">
                                     <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="service.php"> Films </a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="logout.php ">Log out</a>
+                                <li class="nav-item active">
+                                    <a class="nav-link" href="ticket.php">My Tickets</a>
                                 </li>
+
+                                <li class="nav-item dropdown ">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <?php echo $_SESSION['username'] ?>
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="view_profile.php">Profile</a>
+                                        <a class="dropdown-item" href="logout.php">Log out</a>
+                                    </div>
+                                </li>'
                             </ul>
                         </div>
                     </nav>
@@ -111,97 +122,97 @@ $id = $_SESSION['userID'];
         <!-- end header section -->
         <!--  -->
 
-       <!-- Body Start -->
-<div class="container py-5" style = "min-height: 88vh;">
-    <a href="service.php" class="text-light"><button class="btn btn-primary my-5">Book Ticket</button></a>
-        <!-- start echo message to user -->
-        <?php
-				if(isset($message)) {
-					foreach($message as $message) {
-						echo '<div class="alert alert-danger" role="alert">
-							'.$message.'
+        <!-- Body Start -->
+        <div class="container py-5" style="min-height: 88vh;">
+            <a href="service.php" class="text-light"><button class="btn btn-primary my-5">Book Ticket</button></a>
+            <!-- start echo message to user -->
+            <?php
+            if (isset($message)) {
+                foreach ($message as $message) {
+                    echo '<div class="alert alert-danger" role="alert">
+							' . $message . '
 						</div>';
-					}
-				}
-		?>
-		<!-- end echo mesaage to user -->
-        <div>
-        <table class="table align-middle table-striped  text-white">
-            <thead class="table-success align-middle thead-dark">
-                <tr>
-                    <th scope="col">No.</th>
-                    <th scope="col">Name Movie</th>
-                    <th scope="col">Theater</th>
-                    <th scope="col">Date</th>
-                    <th scope="col">Time</th>
-                    <!-- <th scope="col">Price</th> -->
-                    <th scope="col">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                    include 'handleDB.php';
-                    $db = new HandleDB();
-                    $tickets = $db->find_one('ticket', 'user_id', $id);
-                    $status = 1;
-                    foreach($tickets as $ticket) {
-                        $seatID = $ticket['seatID'];
-                        $seat = $db->find_data('seats', 'seatID', $seatID);
-                        $movieID = $seat['MovieID'];
-                        $theaterID = $seat['theaterID'];
-                        $time = $seat['time'];
-                        $date = $seat['date'];
-                        $seatMap = $seat['seat'];
-                        $seatMap = json_decode($seatMap, true);
-                        $seatName = array();
-                        foreach ($seatMap as $seat) {
-                            if ($seat['user_id'] == $id) {
-                                $seatName[] = $seat['seatName'];
+                }
+            }
+            ?>
+            <!-- end echo mesaage to user -->
+            <div>
+                <table class="table align-middle table-striped  text-white">
+                    <thead class="table-success align-middle thead-dark">
+                        <tr>
+                            <th scope="col">No.</th>
+                            <th scope="col">Name Movie</th>
+                            <th scope="col">Theater</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Time</th>
+                            <!-- <th scope="col">Price</th> -->
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        include 'handleDB.php';
+                        $db = new HandleDB();
+                        $tickets = $db->find_one('ticket', 'user_id', $id);
+                        $status = 1;
+                        foreach ($tickets as $ticket) {
+                            $seatID = $ticket['seatID'];
+                            $seat = $db->find_data('seats', 'seatID', $seatID);
+                            $movieID = $seat['MovieID'];
+                            $theaterID = $seat['theaterID'];
+                            $time = $seat['time'];
+                            $date = $seat['date'];
+                            $seatMap = $seat['seat'];
+                            $seatMap = json_decode($seatMap, true);
+                            $seatName = array();
+                            foreach ($seatMap as $seat) {
+                                if ($seat['user_id'] == $id) {
+                                    $seatName[] = $seat['seatName'];
+                                }
                             }
-                        }
-                        $seatName = implode(', ', $seatName);
-                        $movie = $db->find_data('Movies', 'MovieID', $movieID);
-                        $name_movie = $movie['Name'];
-                        $location = $db->find_data('theater', 'theaterID', $theaterID);
-                        $location = $location['theaterName'];
-                        $price = $movie['cost'];
-                        $totalprice = 0;
-                        // calculate price if user book more than 1 ticket
-                        $seatName = explode(', ', $seatName);
-                        // foreach ($seatName as $seat) {
-                        //     // check if seat is VIP or not by A,B character in seat name
-                        //     if ($seat[0] == 'A' || $seat[0] == 'B') {
-                        //         $totalprice += $price * 1.5;
-                        //     } else {
-                        //         $totalprice += $price;
-                        //     }
-                        // }
-
-                        echo '<tr>
-                                <th scope="row">'.$status.'</th>
-                                <td>'.$name_movie.'</td>
-                                <td>'.$location.'</td>
-                                <td>'.$date.'</td>
-                                <td>'.$time.'</td>
+                            $seatName = implode(', ', $seatName);
+                            $movie = $db->find_data('Movies', 'MovieID', $movieID);
+                            $name_movie = $movie['Name'];
+                            $location = $db->find_data('theater', 'theaterID', $theaterID);
+                            $location = $location['theaterName'];
+                            $price = $movie['cost'];
+                            $totalprice = 0;
+                            // calculate price if user book more than 1 ticket
+                            $seatName = explode(', ', $seatName);
+                            // foreach ($seatName as $seat) {
+                            //     // check if seat is VIP or not by A,B character in seat name
+                            //     if ($seat[0] == 'A' || $seat[0] == 'B') {
+                            //         $totalprice += $price * 1.5;
+                            //     } else {
+                            //         $totalprice += $price;
+                            //     }
+                            // }
+                        
+                            echo '<tr>
+                                <th scope="row">' . $status . '</th>
+                                <td>' . $name_movie . '</td>
+                                <td>' . $location . '</td>
+                                <td>' . $date . '</td>
+                                <td>' . $time . '</td>
                                 <td>
-                                    <a href="show_ticket.php?id='.$ticket['ticketID'].'" class="text-light"><button class="btn btn-primary">Detail</button></a>
-                                    <a href="cancelTicket.php?id='.$ticket['ticketID'].'" class="text-light"><button class="btn btn-danger">Cancel</button></a>
+                                    <a href="show_ticket.php?id=' . $ticket['ticketID'] . '" class="text-light"><button class="btn btn-primary">Detail</button></a>
+                                    <a href="cancelTicket.php?id=' . $ticket['ticketID'] . '" class="text-light"><button class="btn btn-danger">Cancel</button></a>
                                 </td>
                               </tr>';
-                        
-                        $status++;
-                    }
-                    
-                ?>
-                
-            </tbody>
-        </table>
-    </div>
-        
-        
-        
-</div>
-<!-- Body End -->
+
+                            $status++;
+                        }
+
+                        ?>
+
+                    </tbody>
+                </table>
+            </div>
+
+
+
+        </div>
+        <!-- Body End -->
 
 
         <!-- info section -->
