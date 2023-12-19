@@ -181,7 +181,7 @@ $db = new HandleDB();
                 echo '<div class = "col-md-6 col-lg-4 mx-auto ">
                 <div class = "box" style="background-color: #ffff; border-radius: 10px">
                   <div class = "img-box" >
-                    <img src = "' . $service['image'] . '" alt = "..." style="min-width: 265px; min-height: 390px; object-fit: cover;"  />
+                    <img src = "' . $service['image'] . '" alt = "..." style="min-width: 265px; height: 390px; object-fit: cover;"  />
                   </div>
                   <div class = "detail-box ">
                     <h5>
@@ -221,7 +221,7 @@ $db = new HandleDB();
                 echo '<div class = "col-md-6 col-lg-4 mx-auto ">
                 <div class = "box" style="background-color: #ffff; border-radius: 10px">
                   <div class = "img-box" >
-                    <img src = "' . $service['image'] . '" alt = "..." style="min-width: 265px; min-height: 390px; object-fit: cover;"  />
+                    <img src = "' . $service['image'] . '" alt = "..." style="min-width: 265px; height: 390px; object-fit: cover;"  />
                   </div>
                   <div class = "detail-box ">
                     <h5>
@@ -253,7 +253,7 @@ $db = new HandleDB();
                 echo '<div class = "col-md-6 col-lg-4 mx-auto ">
                 <div class = "box" style="background-color: #ffff; border-radius: 10px">
                   <div class = "img-box" >
-                    <img src = "' . $service['image'] . '" alt = "" style="min-width: 265px; min-height: 390px; object-fit: cover;"  />
+                    <img src = "' . $service['image'] . '" alt = "" style="min-width: 265px; height: 390px; object-fit: cover;"  />
                   </div>
                   <div class = "detail-box ">
                     <h5>
