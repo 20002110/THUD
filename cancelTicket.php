@@ -36,16 +36,34 @@ foreach ($seatMap as $seat) {
 $newSeatMap = json_encode($newSeatMap);
 
 
-
 if ($db->update('seats', array('seat' => $newSeatMap), 'seatID', $seatID)) {
     if ($db->delete('ticket', 'ticketID', $id)) {
-        header("ticket.php");
+        echo '
+            <div class="modal fade" id="popup_Modal">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+            
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                            <h4 class="modal-title">Thông báo</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                    
+                        <!-- Modal body -->
+                        <div class="modal-body">
+                            Hủy vé thành công!
+                        </div>
+                
+                        <!-- Modal footer -->
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                        </div>
+                
+                    </div>
+                </div>
+            </div>';
+        header("Location: ticket.php");
     }
 } else {
     echo '<script>alert("Có lỗi xảy ra, vui lòng thử lại sau")</script>';
 }
-
-
-
-
-?>

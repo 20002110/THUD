@@ -77,13 +77,9 @@ $userID = $_SESSION['userID'];
                     <li class="nav-item ">
                         <a class="nav-link" href="service.php"> Films</a>
                     </li>
-                    <li class="nav-item ">
-                        <a class="nav-link" href="ticket.php">My Tickets</a>
-                    </li>
-
                     <li class="nav-item">
-                    <a class="nav-link" href="ticket.php"> my ticket </a>
-                </li>
+                        <a class="nav-link" href="ticket.php"> My ticket </a>
+                    </li>
                 <?php
                 if ($_SESSION['username'] == 'admin@gmail.com') {
                   echo '<li class="nav-item">
