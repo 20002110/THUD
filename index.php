@@ -33,7 +33,7 @@
     <!-- header section start -->
     <div class="hero_bg_box">
       <div class="img-box">
-        <img src="images/slider_bg.jpeg" alt="">
+        <img src="images/slide_background.jpg" alt="">
       </div>
     </div>
     <header class="header_section">
@@ -111,30 +111,14 @@
     <!-- end header section -->
 
     <!-- slider section -->
-    <section class=" slider_section ">
+    <section class=" slider_section  text-center">
       <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
           <div class="carousel-item active">
             <div class="container">
               <div class="row">
-                <div class="col-md-7">
-                  <div class="detail-box">
-                    <h1>
-                      <i>"THUD"</i> <br>
-                      <span>
-                        Cùng bạn trên mọi hành trình
-                      </span>
-                    </h1>
-                    <p>
-                      Trải nghiệm sự khác biệt của <i>"THUD"</i> với
-                      <span class="text-primary">hơn 10000</span>
-                      xe rộng khắp Hà Nội và TP.Hồ Chí Minh
-                    </p>
-                    <div class="btn-box">
-                      <a href="" class="btn-1"> Xe tự lái </a>
-                      <a href="" class="btn-2">Xe có tài xế</a>
-                    </div>
-                  </div>
+                <div class="col-md-10">
+                  <img src="images/slide1.jpg" alt="">
                 </div>
               </div>
             </div>
@@ -142,24 +126,8 @@
           <div class="carousel-item ">
             <div class="container">
               <div class="row">
-                <div class="col-md-7">
-                  <div class="detail-box">
-                    <h1>
-                      Chương trình <br>
-                      <span>
-                        khuyến mãi
-                      </span>
-                    </h1>
-                    <p>
-                      Nhận nhiều
-                      <span class="text-primary">ưu đãi</span>
-                      hấp dẫn từ <i>"THUD"</i> với nhiều khuyến mãi trên tất cả các dịch vụ hiện có
-                    </p>
-                    <div class="btn-box">
-                      <a href="" class="btn-1">Tìm hiểu ngay</a>
-                      <!-- <a href="" class="btn-2">Get A Quote</a> -->
-                    </div>
-                  </div>
+                <div class="col-md-10">
+                  <img src="images/slide2.jpg" alt="">
                 </div>
               </div>
             </div>
@@ -167,172 +135,113 @@
           <div class="carousel-item ">
             <div class="container">
               <div class="row">
-                <div class="col-md-7">
-                  <div class="detail-box">
-
-                    <h1>
-                      An toàn của bạn <br>
-                      <span>
-                        Trách nhiệm của chúng tôi
-                      </span>
-                    </h1>
-                    <p>
-                      Chúng tôi cam kết về an toàn của khách hàng trong quá trình trải nghiệm dịch vụ
-                      <br>
-                      Mọi thông tin chi tiết được nằm trong
-                      <span class="text-primary">điều khoản dịch vụ</span>
-                    </p>
-                    <div class="btn-box">
-                      <a href="" class="btn-1">Tìm hiểu ngay</a>
-                    </div>
-                  </div>
+                <div class="col-md-10">
+                  <img src="images/slide3.jpg" alt="">
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="container idicator_container">
+        <!-- <div class="container idicator_container ">
           <ol class="carousel-indicators">
             <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
             <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
             <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
           </ol>
-        </div>
+        </div> -->
       </div>
     </section>
     <!-- end slider section -->
   </div>
 
-  <!-- about section -->
-  <section class="about_section layout_padding">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-6 px-0">
-          <div class="img_container">
-            <div class="img-box">
-              <img src="images/who_are_we.jpg" alt="" />
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 px-0">
-          <div class="detail-box">
-            <div class="heading_container ">
-              <h2>
-                <i>"THUD"</i> - slogan
-              </h2>
-            </div>
-            <p>
-              Chúng tôi quan niệm rằng, mỗi chuyến đi là một hành trình trải nghiệm và khám phá, là cơ hội để bản thân
-              tìm hiểu
-              những khoảnh khắc mới mẻ trong cuộc sống. Do đó, chất lượng dịch vụ, trải nghiệm người dùng là ưu tiên
-              hàng đầu và
-              là nguồn cảm hứng của chúng tôi xuyên suốt của trình hoạt động.
-              <br><br>
-              <i>"THUD"</i> là nền tảng cho thuê xe với đa dạng phân khúc, mẫu mã. Chúng tôi không chỉ dừng lại
-              với việc kết nối với khách hàng một cách nhanh chóng, đảm bảo chất lượng xe an toàn, bên cạnh đó chúng tôi
-              còn
-              hướng tới trải nghiệm của khách hàng một cách tốt nhất trong quá trình trải nghiệm dịch vụ.
-
-            </p>
-            <!-- <div class="btn-box">
-              <a href="">
-                Read More
-              </a>
-            </div> -->
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- end about section -->
-
-  <!-- contact section -->
-  <section class="contact_section layout_padding">
-    <div class="contact_bg_box">
-      <div class="img-box">
-        <img src="images/get_in_touch.jpg" alt="">
-      </div>
-    </div>
-    <div class="container">
-      <div class="heading_container heading_center">
-        <h2>
-          Get In touch
-        </h2>
-      </div>
-      <div class="">
-        <div class="row">
-          <div class="col-md-7 mx-auto">
-            <form action="#">
-              <div class="contact_form-container">
-                <div>
-                  <div>
-                    <input type="text" placeholder="Full Name" />
-                  </div>
-                  <div>
-                    <input type="email" placeholder="Email " />
-                  </div>
-                  <div>
-                    <input type="text" placeholder="Phone Number" />
-                  </div>
-                  <div class="">
-                    <input type="text" placeholder="Message" class="message_input" />
-                  </div>
-                  <div class="btn-box ">
-                    <button type="submit">
-                      Send
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- end contact section -->
 
   <!-- team section -->
-  <section class="team_section layout_padding">
-    <div class="container">
-      <div class="heading_container heading_center">
-        <h2>
-          Dịch vụ của chúng tôi
-        </h2>
-      </div>
-      <div class="row">
-        <div class="col-md-4 col-sm-6 mx-auto ">
-          <div class="box">
-            <div class="img-box">
-              <img src="images/lux_A2_resize.jpg" alt="">
-            </div>
-            <div class="detail-box">
-              <h3> Xe tự lái </h3>
-              <p> Quận Thanh Xuân, Hà Nội </p>
-              <div class="btn-box">
-                <a href="service.php"> Thuê xe tự lái </a>
+  <section class="py-5 bg-light team_section layout_padding" style="color: black">
+    <div class="container px-4 px-lg-5 mt-5">
+      <h2 class="fw-bolder mb-4 text-center">Phim Hot</h2>
+      <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+        <!-- <div class="col mb-5">
+          <div class="card h-100">
+            
+            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">New</div>
+            
+            <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+            
+            <div class="card-body p-4">
+              <div class="text-center">
+                
+                <h5 class="fw-bolder">New Film</h5>
               </div>
             </div>
-          </div>
-        </div>
-        <div class="col-md-4 col-sm-6 mx-auto ">
-          <div class="box">
-            <div class="img-box">
-              <img src="images/vf6_1_resize.jpg">
-            </div>
-            <div class="detail-box">
-              <h3> Xe có tài xế </h3>
-              <p> Quận 1, Hồ Chí Minh </p>
-              <div class="btn-box">
-                <a href="service.php"> Thuê xe có tài xế </a>
-              </div>
+            
+            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+              <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Xem phim</a></div>
             </div>
           </div>
-        </div>
+        </div> -->
+
+        <?php
+        include_once('handleDB.php');
+        $db = new handleDB();
+        $films = $db->findALL('Movies');
+        
+        $i = 0;
+
+        foreach ($films as $film) {
+          echo '<div class = "col-md-6 col-lg-4 mx-auto ">
+                <div class = "box" style="background-color: #ffff; border-radius: 10px">
+                  <div class = "img-box" >
+                    <img src = "' . $film['image'] . '" alt = "..." style="width: 265px; height: 390px; object-fit: cover;"  />
+                  </div>
+                  <div class = "detail-box ">
+                    <h5>
+                      ' . $film['Name'] . '
+                    </h5>
+                    <p>
+                      ' . $film['director'] . ' 
+                    </p>
+                    <a href = "detail.php?id=' . $film['movieID'] . '" class = "btn btn-outline-primary" >
+                      Book ticket
+                    </a>
+
+  
+  
+                  </div>
+                  <script>
+                  // auto resize image to fit the box 265x390
+
+                  </script>
+                </div>  
+              </div>';
+
+          $i++;
+
+          if ($i == 3) {
+            break;
+          }
+        }
+
+        ?>
       </div>
     </div>
   </section>
   <!-- end team section -->
+
+  <div class="container bg-dark info_section" style="min-height:100px;">
+        <h1 class="text-center">CINEMAS</h1><hr color="white"/>
+        <?php
+        include_once('handleDB.php');
+        $db = new handleDB();
+        $theaters = $db->findALL('theater');
+        foreach ($theaters as $theater) {
+          echo '<div class="row">
+                  <div class="col-md-3">
+                    <h3>' . $theater['theaterName'] . '</h3>
+                  </div>
+                </div>';
+        }
+        ?>
+  </div>
 
   <!-- info section -->
   <section class="info_section ">

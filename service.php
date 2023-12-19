@@ -40,7 +40,7 @@ $db = new HandleDB();
     <!-- header section strats -->
     <div class="hero_bg_box">
       <div class="img-box">
-        <img src="images/hero-bg.jpg" alt="">
+        <img src="images/background.jpg" alt="">
       </div>
     </div>
 

@@ -48,7 +48,7 @@ $id = $_SESSION['userID'];
         <!-- header section strats -->
         <div class="hero_bg_box">
             <div class="img-box">
-                <img src="images/vinfast.jpeg" alt="">
+                <img src="images/listTicket_bg.jpg" alt="">
             </div>
         </div>
 
@@ -109,10 +109,11 @@ $id = $_SESSION['userID'];
             </div>
         </header>
         <!-- end header section -->
+        <!--  -->
 
        <!-- Body Start -->
-<div class="container py-5">
-    <a href="addNew.php" class="text-light"><button class="btn btn-primary my-5">Book Ticket</button></a>
+<div class="container py-5" style = "min-height: 88vh;">
+    <a href="service.php" class="text-light"><button class="btn btn-primary my-5">Book Ticket</button></a>
         <!-- start echo message to user -->
         <?php
 				if(isset($message)) {

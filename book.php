@@ -25,7 +25,12 @@ if (isset($_POST['submit'])) {
     $newSeatMap = array();
 
     $ticket = $db->find_last_row('ticket', 'ticketID');
-    $ticketID = $ticket['ticketID'] + 1;
+    // check empty ticket
+    if (empty($ticket)) {
+        $ticketID = 1;
+    } else {
+        $ticketID = $ticket['ticketID'] + 1;
+    }
     foreach ($seatMap as $seat) {
         // if ($seat['seatName'] == $selectedSeat) {
         //     $seat['user_id'] = $userID;
@@ -94,7 +99,7 @@ if (isset($_POST['submit'])) {
 
 
     </script>';
-                
+
             echo '<script>sendMail("' . $_SESSION['username'] . '")</script>';
             // echo "<script>alert('Đặt vé thành công');</script>";
 
@@ -143,7 +148,7 @@ if (isset($_POST['submit'])) {
     </style>
     <script src="js/jquery-3.4.1.min.js"></script>
     <script src="js/bootstrap.js"></script>
-   <!-- <script src="js/custom.js"></script> -->
+    <!-- <script src="js/custom.js"></script> -->
 
 </head>
 

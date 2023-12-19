@@ -123,6 +123,20 @@ class HandleDB
 
     }
 
+    #set auto increment to last row + 1
+    public function set_auto_increment($table, $column)
+    {
+        $last_row = $this->find_last_row($table, $column);
+        $last_row = $last_row[$column];
+        $last_row++;
+        $sql = "ALTER TABLE $table AUTO_INCREMENT = $last_row";
+        if ($this->conn->query($sql) === TRUE) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public function find_one($table, $column, $data)
     {
         $sql = "SELECT * FROM $table WHERE $column LIKE '%$data%'";

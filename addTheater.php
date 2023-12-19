@@ -50,7 +50,7 @@ if ($_SESSION['username'] != "admin@gmail.com") {
         <!-- header section strats -->
         <div class="hero_bg_box">
             <div class="img-box">
-                <img src="images/vinfast.jpeg" alt="">
+                <img src="images/addTheater_bg.jpg" alt="">
             </div>
         </div>
 

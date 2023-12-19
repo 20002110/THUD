@@ -145,7 +145,7 @@ if (isset($_POST['submit'])) {
         <!-- header section strats -->
         <div class="hero_bg_box">
             <div class="img-box">
-                <img src="images/vinfast.jpeg" alt="">
+                <img src="images/manager_bg.jpg" alt="">
             </div>
         </div>
 
