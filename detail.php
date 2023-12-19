@@ -76,7 +76,7 @@ $film = $db->find_data('Movies', 'movieID', $id);
         <!-- <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0"
             src="https://dummyimage.com/600x700/dee2e6/6c757d.jpg" alt="..." /></div> -->
           <?php
-          echo '<div class="col-md-6" ><img class="card-img-top mb-5 mb-md-0" id = "img" src="' . $film['image'] . '" alt="..."  style="width: 500px; height: 715px; object-fit: cover;" /></div>';
+          echo '<div class="col-md-6" ><img class="card-img-top mb-5 mb-md-0" id = "img" src="' . $film['image'] . '" alt="..."  style="min-width: 500px; min-height: 715px; object-fit: cover;" /></div>';
           ?>
 
         <div class="col-md-6 text-center text-md-start">
