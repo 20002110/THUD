@@ -43,11 +43,9 @@
             if ($db->update_movie("userInfor", $data, "user_id", $userID)) {
                 echo "<script>alert('Chỉnh sửa thành công')</script>";           
             } else {
-                echo "<script>alert('update thất bại')</script>";
+                echo "<script>alert('Chỉnh sửa thất bại')</script>";
             }
-
         }    
-
     }
 
 ?>
@@ -260,11 +258,9 @@
                                 </div>
 
                                 <div class="text-center mt-3">
-                                    <input class="btn bg-primary text-white" type="submit" name="submit" id="submit">
-
-                                    <button type="reset" class="btn btn-primary text-white">Reset</button>
+                                    <button type="submit" name="submit" class="btn bg-primary text-white" > Submit </button>
+                                    <button type="reset" class="btn btn-primary text-white" >Reset</button>
                                 </div>
-
                             </form>
                         </div>
                     </div>

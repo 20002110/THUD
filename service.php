@@ -44,6 +44,7 @@ $db = new HandleDB();
       </div>
     </div>
 
+    </body>
     <header class="header_section">
       <div class="header_top">
         <div class="container-fluid">
