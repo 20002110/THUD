@@ -95,7 +95,9 @@ if ($_SESSION['username'] != "admin@gmail.com") {
 
                         <div class="collapse navbar-collapse ml-auto" id="navbarSupportedContent">
                         <ul class="navbar-nav  ">
-
+                            <li class="nav-item">
+                                <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
+                            </li>
                             <li class="nav-item dropdown active">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -193,7 +195,39 @@ if ($_SESSION['username'] != "admin@gmail.com") {
                                     <td>'.$cost.'</td>
                                     <td>
                                         <a href="updateMovie.php?updateid='.$id.'" class="text-light"><button class="btn btn-primary">Update</button></a>
-                                        <a href="deleteMovie.php?deleteid='.$id.'" class="text-light"><button class="btn btn-danger">Delete</button></a>
+                                        <a class="text-light">
+                                            <button class="btn btn-danger" data-toggle="modal" data-target="#popup_Modal">
+                                                Delete  
+                                            </button>                                              
+                                        </a>
+                                        <div class="modal fade" id="popup_Modal" >
+                                            <div class="modal-dialog">
+                                                <div class="modal-content bg-dark">
+                                        
+                                                    <!-- Modal Header -->
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title">Thông báo</h4>
+                                                        <button type="button" class=" close" data-dismiss="modal">&times;</button>
+                                                    </div>
+                                                
+                                                    <!-- Modal body -->
+                                                    <div class="modal-body">
+                                                        Bạn thực sự muốn xóa phim?
+                                                    </div>
+                                            
+                                                    <!-- Modal footer -->
+                                                    <div class="modal-footer" >
+                
+                                                    <a href="deleteMovie.php?deleteid='.$id.'">
+                                                        <button class="btn btn-danger" >
+                                                            Đồng ý
+                                                        </button>                                              
+                                                    </a>
+                                                    </div>
+                                            
+                                                </div>
+                                            </div>
+                                        </div>
                                     </td>
                                   </tr>';
                             

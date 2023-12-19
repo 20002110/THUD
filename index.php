@@ -82,8 +82,18 @@
                 <li class="nav-item">
                   <a class="nav-link" href="service.php"> Films </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="ticket.php"> My ticket </a>
+                </li>
                 <?php
                 session_start();
+                if ($_SESSION['username'] == 'admin@gmail.com') {
+                  echo '<li class="nav-item">
+                  <a class="nav-link" href="addNew.php"> Manager </a>
+                </li>';
+                }
+                ?>
+                <?php      
                 if (isset($_SESSION['username'])) {
                   echo '  <li class="nav-item dropdown ">  
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"

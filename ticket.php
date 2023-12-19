@@ -102,7 +102,14 @@ $id = $_SESSION['userID'];
                                 <li class="nav-item active">
                                     <a class="nav-link" href="ticket.php">My Tickets</a>
                                 </li>
-
+                                <?php
+                                session_start();
+                                if ($_SESSION['username'] == 'admin@gmail.com') {
+                                echo '<li class="nav-item">
+                                <a class="nav-link" href="addNew.php"> Manager </a>
+                                </li>';
+                                }
+                                ?>
                                 <li class="nav-item dropdown ">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -195,8 +202,44 @@ $id = $_SESSION['userID'];
                                 <td>' . $date . '</td>
                                 <td>' . $time . '</td>
                                 <td>
-                                    <a href="show_ticket.php?id=' . $ticket['ticketID'] . '" class="text-light"><button class="btn btn-primary">Detail</button></a>
-                                    <a href="cancelTicket.php?id=' . $ticket['ticketID'] . '" class="text-light"><button class="btn btn-danger">Cancel</button></a>
+                                    <a href="show_ticket.php?id=' . $ticket['ticketID'] . '" class="text-light">
+                                        <button class="btn btn-primary">
+                                            Detail
+                                        </button>
+                                    </a>
+                                    <a class="text-light">
+                                        <button class="btn btn-danger" data-toggle="modal" data-target="#popup_Modal">
+                                            Cancel
+                                        </button>                                              
+                                    </a>
+                                    <div class="modal fade" id="popup_Modal" >
+                                        <div class="modal-dialog">
+                                            <div class="modal-content bg-dark">
+                                    
+                                                <!-- Modal Header -->
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title">Thông báo</h4>
+                                                    <button type="button" class=" close" data-dismiss="modal">&times;</button>
+                                                </div>
+                                            
+                                                <!-- Modal body -->
+                                                <div class="modal-body">
+                                                    Bạn thực sự muốn hủy vé?
+                                                </div>
+                                        
+                                                <!-- Modal footer -->
+                                                <div class="modal-footer" >
+            
+                                                <a href="cancelTicket.php?id=' . $ticket['ticketID'] . '">
+                                                    <button class="btn btn-danger" >
+                                                        Đồng ý
+                                                    </button>                                              
+                                                </a>
+                                                </div>
+                                        
+                                            </div>
+                                        </div>
+                                            </div>
                                 </td>
                               </tr>';
 
