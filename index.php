@@ -1,3 +1,6 @@
+<?php
+  session_start();
+ ?>
 <!DOCTYPE html>
 <html>
 
@@ -88,6 +91,13 @@
                 <li class="nav-item">
                     <a class="nav-link" href="ticket.php"> my ticket </a>
                 </li>
+                <?php
+                if ($_SESSION['username'] == 'admin@gmail.com') {
+                  echo '<li class="nav-item">
+                  <a class="nav-link" href="addNew.php"> Manager </a>
+                </li>';
+                }
+                ?>
                 <?php
                 session_start();
                 if (isset($_SESSION['username'])) {

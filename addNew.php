@@ -95,6 +95,9 @@ if ($_SESSION['username'] != "admin@gmail.com") {
 
                         <div class="collapse navbar-collapse ml-auto" id="navbarSupportedContent">
                             <ul class="navbar-nav  ">
+                            <li class="nav-item">
+                                <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
+                            </li>
                                 <li class="nav-item dropdown ">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -115,31 +118,27 @@ if ($_SESSION['username'] != "admin@gmail.com") {
                                         <a class="dropdown-item" href="manageMovie.php">List Movies</a>
                                     </div>
                                 </li>
-                                <?php 
-                                if($_SESSION['username'] == 'admin@gmail.com'){
-                                echo '<li class="nav-item active">
-                                <a class="nav-link" href="addNew.php">Add Product</a>
+                                <li class="nav- item">
+                                <?php
+                                session_start();
+                                if (isset($_SESSION['username'])) {
+                                echo '  <li class="nav-item dropdown ">  
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        ' . $_SESSION['username'] . '
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="view_profile.php">Profile</a>
+                                        <a class="dropdown-item" href="logout.php">Log out</a>
+                                    </div>
+                                </li>';
+
+                                } else {
+                                echo '<li class="nav-item">
+                                <a class="nav-link" href="login.php"> Login </a>
                                 </li>';
                                 }
                                 ?>
-                                <li class="nav- item">
-                                    <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                                        aria-haspopup="true" aria-expanded="false">
-                                        Acount
-                                    </a>
-                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="service.php">Your Profile</a>
-                                        <?php
-                                        session_start();
-                                        if (isset($_SESSION['username'])) {
-                                        echo '<a class="dropdown-item" href="logout.php">Log out</a>';
-                                        } else {
-                                        echo '<a class="dropdown-item" href="login.php">Log in</a>';
-                                        }
-                                        ?>
-                                    </div>
-                                    </li>
                                 </li>
                             </ul>
                         </div>
