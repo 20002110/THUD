@@ -32,22 +32,42 @@ $film = $db->find_data('Movies', 'movieID', $id);
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
   <!-- Core theme CSS (includes Bootstrap)-->
   <link href="css/detail.css" rel="stylesheet" />
+  <link href="css/responsive.css" rel="stylesheet" />
 </head>
 
-<body class="bg-dark" style="color:whitesmoke">
+<body class=" mt-5 bg-dark" style="color:whitesmoke">
   <!-- Navigation-->
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-           <div class="container px-4 px-lg-5">
-               <a class="navbar-brand" href="#!">THUD</a>
-               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-               <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                   <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                       <li class="nav-Film"><a class="nav-link active" aria-current="page" href="#!">Home</a></li>
-                       <li class="nav-Film"><a class="nav-link" href="#!">About</a></li>
-                   </ul>
-               </div>
-           </div>
-       </nav>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top container">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.php">Home</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse " id="navbarNav">
+                <ul class="navbar-nav float-end" style="margin-left: auto!important;">
+                    <li class="nav-item ">
+                        <a class="nav-link" href="service.php"> Films</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="ticket.php">My Tickets</a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <?php echo $_SESSION['username'] ?>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="view_profile.php">Profile</a>
+                            <a class="dropdown-item" href="logout.php">Log out</a>
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
   <!-- Product section -->
   <section class="py-5">
     <div class="container px-4 px-lg-5 my-5">
@@ -165,7 +185,9 @@ $film = $db->find_data('Movies', 'movieID', $id);
   <!-- Bootstrap core JS-->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
   <!-- Core theme JS-->
-  <script src="js/scripts.js"></script>
+  <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/custom.js"></script>
 </body>
 
 </html>

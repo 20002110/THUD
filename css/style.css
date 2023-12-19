@@ -786,9 +786,6 @@ a:focus {
   padding: 10px 10px;
   text-align: center;
   bottom: 0;
-<<<<<<< HEAD
-  background-color: rgba(28, 28, 28, 0.75);
-=======
   background-color: rgba(28, 28, 28, 0.9);
   display: none;
   position: absolute;
@@ -797,7 +794,6 @@ a:focus {
 /*  display when hover */
 .team_section .box:hover .detail-box {
   display: block;
->>>>>>> danhnt
 }
 
 .team_section .btn-box {

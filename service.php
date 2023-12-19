@@ -1,5 +1,8 @@
 <?php
 session_start();
+
+include 'handleDB.php';
+$db = new HandleDB();
 ?>
 
 <!DOCTYPE html>
@@ -90,10 +93,17 @@ session_start();
                     Filter
                   </a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="service.php">All</a>
+                    <!-- <a class="dropdown-item" href="service.php">All</a>
                     <a class="dropdown-item" href="service.php?filter=Porsche">Porsche</a>
                     <a class="dropdown-item" href="service.php?filter=Vinfast">Vinfast</a>
-                    <a class="dropdown-item" href="service.php?filter=Ferrari">Ferrari</a>
+                    <a class="dropdown-item" href="service.php?filter=Ferrari">Ferrari</a> -->
+                    <?php
+                    $result = $db->findAll('TypeMovie');
+                    foreach ($result as $type) {
+                      echo '<a class="dropdown-item" href="service.php?filter=' . $type['typeID'] . '">' . $type['typeName'] . '</a>';
+                    }
+
+                    ?>
                   </div>
                 </li>
 
@@ -159,10 +169,6 @@ session_start();
         <div class="row">
           <?php
 
-            include 'handleDB.php';
-            $db = new HandleDB();
-
-
           if (isset($_POST['submit'])) {
             $search = $_POST['search'];
 
@@ -175,7 +181,7 @@ session_start();
                   <div class = "img-box" >
                     <img src = "' . $service['image'] . '" alt = "..." style="width: 265px; height: 390px; object-fit: cover;"  />
                   </div>
-                  <div class = "detail-box " style="position: relative">
+                  <div class = "detail-box ">
                     <h5>
                       ' . $service['Name'] . '
                     </h5>
@@ -207,7 +213,7 @@ session_start();
           } elseif (isset($_GET['filter'])) {
             $filter = $_GET['filter'];
 
-            $result = $db->find_by_data('Movies', $filter);
+            $result = $db->find_movie('Movies', 'typeID', $filter);
 
             if ($result) {
               foreach ($result as $service) {
