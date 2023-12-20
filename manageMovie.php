@@ -177,7 +177,7 @@ if ($_SESSION['username'] != "admin@gmail.com") {
                                     <td>'.$premiere.'</td>
                                     <td>'.$cost.'</td>
                                     <td>
-                                        <a href="updateMovie.php?updateid='.$id.'" class="text-light"><button class="btn btn-primary">Update</button></a>
+                                        <a href="updateMovie.php?updateid='.$id.'" class="text-light"><button class="btn btn-primary">Update</button></a>   
                                         <a class="text-light">
                                             <button class="btn btn-danger" data-toggle="modal" data-target="#popup_Modal">
                                                 Delete  
@@ -195,7 +195,7 @@ if ($_SESSION['username'] != "admin@gmail.com") {
                                                 
                                                     <!-- Modal body -->
                                                     <div class="modal-body">
-                                                        Bạn thực sự muốn hủy vé?
+                                                        Bạn thực sự muốn xóa phim?
                                                     </div>
                                             
                                                     <!-- Modal footer -->
