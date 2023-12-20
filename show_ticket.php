@@ -65,7 +65,7 @@ $userID = $_SESSION['userID'];
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top ">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top container">
         <div class="container-fluid">
             <a class="navbar-brand" href="index.php">Home</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"

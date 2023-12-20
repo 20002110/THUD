@@ -33,6 +33,7 @@ $film = $db->find_data('Movies', 'movieID', $id);
   <!-- Core theme CSS (includes Bootstrap)-->
   <link href="css/detail.css" rel="stylesheet" />
   <link href="css/responsive.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body class=" mt-5 bg-dark" style="color:whitesmoke">
@@ -75,7 +76,7 @@ $film = $db->find_data('Movies', 'movieID', $id);
         <!-- <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0"
             src="https://dummyimage.com/600x700/dee2e6/6c757d.jpg" alt="..." /></div> -->
           <?php
-          echo '<div class="col-md-6" ><img class="card-img-top mb-5 mb-md-0" id = "img" src="' . $film['image'] . '" alt="..."  style="width: 500px; height: 715px; object-fit: cover;" /></div>';
+          echo '<div class="col-md-6" ><img class="card-img-top mb-5 mb-md-0" id = "img" src="' . $film['image'] . '" alt="..."  style="min-width: 500px; min-height: 715px; object-fit: cover;" /></div>';
           ?>
 
         <div class="col-md-6 text-center text-md-start">
@@ -99,17 +100,17 @@ $film = $db->find_data('Movies', 'movieID', $id);
 
           <div class="d-flex">
             <button class="btn btn-outline-light flex-shrink-0" type="button" >
-              <i class="bi-cart-fill me-1"></i>
+            <i class="fa-solid fa-ticket"></i>
               <a href="book.php?id=<?php echo $film['movieID'] ?>" class = "text-decoration-none" style="color: white">Đặt vé</a>
             </button>
           </div><br>
           <div class="d-xxl-inline-flexex">
             <button class="btn btn-outline-light flex-shrink-0" type="button">
-              <i class="bi-cart-fill me-1"></i>
+            <i class="fa-solid fa-heart"></i>
               Yêu thích
             </button>
             <button class="btn btn-outline-light flex-shrink-0" type="button">
-              <i class="bi-cart-fill me-1"></i>
+            <i class="fa-solid fa-share"></i>
               Chia sẻ
             </button>
           </div>

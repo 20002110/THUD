@@ -145,7 +145,7 @@ if (isset($_POST['submit'])) {
         <!-- header section strats -->
         <div class="hero_bg_box">
             <div class="img-box">
-                <img src="images/vinfast.jpeg" alt="">
+                <img src="images/manager_bg.jpg" alt="">
             </div>
         </div>
 
@@ -179,7 +179,7 @@ if (isset($_POST['submit'])) {
                     <nav class="navbar navbar-expand-lg custom_nav-container">
                         <a class="navbar-brand" href="index.php">
                             <span>
-                                THUD
+                                CGV*
                             </span>
                         </a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse"

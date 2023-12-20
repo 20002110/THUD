@@ -40,7 +40,7 @@ $db = new HandleDB();
     <!-- header section strats -->
     <div class="hero_bg_box">
       <div class="img-box">
-        <img src="images/hero-bg.jpg" alt="">
+        <img src="images/background.jpg" alt="">
       </div>
     </div>
 
@@ -75,7 +75,7 @@ $db = new HandleDB();
           <nav class="navbar navbar-expand-lg custom_nav-container">
             <a class="navbar-brand" href="index.php">
               <span>
-                Films
+                CGV*
               </span>
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -180,7 +180,7 @@ $db = new HandleDB();
                 echo '<div class = "col-md-6 col-lg-4 mx-auto ">
                 <div class = "box" style="background-color: #ffff; border-radius: 10px">
                   <div class = "img-box" >
-                    <img src = "' . $service['image'] . '" alt = "..." style="width: 265px; height: 390px; object-fit: cover;"  />
+                    <img src = "' . $service['image'] . '" alt = "..." style="min-width: 265px; height: 390px; object-fit: cover;"  />
                   </div>
                   <div class = "detail-box ">
                     <h5>
@@ -221,7 +221,7 @@ $db = new HandleDB();
                 echo '<div class = "col-md-6 col-lg-4 mx-auto ">
                 <div class = "box" style="background-color: #ffff; border-radius: 10px">
                   <div class = "img-box" >
-                    <img src = "' . $service['image'] . '" alt = "..." style="width: 265px; height: 390px; object-fit: cover;"  />
+                    <img src = "' . $service['image'] . '" alt = "..." style="min-width: 265px; height: 390px; object-fit: cover;"  />
                   </div>
                   <div class = "detail-box ">
                     <h5>
@@ -253,7 +253,7 @@ $db = new HandleDB();
                 echo '<div class = "col-md-6 col-lg-4 mx-auto ">
                 <div class = "box" style="background-color: #ffff; border-radius: 10px">
                   <div class = "img-box" >
-                    <img src = "' . $service['image'] . '" alt = "" style="width: 265px; height: 390px; object-fit: cover;"  />
+                    <img src = "' . $service['image'] . '" alt = "" style="min-width: 265px; height: 390px; object-fit: cover;"  />
                   </div>
                   <div class = "detail-box ">
                     <h5>

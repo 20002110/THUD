@@ -1,52 +1,53 @@
 <?php
-    session_start();
-    if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
-        echo "<script>alertBạn chưa đăng nhập</script>";
-        header("location: login.php");
-        exit;
-    }
+session_start();
+if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
+    echo "<script>alertBạn chưa đăng nhập</script>";
+    header("location: login.php");
+    exit;
+}
 
-    include 'handleDB.php';
+include 'handleDB.php';
 
-    $db = new handleDB();
-    $userID = $db->find_data('users','username',$_SESSION['username'])['user_id'];
-    $foreign_userID = $db->find_data('userInfor','user_id',$userID)['user_id'];
+$db = new handleDB();
+$userID = $db->find_data('users', 'username', $_SESSION['username'])['user_id'];
+$foreign_userID = $db->find_data('userInfor', 'user_id', $userID)['user_id'];
 
-    if (isset($_POST['submit'])) {
-        $fullName = $_POST['fullName'];
-        $phoneNumber = $_POST['phoneNumber'];
-        $birthDay = $_POST['birthDay'];
-        $address = $_POST['address'];
+if (isset($_POST['submit'])) {
+    $fullName = $_POST['fullName'];
+    $phoneNumber = $_POST['phoneNumber'];
+    $birthDay = $_POST['birthDay'];
+    $address = $_POST['address'];
 
-        if (!isset($foreign_userID) || empty($foreign_userID)) {
-            $data = array(
-                "user_id" => $userID,
-                "fullName" => $fullName,
-                "phone" => $phoneNumber,
-                "date_of_birth" => $birthDay,
-                "address" => $address
-            );
-            if ($db->add_data("userInfor", $data)) {
-                echo "<script>alert('Chỉnh sửa thành công')</script>";           
-            } else {
-                echo "<script>alert('Chỉnh sửa thất bại')</script>";
-            }
+    if (!isset($foreign_userID) || empty($foreign_userID)) {
+        $data = array(
+            "user_id" => $userID,
+            "fullName" => $fullName,
+            "phone" => $phoneNumber,
+            "date_of_birth" => $birthDay,
+            "address" => $address
+        );
+        if ($db->add_data("userInfor", $data)) {
+            echo "<script>alert('Chỉnh sửa thành công')</script>";
+        } else {
+            echo "<script>alert('Chỉnh sửa thất bại')</script>";
         }
-        else{
-            $data = array(
-                "fullName" => $fullName,
-                "phone" => $phoneNumber,
-                "date_of_birth" => $birthDay,
-                "address" => $address
-            );
+    } else {
+        $data = array(
+            "fullName" => $fullName,
+            "phone" => $phoneNumber,
+            "date_of_birth" => $birthDay,
+            "address" => $address
+        );
 
-            if ($db->update_movie("userInfor", $data, "user_id", $userID)) {
-                echo "<script>alert('Chỉnh sửa thành công')</script>";           
-            } else {
-                echo "<script>alert('Chỉnh sửa thất bại')</script>";
-            }
-        }    
+        if ($db->update_movie("userInfor", $data, "user_id", $userID)) {
+            echo "<script>alert('Chỉnh sửa thành công')</script>";
+        } else {
+            echo "<script>alert('update thất bại')</script>";
+        }
+
     }
+
+}
 
 ?>
 
@@ -56,11 +57,13 @@
 <head>
     <meta charset="utf-8">
     <title>Insert title here</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
 
     <!-- fonts style -->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Poppins:400,600,700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Poppins:400,600,700&display=swap"
+        rel="stylesheet" />
 
     <!-- Custom styles for this template -->
     <link href="css/style.css" rel="stylesheet" />
@@ -101,10 +104,12 @@
                     <nav class="navbar navbar-expand-lg custom_nav-container">
                         <a class="navbar-brand" href="index.php">
                             <span>
-                                <i>"THUD"</i>
+                                CGV*
                             </span>
                         </a>
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse"
+                            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
                             <span class=""></span>
                         </button>
 
@@ -117,33 +122,25 @@
                                     <a class="nav-link" href="service.php"> Films </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="ticket.php"> my ticket </a>
+                                    <a class="nav-link" href="ticket.php"> My ticket </a>
                                 </li>
                                 <?php
-                                if ($_SESSION['username'] == 'admin@gmail.com') {
-                                echo '<li class="nav-item">
-                                <a class="nav-link" href="addNew.php"> Manager </a>
-                                </li>';
-                                }
-                                ?>
-                                <?php
-                                session_start();
                                 if (isset($_SESSION['username'])) {
-                                echo '  <li class="nav-item dropdown active">  
-                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        ' . $_SESSION['username'] . '
-                                    </a>
-                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="view_profile.php">Profile</a>
-                                        <a class="dropdown-item" href="logout.php">Log out</a>
-                                    </div>
-                                </li>';
+                                    echo '  <li class="nav-item dropdown ">  
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        ' . $_SESSION['username'] . '
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="view_profile.php">Profile</a>
+                        <a class="dropdown-item" href="logout.php">Log out</a>
+                    </div>
+                </li>';
 
                                 } else {
-                                echo '<li class="nav-item">
-                                <a class="nav-link" href="login.php"> Login </a>
-                                </li>';
+                                    echo '<li class="nav-item">
+                  <a class="nav-link" href="login.php"> Login </a>
+                </li>';
                                 }
                                 ?>
                             </ul>
@@ -154,13 +151,14 @@
         </header>
         <!-- header section end -->
     </div>
-<?php
-    $userPassword = $db->find_data('users','username',$_SESSION['username'])['password'];
-    $userFullName = $db->find_data('userInfor','user_id',$userID)['fullName'];
-    $userPhone = $db->find_data('userInfor','user_id',$userID)['phone'];
-    $userBirthday = $db->find_data('userInfor','user_id',$userID)['date_of_birth'];
-    $userAddress = $db->find_data('userInfor','user_id',$userID)['address'];
- ?>
+    <?php
+    $userPassword = $db->find_data('users', 'username', $_SESSION['username'])['password'];
+    $userFullName = $db->find_data('userInfor', 'user_id', $userID)['fullName'];
+    $userPhone = $db->find_data('userInfor', 'user_id', $userID)['phone'];
+    $userBirthday = $db->find_data('userInfor', 'user_id', $userID)['date_of_birth'];
+    $userAddress = $db->find_data('userInfor', 'user_id', $userID)['address'];
+
+    ?>
     <section style="font-family: 'JetBrains Mono Medium'">
         <div class="hero_bg_box">
             <div class="img-box">
@@ -177,40 +175,47 @@
 
                                 <div class="form-group mt-2">
                                     <label> Email</label>
-                                    <input type="text" name="email" value="<?php echo $_SESSION['username'] ?>" readonly class="form-control" required="required">
+                                    <input type="text" name="email" value="<?php echo $_SESSION['username'] ?>" readonly
+                                        class="form-control" required="required">
                                 </div>
 
                                 <div class="form-group mt-2">
                                     <label> Mật khẩu</label>
-                                    <input type="password" name="passWord" value="<?php echo $userPassword ?>" readonly class="form-control" required="required">
+                                    <input type="password" name="passWord" value="<?php echo $userPassword ?>" readonly
+                                        class="form-control" required="required">
                                 </div>
 
                                 <div class="form-group mt-2">
                                     <label> Tên </label>
-                                    <input type="text" name="fullName" value="<?php echo $userFullName ?>" readonly class="form-control" required="required">
+                                    <input type="text" name="fullName" value="<?php echo $userFullName ?>" readonly
+                                        class="form-control" required="required">
                                 </div>
 
                                 <div class="form-group mt-2">
                                     <label> Ngày sinh </label>
-                                    <input type="date" name="birthDay" value="<?php echo $userBirthday ?>" readonly class="form-control" required="required">
+                                    <input type="date" name="birthDay" value="<?php echo $userBirthday ?>" readonly
+                                        class="form-control" required="required">
                                 </div>
 
                                 <div class="form-group mt-2">
-                                    <label> Giới tính </label>  
+                                    <label> Giới tính </label>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                        <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                            id="flexRadioDefault1">
                                         <label class="form-check-label" for="flexRadioDefault1">
                                             Nam
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                                        <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                            id="flexRadioDefault2" checked>
                                         <label class="form-check-label" for="flexRadioDefault1">
                                             Nữ
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                                        <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                            id="flexRadioDefault2" checked>
                                         <label class="form-check-label" for="flexRadioDefault1">
                                             None
                                         </label>
@@ -219,17 +224,19 @@
 
                                 <div class="form-group mt-2">
                                     <label> Số điện thoại</label>
-                                    <input type="text" name="Phone_number" value="<?php echo $userPhone ?>" readonly class="form-control" required="required">
+                                    <input type="text" name="Phone_number" value="<?php echo $userPhone ?>" readonly
+                                        class="form-control" required="required">
                                 </div>
                                 <div class="form-group mt-2">
                                     <label> Thành phố/Tỉnh</label>
-                                    <input type="text" name="Adress" value="<?php echo $userAddress ?>" readonly class="form-control" required="required">
+                                    <input type="text" name="Adress" value="<?php echo $userAddress ?>" readonly
+                                        class="form-control" required="required">
                                 </div>
                             </form>
                         </div>
                     </div>
                 </div>
-                                            
+
                 <div class="col-md-6">
                     <div class="card paint-card">
                         <div class="card-body">
@@ -238,23 +245,27 @@
                                 <p class="fs-4 text-center" style="font-size: 24px">CẬP NHẬT THÔNG TIN</p>
 
                                 <div class="form-group mt-2">
-                                    <label> Tên </label> 
-                                    <input type="text" name="fullName" id="fullName" class="form-control" required="required">
+                                    <label> Tên </label>
+                                    <input type="text" name="fullName" id="fullName" class="form-control"
+                                        required="required">
                                 </div>
 
                                 <div class="form-group mt-2">
                                     <label> Ngày sinh </label>
-                                    <input type="date" name="birthDay" id=birthDay class="form-control" required="required">
+                                    <input type="date" name="birthDay" id=birthDay class="form-control"
+                                        required="required">
                                 </div>
 
                                 <div class="form-group mt-2">
-                                    <label>Số điện thoại</label> 
-                                    <input type="number" name="phoneNumber" id=phoneNumber class="form-control" required="required">
+                                    <label>Số điện thoại</label>
+                                    <input type="number" name="phoneNumber" id=phoneNumber class="form-control"
+                                        required="required">
                                 </div>
 
                                 <div class="form-group mt-2">
-                                    <label>Thành phố/Tỉnh</label> 
-                                    <input type="text" name="address" id=address class="form-control" required="required">
+                                    <label>Thành phố/Tỉnh</label>
+                                    <input type="text" name="address" id=address class="form-control"
+                                        required="required">
                                 </div>
 
                                 <div class="text-center mt-3">
@@ -269,6 +280,10 @@
         </div>
     </section>
 
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="js/bootstrap.js"></script>
 </body>
+
+
 
 </html>

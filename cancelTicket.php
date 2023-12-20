@@ -36,9 +36,20 @@ foreach ($seatMap as $seat) {
 $newSeatMap = json_encode($newSeatMap);
 
 
+<<<<<<< HEAD
 if ($db->update('seats', array('seat' => $newSeatMap), 'seatID', $seatID)) {
     if ($db->delete('ticket', 'ticketID', $id)) {
         header("Location: ticket.php");
+=======
+// echo $newSeatMap;
+
+
+if ($db->update('seats', array('seat' => $newSeatMap), 'seatID', $seatID)) {
+    if ($db->delete('ticket', 'ticketID', $id)) {
+        // echo '<script>alert("Hủy vé thành công")</script>';
+        $db -> set_auto_increment('ticket', 'ticketID');
+        header("location: ticket.php");
+>>>>>>> danhnt
     }
 } else {
     echo '<script>alert("Có lỗi xảy ra, vui lòng thử lại sau")</script>';
