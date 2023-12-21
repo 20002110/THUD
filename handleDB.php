@@ -139,7 +139,7 @@ class HandleDB
 
     public function find_one($table, $column, $data)
     {
-        $sql = "SELECT * FROM $table WHERE $column LIKE '%$data%'";
+        $sql = "SELECT * FROM $table WHERE $column LIKE '%$data%' ";
         $result = $this->conn->query($sql);
 
         if ($result->num_rows > 0) {
@@ -169,6 +169,21 @@ class HandleDB
             return false;
         }
 
+    }
+
+    public function find_statistic($table,$column,$data){
+        $sql = "SELECT * FROM $table WHERE $column LIKE '%$data%' ";
+        $result = $this->conn->query($sql);
+
+        if ($result->num_rows > 0) {
+            $rows = array();
+            while ($row = $result->fetch_assoc()) {
+                $rows[] = $row;
+            }
+            return $rows;
+        } else {
+            return false;
+        }
     }
 
     public function find_by_array($table, $array)
