@@ -44,7 +44,6 @@ $db = new HandleDB();
       </div>
     </div>
 
-    </body>
     <header class="header_section">
       <div class="header_top">
         <div class="container-fluid">
@@ -122,7 +121,6 @@ $db = new HandleDB();
                 <li class="nav-item ">
                   <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
                 </li>
-
                 <li class="nav-item active">
                   <a class="nav-link" href="service.php"> Films </a>
                 </li>
@@ -177,10 +175,31 @@ $db = new HandleDB();
 
             if ($result) {
               foreach ($result as $service) {
+                $url = $service['url'];
                 echo '<div class = "col-md-6 col-lg-4 mx-auto ">
                 <div class = "box" style="background-color: #ffff; border-radius: 10px">
-                  <div class = "img-box" >
-                    <img src = "' . $service['image'] . '" alt = "..." style="min-width: 265px; height: 390px; object-fit: cover;"  />
+                  <a class = "video-btn" data-toggle="modal" data-src="'.$url.'" data-target="#myModal"> 
+                    <div class = "img-box" >
+                      <img src = "' . $service['image'] . '" alt = "..." style="min-width: 265px; height: 390px; object-fit: cover;"  />
+                    </div>             
+                  </a>  
+                  
+                  <!-- Modal -->
+                  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="top:150px">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-body">
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>        
+                          <!-- 16:9 aspect ratio -->
+                          <div class="embed-responsive embed-responsive-16by9">
+                            <iframe class="embed-responsive-item" src="" id="video"  allowscriptaccess="always" allow="autoplay">
+                            </iframe>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                   <div class = "detail-box ">
                     <h5>
@@ -208,7 +227,6 @@ $db = new HandleDB();
               echo "<p style='color: red'>Không có dữ liệu</p>";
 
             }
-            
 
 
           } elseif (isset($_GET['filter'])) {
@@ -218,10 +236,31 @@ $db = new HandleDB();
 
             if ($result) {
               foreach ($result as $service) {
+                $url = $service['url'];
                 echo '<div class = "col-md-6 col-lg-4 mx-auto ">
                 <div class = "box" style="background-color: #ffff; border-radius: 10px">
-                  <div class = "img-box" >
-                    <img src = "' . $service['image'] . '" alt = "..." style="min-width: 265px; height: 390px; object-fit: cover;"  />
+                  <a class = "video-btn" data-toggle="modal" data-src="'.$url.'" data-target="#myModal"> 
+                    <div class = "img-box" >
+                      <img src = "' . $service['image'] . '" alt = "..." style="min-width: 265px; height: 390px; object-fit: cover;"  />
+                    </div>             
+                  </a>  
+                  
+                  <!-- Modal -->
+                  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="top:150px">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-body">
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>        
+                          <!-- 16:9 aspect ratio -->
+                          <div class="embed-responsive embed-responsive-16by9">
+                            <iframe class="embed-responsive-item" src="" id="video"  allowscriptaccess="always" allow="autoplay">
+                            </iframe>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                   <div class = "detail-box ">
                     <h5>
@@ -250,10 +289,30 @@ $db = new HandleDB();
 
             if ($result) {
               foreach ($result as $service) {
+                $url = $service['url'];
                 echo '<div class = "col-md-6 col-lg-4 mx-auto ">
                 <div class = "box" style="background-color: #ffff; border-radius: 10px">
-                  <div class = "img-box" >
-                    <img src = "' . $service['image'] . '" alt = "" style="min-width: 265px; height: 390px; object-fit: cover;"  />
+                  <a class = "video-btn" data-toggle="modal" data-src="'.$url.'" data-target="#myModal"> 
+                    <div class = "img-box" >
+                      <img src = "' . $service['image'] . '" alt = "..." style="min-width: 265px; height: 390px; object-fit: cover;"  />
+                    </div>             
+                  </a>  
+                  
+                  <!-- Modal -->
+                  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="top:150px">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-body">
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>        
+                          <!-- 16:9 aspect ratio -->
+                          <div class="embed-responsive embed-responsive-16by9">
+                            <iframe class="embed-responsive-item" src="" id="video"  allowscriptaccess="always" allow="autoplay"></iframe>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                   <div class = "detail-box ">
                     <h5>
