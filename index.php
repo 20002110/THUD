@@ -89,20 +89,8 @@
                   <a class="nav-link" href="service.php"> Films </a>
                 </li>
                 <li class="nav-item">
-<<<<<<< HEAD
-                    <a class="nav-link" href="ticket.php"> my ticket </a>
-                </li>
-                <?php
-                if ($_SESSION['username'] == 'admin@gmail.com') {
-                  echo '<li class="nav-item">
-                  <a class="nav-link" href="addNew.php"> Manager </a>
-                </li>';
-                }
-                ?>
-=======
                     <a class="nav-link" href="ticket.php"> My ticket </a>
                 </li>
->>>>>>> danhnt
                 <?php
                 session_start();
                 if ($_SESSION['username'] == 'admin@gmail.com') {

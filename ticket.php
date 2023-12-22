@@ -88,46 +88,12 @@ $id = $_SESSION['userID'];
 
                         <div class="collapse navbar-collapse ml-auto" id="navbarSupportedContent">
                             <ul class="navbar-nav  ">
-<<<<<<< HEAD
-                                <li class="nav-item">
-=======
                                 <li class="nav-item ">
->>>>>>> danhnt
                                     <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="service.php"> Films </a>
                                 </li>
-<<<<<<< HEAD
-                                <li class="nav-item active ">
-                                    <a class="nav-link" href="ticket.php"> my ticket </a>
-                                </li>
-                                <?php
-                                if ($_SESSION['username'] == 'admin@gmail.com') {
-                                    echo '<li class="nav-item">
-                                    <a class="nav-link" href="addNew.php"> Manager </a>
-                                    </li>';
-                                }
-                                ?>
-                                <?php
-                                if (isset($_SESSION['username'])) {
-                                    echo '  <li class="nav-item dropdown ">  
-                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            ' . $_SESSION['username'] . '
-                                        </a>
-                                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                            <a class="dropdown-item" href="view_profile.php">Profile</a>
-                                            <a class="dropdown-item" href="logout.php">Log out</a>
-                                        </div>
-                                    </li>';
-                                } else {
-                                    echo '<li class="nav-item">
-                                    <a class="nav-link" href="login.php"> Login </a>
-                                    </li>';
-                                }
-                                ?>
-=======
                                 <li class="nav-item active">
                                     <a class="nav-link" href="ticket.php">My Tickets</a>
                                 </li>
@@ -149,7 +115,6 @@ $id = $_SESSION['userID'];
                                         <a class="dropdown-item" href="logout.php">Log out</a>
                                     </div>
                                 </li>'
->>>>>>> danhnt
                             </ul>
                         </div>
                     </nav>
@@ -160,25 +125,15 @@ $id = $_SESSION['userID'];
         <!--  -->
 
         <!-- Body Start -->
-<<<<<<< HEAD
-        <div class="container py-5">
-            <a href="addNew.php" class="text-light"><button class="btn btn-primary my-5">Book Ticket</button></a>
-=======
         <div class="container py-5" style="min-height: 88vh;">
             <a href="service.php" class="text-light"><button class="btn btn-primary my-5">Book Ticket</button></a>
->>>>>>> danhnt
             <!-- start echo message to user -->
             <?php
             if (isset($message)) {
                 foreach ($message as $message) {
                     echo '<div class="alert alert-danger" role="alert">
-<<<<<<< HEAD
-                                ' . $message . '
-                            </div>';
-=======
 							' . $message . '
 						</div>';
->>>>>>> danhnt
                 }
             }
             ?>
@@ -192,10 +147,7 @@ $id = $_SESSION['userID'];
                             <th scope="col">Theater</th>
                             <th scope="col">Date</th>
                             <th scope="col">Time</th>
-<<<<<<< HEAD
-=======
                             <!-- <th scope="col">Price</th> -->
->>>>>>> danhnt
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
@@ -227,57 +179,6 @@ $id = $_SESSION['userID'];
                             $location = $location['theaterName'];
                             $price = $movie['cost'];
                             $totalprice = 0;
-<<<<<<< HEAD
-                            $seatName = explode(', ', $seatName);
-
-                            echo '<tr>
-                                        <th scope="row">' . $status . '</th>
-                                        <td>' . $name_movie . '</td>
-                                        <td>' . $location . '</td>
-                                        <td>' . $date . '</td>
-                                        <td>' . $time . '</td>
-                                        <td>
-                                            <a href="show_ticket.php?id=' . $ticket['ticketID'] . '" class="text-light">
-                                                <button class="btn btn-primary">
-                                                    Detail
-                                                 </button>
-                                            </a>
-                                            <a class="text-light">
-                                                <button class="btn btn-danger" data-toggle="modal" data-target="#popup_Modal">
-                                                    Cancel
-                                                </button>                                              
-                                            </a>
-                                            <div class="modal fade" id="popup_Modal" >
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content bg-dark">
-                                            
-                                                        <!-- Modal Header -->
-                                                        <div class="modal-header">
-                                                            <h4 class="modal-title">Thông báo</h4>
-                                                            <button type="button" class=" close" data-dismiss="modal">&times;</button>
-                                                        </div>
-                                                    
-                                                        <!-- Modal body -->
-                                                        <div class="modal-body">
-                                                            Bạn thực sự muốn hủy vé?
-                                                        </div>
-                                                
-                                                        <!-- Modal footer -->
-                                                        <div class="modal-footer" >
-                    
-                                                        <a href="cancelTicket.php?id=' . $ticket['ticketID'] . '">
-                                                            <button class="btn btn-danger" >
-                                                                Đồng ý
-                                                            </button>                                              
-                                                        </a>
-                                                        </div>
-                                                
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>';
-=======
                             // calculate price if user book more than 1 ticket
                             $seatName = explode(', ', $seatName);
                             // foreach ($seatName as $seat) {
@@ -336,7 +237,6 @@ $id = $_SESSION['userID'];
                                             </div>
                                 </td>
                               </tr>';
->>>>>>> danhnt
 
                             $status++;
                         }
@@ -346,12 +246,9 @@ $id = $_SESSION['userID'];
                     </tbody>
                 </table>
             </div>
-<<<<<<< HEAD
-=======
 
 
 
->>>>>>> danhnt
         </div>
         <!-- Body End -->
 
