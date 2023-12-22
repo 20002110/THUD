@@ -21,13 +21,13 @@ Movie Ticket is a web application that allows users to book movie tickets online
 - Operating system: Ubuntu 22.04 LTS
 
 ## Installation
-1. Clone the repository: `git clone https://github.com/20002110/THUD.git `
-2. Install the Apache2 web server: `sudo apt install apache2`
-3. Install PHP: `sudo apt install php libapache2-mod-php php-mysql`
-4. Install MariaDB: `sudo apt install mariadb-server`
-5. Install phpMyAdmin: `sudo apt install phpmyadmin`
-6. Set up the database: import the database schema from the `sql` folder. `mysql -u [your_account] -p < sql/movie_ticket.sql`
-7. Configure Apache2: configure the Apache2 web server to serve the website from the `public` folder. `sudo nano /etc/apache2/sites-available/000-default.conf`
+1. Clone the repository: ```git clone https://github.com/20002110/THUD.git ```
+2. Install the Apache2 web server: ```sudo apt install apache2```
+3. Install PHP: ```sudo apt install php libapache2-mod-php php-mysql```
+4. Install MariaDB: ```sudo apt install mariadb-server```
+5. Install phpMyAdmin: ```sudo apt install phpmyadmin```
+6. Set up the database: import the database schema from the `sql` folder. ```mysql -u [your_account] -p < sql/movie_ticket.sql```
+7. Configure Apache2: configure the Apache2 web server to serve the website from the `public` folder. ```sudo nano /etc/apache2/sites-available/000-default.conf```
 
 
 ## Usage
@@ -40,9 +40,9 @@ Movie Ticket is a web application that allows users to book movie tickets online
 ## Contributing
 Contributions are welcome! If you would like to contribute to the Movie Ticket project, please follow these steps:
 1. Fork the repository.
-2. Create a new branch: `git checkout -b feature/your-feature-name`
-3. Make your changes and commit them: `git commit -m 'Add your commit message'`
-4. Push to the branch: `git push origin feature/your-feature-name`
+2. Create a new branch: ```git checkout -b feature/your-feature-name```
+3. Make your changes and commit them: ```git commit -m 'Add your commit message'```
+4. Push to the branch: ```git push origin feature/your-feature-name```
 5. Submit a pull request.
 
 
