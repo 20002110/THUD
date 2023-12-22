@@ -195,13 +195,33 @@ if (isset($_POST['submit'])) {
             <div class="form-check form-check-inline">
                 <?php
                 $today = date("Y-m-d");
-                for ($i = 0; $i < 7; $i++) {
-                    $date = date('Y-m-d', strtotime($today . ' + ' . $i . ' days'));
-                    echo "<div class=\"form-check form-check-inline center\">
-                <input class=\"form-check-input\" type=\"radio\" name=\"date\" id=\"date\" value=\"$date\">
-                <label class=\"form-check-label\" for=\"date\">$date</label>
-            </div>";
-                }
+            //     for ($i = 0; $i < 7; $i++) {
+            //         $date = date('Y-m-d', strtotime($today . ' + ' . $i . ' days'));
+            //         echo "<div class=\"form-check form-check-inline center\">
+            //     <input class=\"form-check-input\" type=\"radio\" name=\"date\" id=\"date\" value=\"$date\">
+            //     <label class=\"form-check-label\" for=\"date\">$date</label>
+            // </div>";
+            //     }
+
+                    // get date from showing table
+                    $showing = $db->find_movie('seats', 'MovieID', $id);
+                    $temp_date = array();
+                    foreach ($showing as $d) {
+                        // check if date > today
+                        $date = $d['date'];
+                        if ($date < $today) {
+                            continue;
+                        }
+                        // check if date is duplicated
+                        if (in_array($date, $temp_date)) {
+                            continue;
+                        }
+                        $temp_date[] = $date;
+                        echo "<div class=\"form-check form-check-inline center\">
+                        <input class=\"form-check-input\" type=\"radio\" name=\"date\" id=\"date\" value=\"$date\">
+                        <label class=\"form-check-label\" for=\"date\">$date</label>
+                    </div>";
+                    }
                 ?>
             </div>
 
