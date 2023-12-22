@@ -50,7 +50,7 @@ if (isset($_POST['submit'])) {
     // } else {
     //     echo '<label style="color:red;">Add false image</label>';
     // }
-    
+
 
     $name = $_POST['name'];
     $director = $_POST['director'];
@@ -62,6 +62,7 @@ if (isset($_POST['submit'])) {
     $describes = $_POST['describes'];
     $price = $_POST['price'];
     $image = $url_image;
+    $url = $_POST['url'];
 
     if ($db->find_data('TypeMovie', 'typeName', $category) == false) {
 
@@ -92,6 +93,7 @@ if (isset($_POST['submit'])) {
         'describes' => $describes,
         'cost' => $price,
         'image' => $image,
+        'url' => $url
     );
 
 
@@ -334,6 +336,12 @@ if (isset($_POST['submit'])) {
                                             <label for="price">Price</label>
                                             <input type="text" placeholder="Price" name="price" id="price"
                                                 value="<?php echo $film['cost'] ?>" />
+                                        </div>
+
+                                        <!-- price -->
+                                        <div>
+                                            <label for="price">url</label>
+                                            <input type="text" placeholder="url" name="url" id="url" value="<?php echo $film['url'] ?>" />
                                         </div>
 
 

@@ -62,6 +62,13 @@ if ($filter == 'day') {
         $month = $today . '-' . $months;
         $data = $db->find_statistic('seats', 'date', $month);
 
+        if (empty($data)) {
+            $values[] = 0;
+            continue;
+        }
+
+
+
         $totalprice = 0;
 
         foreach ($data as $value) {

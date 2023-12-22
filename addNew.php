@@ -118,9 +118,9 @@ if ($_SESSION['username'] != "admin@gmail.com") {
                                         <a class="dropdown-item" href="manageMovie.php">List Movies</a>
                                     </div>
                                 </li>
-                                <?php      
-                if (isset($_SESSION['username'])) {
-                  echo '  <li class="nav-item dropdown ">  
+                                <?php
+                                if (isset($_SESSION['username'])) {
+                                    echo '  <li class="nav-item dropdown ">  
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         ' . $_SESSION['username'] . '
@@ -131,12 +131,12 @@ if ($_SESSION['username'] != "admin@gmail.com") {
                     </div>
                 </li>';
 
-                } else {
-                  echo '<li class="nav-item">
+                                } else {
+                                    echo '<li class="nav-item">
                   <a class="nav-link" href="login.php"> Login </a>
                 </li>';
-                }
-                ?>
+                                }
+                                ?>
                             </ul>
                         </div>
                     </nav>
@@ -218,13 +218,13 @@ if ($_SESSION['username'] != "admin@gmail.com") {
                                         <!-- time -->
                                         <div>
                                             <label for="time">Time</label>
-                                            <input type="text" placeholder="Time" name="time" id="time" />
+                                            <input type="text" placeholder="Time" name="time" id="time" required/>
                                         </div>
 
                                         <!-- language -->
                                         <div>
                                             <label for="language">Language</label>
-                                            <input type="text" placeholder="Language" name="language" id="language" />
+                                            <input type="text" placeholder="Language" name="language" id="language" required/>
                                         </div>
 
                                         <!-- premiere -->
@@ -245,6 +245,12 @@ if ($_SESSION['username'] != "admin@gmail.com") {
                                         <div>
                                             <label for="price">Price</label>
                                             <input type="text" placeholder="Price" name="price" id="price" />
+                                        </div>
+
+                                        <!-- price -->
+                                        <div>
+                                            <label for="price">url</label>
+                                            <input type="text" placeholder="url" name="url" id="url" />
                                         </div>
 
 
@@ -311,6 +317,7 @@ if ($_SESSION['username'] != "admin@gmail.com") {
                                             $describes = $_POST['describes'];
                                             $price = $_POST['price'];
                                             $image = $url_image;
+                                            $url = $_POST['url'];
 
                                             if ($db->find_data('TypeMovie', 'typeName', $category) == false) {
                                                 if ($db->add_data('TypeMovie', array('typeName' => $category))) {
@@ -338,7 +345,8 @@ if ($_SESSION['username'] != "admin@gmail.com") {
                                                 'premiere' => $premiere,
                                                 'describes' => $describes,
                                                 'cost' => $price,
-                                                'image' => $image
+                                                'image' => $image,
+                                                'url' => $url
                                             );
 
 
@@ -354,7 +362,7 @@ if ($_SESSION['username'] != "admin@gmail.com") {
 
                                             $today = date("Y-m-d");
 
-                                            for ($day = 0; $day < 30; $day+= 2) {
+                                            for ($day = 0; $day < 30; $day += 2) {
                                                 $premiere = date('Y-m-d', strtotime($today . ' + ' . $day . ' days'));
                                                 foreach ($all_theater as $key => $value) {
                                                     $theaterID = $value['theaterID'];
@@ -368,8 +376,8 @@ if ($_SESSION['username'] != "admin@gmail.com") {
                                                         $check_date = $premiere;
 
                                                         $check = $db->find_by_array('seats', array('theaterID' => $theaterID, 'time' => $check_time, 'date' => $check_date));
-                                                        
-                                                        
+
+
 
                                                         if ($check != false or empty($check) == false) {
                                                             if (count($check) >= $value['rooms']) {
@@ -422,7 +430,7 @@ if ($_SESSION['username'] != "admin@gmail.com") {
 
 
                                                 }
-                                                
+
                                             }
                                             echo '<label style="color:green;">Add success</label>';
                                         }
