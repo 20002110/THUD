@@ -66,7 +66,7 @@ if (isset($_POST['login'])) {
         <!-- header section start -->
         <div class="hero_bg_box">
             <div class="img-box">
-                <img src="images/login_bg.jpg" alt="">
+                <img src="images/background.jpg" alt="">
             </div>
         </div>
         <header class="header_section">
@@ -99,7 +99,7 @@ if (isset($_POST['login'])) {
                     <nav class="navbar navbar-expand-lg custom_nav-container">
                         <a class="navbar-brand" href="index.html">
                             <span>
-                                THUD
+                            CGV*
                             </span>
                         </a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -131,7 +131,7 @@ if (isset($_POST['login'])) {
     <section class="contact_section layout_padding">
         <div class="contact_bg_box">
             <div class="img-box">
-                <img src="images/login_bg.jpg" alt="">
+                <img src="images/background.jpg" alt="">
             </div>
         </div>
         <div class="container">

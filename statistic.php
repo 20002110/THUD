@@ -3,61 +3,104 @@
 session_start();
 
 
+
 if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
     header("location: login.php");
     exit;
 }
 
 if ($_SESSION['username'] != "admin@gmail.com") {
-    header("location: service.php");
+    header("location: index.php");
 }
 
 include_once 'handleDB.php';
 $db = new HandleDB();
 
-$theaterID = $_GET['updateid'];
-$theater= $db->find_data('theater', 'theaterID', $theaterID);
+$sum_ticket = 0;
 
 
-?>
+$filter = $_GET['filter'];
+if (empty($filter)) {
+    $filter = 'day';
+}
 
-<?php
-
-
-if (isset($_POST['submit'])) {
-
-    $theaterName = $_POST['theaterName'];
-    $location = $_POST['location'];
-    $rooms = $_POST['rooms'];
-    $row = $_POST['row'];
-    $col = $_POST['col'];
-
-    $data = array(
-        'theaterName' => $theaterName,
-        'location' => $location,
-        'rooms' => $rooms,
-        'row' => $row,
-        'col' => $col,
-    );
+if ($filter == 'day') {
+    $today = date("Y-m");
+    $data = $db->find_statistic('seats', 'date', $today);
 
 
+    $labels = [];
+    $values = [];
+
+    foreach ($data as $value) {
+        $seats = json_decode($value['seat'], true);
+        $totalprice = 0;
+        $price = $db->find_data('Movies', 'movieID', $value['MovieID'])['cost'];
+
+        foreach ($seats as $seat) {
+            if ($seat['status'] == 1) {
+                $sum_ticket++;
+                if ($seat['seatName'] == 'A' || $seat['seatName'] == 'B') {
+                    $totalprice += $price * 1.5;
+                } else {
+                    $totalprice += $price;
+                }
+            }
+        }
+
+        $labels[] = $value['date'];
+        $values[] = $totalprice;
+    }
+} else if ($filter == 'month') {
+    $today = date("Y");
+
+    $labels = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10',
+        '11', '12'];
+    $values = [];
+
+    foreach ($labels as $months) {
+        $month = $today . '-' . $months;
+        $data = $db->find_statistic('seats', 'date', $month);
+
+        if (empty($data)) {
+            $values[] = 0;
+            continue;
+        }
 
 
-    if ($db->update_movie('theater', $data, 'theaterID', $theaterID)) {
 
-        // echo '<label style="color:green;">Add success</label>';
-        header("location: manageTheater.php");
-    } else {
-        echo '<label style="color:red;">update false</label>';
+        $totalprice = 0;
+
+        foreach ($data as $value) {
+            $seats = json_decode($value['seat'], true);
+            $price = $db->find_data('Movies', 'movieID', $value['MovieID'])['cost'];
+            foreach ($seats as $seat) {
+                if ($seat['status'] == 1) {
+                    $sum_ticket++;
+                    if ($seat['seatName'] == 'A' || $seat['seatName'] == 'B') {
+                        $totalprice += $price * 1.5;
+                    } else {
+                        $totalprice += $price;
+                    }
+                }
+            }
+        }
+        $values[] = $totalprice;
+
     }
 
+
+
 }
+
+
+
+
+
 ?>
 
-
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
     <!-- Basic -->
@@ -71,7 +114,7 @@ if (isset($_POST['submit'])) {
     <meta name="author" content="" />
     <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
 
-    <title>Update Theater</title>
+    <title> Films </title>
 
     <!-- bootstrap core css -->
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
@@ -84,18 +127,21 @@ if (isset($_POST['submit'])) {
     <link href="css/style.css" rel="stylesheet" />
     <!-- responsive style -->
     <link href="css/responsive.css" rel="stylesheet" />
+    <!-- Thư viện Bootstrap và Chart.js -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
-<body>
+<body class="sub_page">
     <div class="hero_area">
-        <!-- header section strats -->
-        <div class="hero_bg_box">
-            <div class="img-box">
-                <img src="images/vinfast.jpeg" alt="">
-            </div>
-        </div>
-
         <header class="header_section">
+            <!-- header section strats -->
+            <!-- <div class="hero_bg_box">
+                <div class="img-box">
+                    <img src="images/background.jpg" alt="">
+                </div>
+            </div> -->
             <div class="header_top">
                 <div class="container-fluid">
                     <div class="contact_link-container">
@@ -108,7 +154,7 @@ if (isset($_POST['submit'])) {
                         <a href="" class="contact_link2">
                             <i class="fa fa-phone" aria-hidden="true"></i>
                             <span>
-                                Call : +84 123456789
+                                Call : +84 1234567890
                             </span>
                         </a>
                         <a href="" class="contact_link3">
@@ -120,12 +166,12 @@ if (isset($_POST['submit'])) {
                     </div>
                 </div>
             </div>
-            <div class="header_bottom">
+            <div class="header_bottom" style="background-color: #424242">
                 <div class="container-fluid">
                     <nav class="navbar navbar-expand-lg custom_nav-container">
                         <a class="navbar-brand" href="index.php">
                             <span>
-                            CGV*
+                                CGV*
                             </span>
                         </a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -136,6 +182,21 @@ if (isset($_POST['submit'])) {
 
                         <div class="collapse navbar-collapse ml-auto" id="navbarSupportedContent">
                             <ul class="navbar-nav  ">
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Statistic
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="statistic.php?filter=day">Statistic by day</a>
+                                        <a class="dropdown-item" href="statistic.php?filter=month">Statistic by
+                                            month</a>
+                                    </div>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
+                                </li>
                                 <li class="nav-item dropdown ">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -156,80 +217,98 @@ if (isset($_POST['submit'])) {
                                         <a class="dropdown-item" href="manageMovie.php">List Movies</a>
                                     </div>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="logout.php ">Log out</a>
-                                </li>
+                                <?php
+                                if (isset($_SESSION['username'])) {
+                                    echo '  <li class="nav-item dropdown ">  
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        ' . $_SESSION['username'] . '
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="view_profile.php">Profile</a>
+                        <a class="dropdown-item" href="logout.php">Log out</a>
+                    </div>
+                </li>';
+
+                                } else {
+                                    echo '<li class="nav-item">
+                  <a class="nav-link" href="login.php"> Login </a>
+                </li>';
+                                }
+                                ?>
                             </ul>
                         </div>
                     </nav>
                 </div>
             </div>
         </header>
-        <!-- end header section -->
 
-        <!-- Add product main -->
-        <section class="contact_section layout_padding">
-            <div class="contact_bg_box">
-                <div class="img-box">
-                    <img src="images/contact-bg.jpg" alt="">
-                </div>
-            </div>
-            <div class="container">
-                <div class="heading_container heading_center">
-                    <h2>
-                        Update Theater
-                    </h2>
-                </div>
-                <div class="">
-                    <div class="row">
-                        <div class="col-md-7 mx-auto">
-                            <form action="" method="post" enctype="multipart/form-data">
-                                <div class="contact_form-container">
-                                    <div>
-                                        <!-- Theater name -->
-                                        <div>
-                                            <label for="theaterName">Name Theater</label>
-                                            <input type="text" placeholder="Name of Theater" name="theaterName" id="theaterName"
-                                                value="<?php echo $theater['theaterName'] ?>" />
-                                        </div>
-                                        <!-- Location -->
-                                        <div>
-                                            <label for="location">Location</label>
-                                            <input type="text" placeholder="Location" name="location" id="location"
-                                                value="<?php echo $theater['location'] ?>" />
-                                        </div>
-                                        <!-- rooms -->
-                                        <div>
-                                            <label for="rooms">Rooms</label>
-                                            <input type="text" placeholder="number of Rooms" name="rooms" id="rooms"
-                                                value="<?php echo $theater['rooms'] ?>" />
-                                        </div>
-
-                                        <!-- row and col -->
-                                        <div>
-                                            <label for="seat">Number of seats</label>
-                                            <input type="text" placeholder="number of row" name="row" id="row"
-                                                value="<?php echo $theater['row'] ?>" />
-                                            <input type="text" placeholder="number of column" name="col" id="col"
-                                                value="<?php echo $theater['col'] ?>" />
-                                        </div>
-
-                                        <div class="btn-box ">
-                                            <button type="submit" class="btn btn-primary" name="submit">
-                                                Update
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
+        <!-- statistic section -->
+        <section>
+            <div class="container mt-4">
+                <!-- Thông số -->
+                <div class="row text-center">
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Tổng số vé</h5>
+                                <p class="card-text">
+                                    <?php echo $sum_ticket; ?> vé
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Tổng doanh thu</h5>
+                                <p class="card-text">
+                                    <?php echo array_sum($values); ?> VND
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
+
+                <!-- Biểu đồ -->
+                <div class="row mt-4">
+                    <div class="col-md-12 text-white">
+                        <canvas id="myChart" width="400" height="200"></canvas>
+                    </div>
+                </div>
             </div>
+            <script>
+                // Vẽ biểu đồ
+                var ctx = document.getElementById('myChart').getContext('2d');
+                var myChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: <?php echo json_encode($labels); ?>,
+                        datasets: [{
+                            label: 'Sales',
+                            data: <?php echo json_encode($values); ?>,
+                            backgroundColor: 'rgba(75, 192, 192, 0.4)',
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    callback: function (value, index, values) {
+                                        return value + ' VND';
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            </script>
+
+
         </section>
-        <!-- end Add product main -->
-
-
 
         <!-- info section -->
         <section class="info_section ">
@@ -305,7 +384,6 @@ if (isset($_POST['submit'])) {
         <script src="js/jquery-3.4.1.min.js"></script>
         <script src="js/bootstrap.js"></script>
         <script src="js/custom.js"></script>
-
 </body>
 
 </html>

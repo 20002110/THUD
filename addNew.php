@@ -50,7 +50,7 @@ if ($_SESSION['username'] != "admin@gmail.com") {
         <!-- header section strats -->
         <div class="hero_bg_box">
             <div class="img-box">
-                <img src="images/vinfast.jpeg" alt="">
+                <img src="images/manager_bg.jpg" alt="">
             </div>
         </div>
 
@@ -95,6 +95,9 @@ if ($_SESSION['username'] != "admin@gmail.com") {
 
                         <div class="collapse navbar-collapse ml-auto" id="navbarSupportedContent">
                             <ul class="navbar-nav  ">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
+                                </li>
                                 <li class="nav-item dropdown ">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -115,9 +118,25 @@ if ($_SESSION['username'] != "admin@gmail.com") {
                                         <a class="dropdown-item" href="manageMovie.php">List Movies</a>
                                     </div>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="logout.php ">Log out</a>
-                                </li>
+                                <?php
+                                if (isset($_SESSION['username'])) {
+                                    echo '  <li class="nav-item dropdown ">  
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        ' . $_SESSION['username'] . '
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="view_profile.php">Profile</a>
+                        <a class="dropdown-item" href="logout.php">Log out</a>
+                    </div>
+                </li>';
+
+                                } else {
+                                    echo '<li class="nav-item">
+                  <a class="nav-link" href="login.php"> Login </a>
+                </li>';
+                                }
+                                ?>
                             </ul>
                         </div>
                     </nav>
@@ -199,13 +218,13 @@ if ($_SESSION['username'] != "admin@gmail.com") {
                                         <!-- time -->
                                         <div>
                                             <label for="time">Time</label>
-                                            <input type="text" placeholder="Time" name="time" id="time" />
+                                            <input type="text" placeholder="Time" name="time" id="time" required/>
                                         </div>
 
                                         <!-- language -->
                                         <div>
                                             <label for="language">Language</label>
-                                            <input type="text" placeholder="Language" name="language" id="language" />
+                                            <input type="text" placeholder="Language" name="language" id="language" required/>
                                         </div>
 
                                         <!-- premiere -->
@@ -226,6 +245,12 @@ if ($_SESSION['username'] != "admin@gmail.com") {
                                         <div>
                                             <label for="price">Price</label>
                                             <input type="text" placeholder="Price" name="price" id="price" />
+                                        </div>
+
+                                        <!-- price -->
+                                        <div>
+                                            <label for="price">url</label>
+                                            <input type="text" placeholder="url" name="url" id="url" />
                                         </div>
 
 
@@ -278,6 +303,7 @@ if ($_SESSION['username'] != "admin@gmail.com") {
                                             if (move_uploaded_file($file_tmp, $file_path)) {
                                                 $url_image = $file_path;
                                             } else {
+                                                // $url_image = $file_path;
                                                 echo '<label style="color:red;">Add false</label>';
                                             }
 
@@ -291,6 +317,7 @@ if ($_SESSION['username'] != "admin@gmail.com") {
                                             $describes = $_POST['describes'];
                                             $price = $_POST['price'];
                                             $image = $url_image;
+                                            $url = $_POST['url'];
 
                                             if ($db->find_data('TypeMovie', 'typeName', $category) == false) {
                                                 if ($db->add_data('TypeMovie', array('typeName' => $category))) {
@@ -318,7 +345,8 @@ if ($_SESSION['username'] != "admin@gmail.com") {
                                                 'premiere' => $premiere,
                                                 'describes' => $describes,
                                                 'cost' => $price,
-                                                'image' => $image
+                                                'image' => $image,
+                                                'url' => $url
                                             );
 
 
@@ -327,7 +355,6 @@ if ($_SESSION['username'] != "admin@gmail.com") {
                                                 $db->add_data('Movies', $data);
                                             } catch (Exception $e) {
                                                 echo '<label style="color:red;">Add false</label>';
-                                                die();
                                             }
 
                                             $all_theater = $db->findAll('theater');
@@ -335,30 +362,53 @@ if ($_SESSION['username'] != "admin@gmail.com") {
 
                                             $today = date("Y-m-d");
 
-                                            for ($day = 0; $day < 7; $day++) {
+                                            for ($day = 0; $day < 30; $day += 2) {
                                                 $premiere = date('Y-m-d', strtotime($today . ' + ' . $day . ' days'));
                                                 foreach ($all_theater as $key => $value) {
                                                     $theaterID = $value['theaterID'];
                                                     $time = 6;
-                                                    for ($k = 0; $k < $value['rooms']; $k++) {
+                                                    $count = 1;
+                                                    for ($k = 0; $k < 9; $k++) {
                                                         $seat = array();
+                                                        $time += 2;
+
+                                                        $check_time = $time . ':00:00';
+                                                        $check_date = $premiere;
+
+                                                        $check = $db->find_by_array('seats', array('theaterID' => $theaterID, 'time' => $check_time, 'date' => $check_date));
+
+
+
+                                                        if ($check != false or empty($check) == false) {
+                                                            if (count($check) >= $value['rooms']) {
+                                                                continue;
+                                                            }
+                                                        }
+
+                                                        if ($count > $value['rooms']) {
+                                                            break;
+                                                        }
+
+
+
                                                         for ($i = 0; $i < $value['row']; $i++) {
                                                             for ($j = 0; $j < $value['col']; $j++) {
                                                                 $seat[] = array(
                                                                     'seatName' => chr(65 + $i) . ($j + 1),
                                                                     'user_id' => 0,
                                                                     'status' => 0,
-                                                                    'tiketID' => -1
+                                                                    'ticketID' => -1
                                                                 );
                                                             }
                                                         }
 
 
-                                                        $time += 2;
+
+
                                                         $data = array(
                                                             'theaterID' => $theaterID,
                                                             'MovieID' => $movieID,
-                                                            'time' => $time . ':00',
+                                                            'time' => $time . ':00:00',
                                                             'date' => $premiere,
                                                             'seat' => json_encode($seat)
                                                         );
@@ -371,6 +421,7 @@ if ($_SESSION['username'] != "admin@gmail.com") {
                                         
                                                         try {
                                                             $db->add_data('seats', $data);
+                                                            $count++;
                                                         } catch (Exception $e) {
                                                             echo '<label style="color:red;">Add false</label>';
                                                             die();
@@ -379,8 +430,9 @@ if ($_SESSION['username'] != "admin@gmail.com") {
 
 
                                                 }
-                                                echo '<label style="color:green;">Add success</label>';
+
                                             }
+                                            echo '<label style="color:green;">Add success</label>';
                                         }
 
                                         ?>

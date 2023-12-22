@@ -59,9 +59,43 @@ $userID = $_SESSION['userID'];
             margin-bottom: 10px;
         }
     </style>
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="js/bootstrap.js"></script> 
+    <!-- <script src="js/custom.js"></script> -->
 </head>
 
 <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top container">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.php">Home</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse " id="navbarNav">
+                <ul class="navbar-nav float-end" style="margin-left: auto!important;">
+                    <li class="nav-item ">
+                        <a class="nav-link" href="service.php"> Films</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="ticket.php">My Tickets</a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <?php echo $_SESSION['username'] ?>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="view_profile.php">Profile</a>
+                            <a class="dropdown-item" href="logout.php">Log out</a>
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
 
     <div class="ticket-container mt-5">
         <h1 class="text-center ticket-heading">VÉ XEM PHIM <i class="fa-solid fa-film"></i></h1>
@@ -78,7 +112,7 @@ $userID = $_SESSION['userID'];
         $seatMap = json_decode($seatMap, true);
         $seatName = array();
         foreach ($seatMap as $seat) {
-            if ($seat['user_id'] == $userID) {// && $seat['TicketID'] == $id) {
+            if ($seat['user_id'] == $userID && $seat['ticketID'] == $id) {
                 $seatName[] = $seat['seatName'];
             }
         }
@@ -104,6 +138,15 @@ $userID = $_SESSION['userID'];
 
         $userinfor = $db->find_data('userInfor', 'user_id', $userID);
         $username = $userinfor['fullName'];
+
+        // check if seatName is empty or not
+        if (empty($seatName)) {
+            $seatName = 'Đặt vé thất bại, thử lại';
+            $name_movie = 'Đặt vé thất bại, thử lại';
+            $totalprice = 'Đặt vé thất bại, thử lại';
+            $date = 'Đặt vé thất bại, thử lại';
+            $time = 'Đặt vé thất bại, thử lại';
+        }
 
 
         echo '<hr>
