@@ -1,11 +1,11 @@
 <?php
 
-session_start();
+// session_start();
 
-if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
-  header("location: login.php");
-  exit;
-}
+// if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
+//   header("location: login.php");
+//   exit;
+// }
 
 include_once 'handleDB.php';
 $db = new HandleDB();
