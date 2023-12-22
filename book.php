@@ -209,7 +209,7 @@ if (isset($_POST['submit'])) {
                     foreach ($showing as $d) {
                         // check if date > today
                         $date = $d['date'];
-                        if ($date < $today) {
+                        if ($date <= $today) {
                             continue;
                         }
                         // check if date is duplicated
