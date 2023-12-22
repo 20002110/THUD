@@ -309,7 +309,7 @@ $userID = $_SESSION['userID'];
                 </div>
                 <div class="location">
                 <span>Cụm rạp</span>
-                    <h2>' . $theaterName . ', ' . $location . '</h2>
+                    <h2>' . $theaterName .  '</h2>
 
                 </div>
                 <div class="time">

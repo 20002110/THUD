@@ -347,7 +347,6 @@ if ($_SESSION['username'] != "admin@gmail.com") {
                                                 $db->add_data('Movies', $data);
                                             } catch (Exception $e) {
                                                 echo '<label style="color:red;">Add false</label>';
-                                                die();
                                             }
 
                                             $all_theater = $db->findAll('theater');
@@ -360,6 +359,7 @@ if ($_SESSION['username'] != "admin@gmail.com") {
                                                 foreach ($all_theater as $key => $value) {
                                                     $theaterID = $value['theaterID'];
                                                     $time = 6;
+                                                    $count = 1;
                                                     for ($k = 0; $k < 9; $k++) {
                                                         $seat = array();
                                                         $time += 2;
@@ -368,11 +368,20 @@ if ($_SESSION['username'] != "admin@gmail.com") {
                                                         $check_date = $premiere;
 
                                                         $check = $db->find_by_array('seats', array('theaterID' => $theaterID, 'time' => $check_time, 'date' => $check_date));
+                                                        
+                                                        
 
-                                                        //  check if count >= room 
-                                                        if (count($check) >= $value['room']) {
-                                                            continue;
+                                                        if ($check != false or empty($check) == false) {
+                                                            if (count($check) >= $value['rooms']) {
+                                                                continue;
+                                                            }
                                                         }
+
+                                                        if ($count > $value['rooms']) {
+                                                            break;
+                                                        }
+
+
 
                                                         for ($i = 0; $i < $value['row']; $i++) {
                                                             for ($j = 0; $j < $value['col']; $j++) {
@@ -404,6 +413,7 @@ if ($_SESSION['username'] != "admin@gmail.com") {
                                         
                                                         try {
                                                             $db->add_data('seats', $data);
+                                                            $count++;
                                                         } catch (Exception $e) {
                                                             echo '<label style="color:red;">Add false</label>';
                                                             die();
@@ -412,8 +422,9 @@ if ($_SESSION['username'] != "admin@gmail.com") {
 
 
                                                 }
-                                                echo '<label style="color:green;">Add success</label>';
+                                                
                                             }
+                                            echo '<label style="color:green;">Add success</label>';
                                         }
 
                                         ?>

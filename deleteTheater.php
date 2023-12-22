@@ -17,6 +17,8 @@ $db = new HandleDB();
 $id = $_GET['deleteid'];
 
 if ($db->delete('theater', 'theaterID', $id)) {
+    $db -> set_auto_increment('theater', 'theaterID');
+    $db -> set_auto_increment('seats', 'seatID');
     header("location: manageTheater.php");
 } else {
     echo "<script>alert('Xóa rap thất bại');</script>";

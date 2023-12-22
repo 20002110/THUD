@@ -135,7 +135,6 @@ $db = new HandleDB();
                 }
                 ?>
                 <?php
-                session_start();
                 if (isset($_SESSION['username'])) {
                   echo '  <li class="nav-item dropdown ">  
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
