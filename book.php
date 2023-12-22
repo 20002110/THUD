@@ -70,7 +70,7 @@ if (isset($_POST['submit'])) {
         function sendMail(email) {
             var receiver = email;
 
-            var link = "https://danhnt.me/show_ticket.php?id=" + ' . $ticketID . ';
+            var link = "https://danhnt.me/ticket_detail.php?id=" + ' . $ticketID . ';
 
             console.log(link);
 
@@ -89,7 +89,7 @@ if (isset($_POST['submit'])) {
                     console.log("SUCCESS!", response.status, response.text);
                 
                     // redirect to show_ticket.php
-                    window.location.href = "show_ticket.php?id=" + ' . $ticketID . ';
+                    window.location.href = "ticket_detail.php?id=" + ' . $ticketID . ';
                 
                 }, function (error) {
                     console.log("FAILED...", error);

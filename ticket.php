@@ -202,7 +202,7 @@ $id = $_SESSION['userID'];
                                 <td>' . $date . '</td>
                                 <td>' . $time . '</td>
                                 <td>
-                                    <a href="show_ticket.php?id=' . $ticket['ticketID'] . '" class="text-light">
+                                    <a href="ticket_detail.php?id=' . $ticket['ticketID'] . '" class="text-light">
                                         <button class="btn btn-primary">
                                             Detail
                                         </button>
