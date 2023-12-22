@@ -355,13 +355,25 @@ if ($_SESSION['username'] != "admin@gmail.com") {
 
                                             $today = date("Y-m-d");
 
-                                            for ($day = 0; $day < 7; $day++) {
+                                            for ($day = 0; $day < 30; $day+= 2) {
                                                 $premiere = date('Y-m-d', strtotime($today . ' + ' . $day . ' days'));
                                                 foreach ($all_theater as $key => $value) {
                                                     $theaterID = $value['theaterID'];
                                                     $time = 6;
-                                                    for ($k = 0; $k < $value['rooms']; $k++) {
+                                                    for ($k = 0; $k < 9; $k++) {
                                                         $seat = array();
+                                                        $time += 2;
+
+                                                        $check_time = $time . ':00:00';
+                                                        $check_date = $premiere;
+
+                                                        $check = $db->find_by_array('seats', array('theaterID' => $theaterID, 'time' => $check_time, 'date' => $check_date));
+
+                                                        //  check if count >= room 
+                                                        if (count($check) >= $value['room']) {
+                                                            continue;
+                                                        }
+
                                                         for ($i = 0; $i < $value['row']; $i++) {
                                                             for ($j = 0; $j < $value['col']; $j++) {
                                                                 $seat[] = array(
@@ -374,11 +386,12 @@ if ($_SESSION['username'] != "admin@gmail.com") {
                                                         }
 
 
-                                                        $time += 2;
+
+
                                                         $data = array(
                                                             'theaterID' => $theaterID,
                                                             'MovieID' => $movieID,
-                                                            'time' => $time . ':00',
+                                                            'time' => $time . ':00:00',
                                                             'date' => $premiere,
                                                             'seat' => json_encode($seat)
                                                         );

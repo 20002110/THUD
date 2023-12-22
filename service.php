@@ -132,7 +132,7 @@ $db = new HandleDB();
                 <?php
                 if ($_SESSION['username'] == 'admin@gmail.com') {
                   echo '<li class="nav-item">
-                  <a class="nav-link" href="addNew.php"> Manager </a>
+                  <a class="nav-link" href="statistic.php"> Manager </a>
                 </li>';
                 }
                 ?>

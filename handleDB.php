@@ -243,18 +243,7 @@ class HandleDB
             return false;
         }
     }
-    public function update_infor($table, $data, $where, $key) {
-        $field = implode(", ", array_keys($data));
-        echo "$field\n";
-        echo "$table($field)";
-        $values = "'" . implode("', '", array_values($data)) . "'";
-        $sql = "UPDATE $table SET $field = $values WHERE $where = '$key'";
-
-        if ($this->conn->query($sql) === TRUE) {
-            return true;
-        } else {
-            return false;
-        }
-    }
 }
+
+
 ?>
