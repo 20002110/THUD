@@ -9,8 +9,6 @@ Movie Ticket is a web application that allows users to book movie tickets online
 - This project is not intended for commercial use.
 - This project is not affiliated with CGV Cinemas.
 
-- Account for admin: admin@gmail.com
-- Password for admin: 1
 
 ## Features
 - User authentication: Users can sign up for an account and log in to the website to book movie tickets.
