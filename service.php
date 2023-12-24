@@ -85,6 +85,10 @@ $db = new HandleDB();
             <div class="collapse navbar-collapse ml-auto" id="navbarSupportedContent">
               <ul class="navbar-nav  ">
 
+                <li class="nav-item ">
+                  <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
+                </li>
+
                 <!-- filter dropdown -->
 
                 <li class="nav-item dropdown">
@@ -93,10 +97,6 @@ $db = new HandleDB();
                     Filter
                   </a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <!-- <a class="dropdown-item" href="service.php">All</a>
-                    <a class="dropdown-item" href="service.php?filter=Porsche">Porsche</a>
-                    <a class="dropdown-item" href="service.php?filter=Vinfast">Vinfast</a>
-                    <a class="dropdown-item" href="service.php?filter=Ferrari">Ferrari</a> -->
                     <?php
                     $result = $db->findAll('TypeMovie');
                     foreach ($result as $type) {
@@ -118,9 +118,7 @@ $db = new HandleDB();
                   </div>
                 </li>
 
-                <li class="nav-item ">
-                  <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
-                </li>
+
                 <li class="nav-item active">
                   <a class="nav-link" href="service.php"> Films </a>
                 </li>
@@ -180,7 +178,7 @@ $db = new HandleDB();
                 $url = $service['url'];
                 echo '<div class = "col-md-6 col-lg-4 mx-auto ">
                 <div class = "box" style="background-color: #ffff; border-radius: 10px">
-                  <a class = "video-btn" data-toggle="modal" data-src="'.$url.'" data-target="#myModal"> 
+                  <a class = "video-btn" data-toggle="modal" data-src="' . $url . '" data-target="#myModal"> 
                     <div class = "img-box" >
                       <img src = "' . $service['image'] . '" alt = "..." style="min-width: 265px; height: 390px; object-fit: cover;"  />
                     </div>             
@@ -241,7 +239,7 @@ $db = new HandleDB();
                 $url = $service['url'];
                 echo '<div class = "col-md-6 col-lg-4 mx-auto ">
                 <div class = "box" style="background-color: #ffff; border-radius: 10px">
-                  <a class = "video-btn" data-toggle="modal" data-src="'.$url.'" data-target="#myModal"> 
+                  <a class = "video-btn" data-toggle="modal" data-src="' . $url . '" data-target="#myModal"> 
                     <div class = "img-box" >
                       <img src = "' . $service['image'] . '" alt = "..." style="min-width: 265px; height: 390px; object-fit: cover;"  />
                     </div>             
@@ -294,7 +292,7 @@ $db = new HandleDB();
                 $url = $service['url'];
                 echo '<div class = "col-md-6 col-lg-4 mx-auto ">
                 <div class = "box" style="background-color: #ffff; border-radius: 10px">
-                  <a class = "video-btn" data-toggle="modal" data-src="'.$url.'" data-target="#myModal"> 
+                  <a class = "video-btn" data-toggle="modal" data-src="' . $url . '" data-target="#myModal"> 
                     <div class = "img-box" >
                       <img src = "' . $service['image'] . '" alt = "..." style="min-width: 265px; height: 390px; object-fit: cover;"  />
                     </div>             
