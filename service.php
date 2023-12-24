@@ -93,10 +93,6 @@ $db = new HandleDB();
                     Filter
                   </a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <!-- <a class="dropdown-item" href="service.php">All</a>
-                    <a class="dropdown-item" href="service.php?filter=Porsche">Porsche</a>
-                    <a class="dropdown-item" href="service.php?filter=Vinfast">Vinfast</a>
-                    <a class="dropdown-item" href="service.php?filter=Ferrari">Ferrari</a> -->
                     <?php
                     $result = $db->findAll('TypeMovie');
                     foreach ($result as $type) {

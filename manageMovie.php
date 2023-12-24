@@ -12,6 +12,9 @@ if ($_SESSION['username'] != "admin@gmail.com") {
     header("location: service.php");
 }
 
+include 'handleDB.php';
+$db = new HandleDB();
+
 
 ?>
 
@@ -84,7 +87,7 @@ if ($_SESSION['username'] != "admin@gmail.com") {
                     <nav class="navbar navbar-expand-lg custom_nav-container">
                         <a class="navbar-brand" href="index.php">
                             <span>
-                                THUD
+                                CGV*
                             </span>
                         </a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -94,33 +97,63 @@ if ($_SESSION['username'] != "admin@gmail.com") {
                         </button>
 
                         <div class="collapse navbar-collapse ml-auto" id="navbarSupportedContent">
-                        <ul class="navbar-nav  ">
-                            <li class="nav-item">
-                                <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
-                            </li>
-                            <li class="nav-item dropdown active">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Theater
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="addTheater.php">Add Theater</a>
-                                    <a class="dropdown-item" href="manageTheater.php">List Theater</a>
-                                </div>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Movies
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="addNew.php">Add Movies</a>
-                                    <a class="dropdown-item" href="manageMovie.php">List Movies</a>
-                                </div>
-                            </li>
-                            <?php      
-                if (isset($_SESSION['username'])) {
-                  echo '  <li class="nav-item dropdown ">  
+                            <ul class="navbar-nav  ">
+
+                                <!-- filter dropdown -->
+
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Filter
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <?php
+                                        $result = $db->findAll('TypeMovie');
+                                        foreach ($result as $type) {
+                                            echo '<a class="dropdown-item" href="manageMovie.php?filter=' . $type['typeID'] . '">' . $type['typeName'] . '</a>';
+                                        }
+
+                                        ?>
+                                    </div>
+                                </li>
+
+                                <!-- search bar -->
+                                <li class="nav-item">
+                                    <div class="search-container">
+                                        <form method="post" action="" style="margin-top: 27px;">
+                                            <input type="text" placeholder="Search.." name="search">
+                                            <button type="submit" name="submit"><i class="fa fa-search"></i></button>
+                                            <!-- <input type ="submit"  class="fa fa-search"  value=""> -->
+                                        </form>
+                                    </div>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
+                                </li>
+                                <li class="nav-item dropdown active">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Theater
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="addTheater.php">Add Theater</a>
+                                        <a class="dropdown-item" href="manageTheater.php">List Theater</a>
+                                    </div>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Movies
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="addNew.php">Add Movies</a>
+                                        <a class="dropdown-item" href="manageMovie.php">List Movies</a>
+                                    </div>
+                                </li>
+                                <?php
+                                if (isset($_SESSION['username'])) {
+                                    echo '  <li class="nav-item dropdown ">  
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         ' . $_SESSION['username'] . '
@@ -131,13 +164,13 @@ if ($_SESSION['username'] != "admin@gmail.com") {
                     </div>
                 </li>';
 
-                } else {
-                  echo '<li class="nav-item">
+                                } else {
+                                    echo '<li class="nav-item">
                   <a class="nav-link" href="login.php"> Login </a>
                 </li>';
-                }
-                ?>
-                        </ul>
+                                }
+                                ?>
+                            </ul>
                         </div>
                     </nav>
                 </div>
@@ -145,48 +178,56 @@ if ($_SESSION['username'] != "admin@gmail.com") {
         </header>
         <!-- end header section -->
 
-       <!-- Body Start -->
-<div class="container py-5">
-    <a href="addNew.php" class="text-light"><button class="btn btn-primary my-5">Add New Movie</button></a>
-        <!-- start echo message to user -->
-        <?php
-				if(isset($message)) {
-					foreach($message as $message) {
-						echo '<div class="alert alert-danger" role="alert">
-							'.$message.'
+        <!-- Body Start -->
+        <div class="container py-5">
+            <a href="addNew.php" class="text-light"><button class="btn btn-primary my-5">Add New Movie</button></a>
+            <!-- start echo message to user -->
+            <?php
+            if (isset($message)) {
+                foreach ($message as $message) {
+                    echo '<div class="alert alert-danger" role="alert">
+							' . $message . '
 						</div>';
-					}
-				}
-		?>
-		<!-- end echo mesaage to user -->
-        <div>
-        <table class="table align-middle table-striped  text-white">
-            <thead class="table-success align-middle thead-dark">
-                <tr>
-                    <th scope="col">No.</th>
-                    <th scope="col">Name Movie</th>
-                    <th scope="col">Director</th>
-                    <!-- <th scope="col">Performer</th> -->
-                    <th scope="col">Category</th>
-                    <th scope="col">Time</th>
-                    <th scope="col">Language</th>
-                    <th scope="col">Premiere</th>
-                    <!-- <th scope="col">Describes</th> -->
-                    <th scope="col">Price</th>
-                    <!-- <th scope="col">Images</th> -->
-                    <th scope="col">Operations</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                    include 'handleDB.php';
-                    $db = new HandleDB();
-                    $films = $db->findAll('Movies');
-                    $status = 1;
-                    foreach ($films as $film) {
-                        $category = $db->find_data('TypeMovie', 'typeID', $film['typeID']);
-                    
-                    
+                }
+            }
+            ?>
+            <!-- end echo mesaage to user -->
+            <div>
+                <table class="table align-middle table-striped  text-white">
+                    <thead class="table-success align-middle thead-dark">
+                        <tr>
+                            <th scope="col">No.</th>
+                            <th scope="col">Name Movie</th>
+                            <th scope="col">Director</th>
+                            <!-- <th scope="col">Performer</th> -->
+                            <th scope="col">Category</th>
+                            <th scope="col">Time</th>
+                            <th scope="col">Language</th>
+                            <th scope="col">Premiere</th>
+                            <!-- <th scope="col">Describes</th> -->
+                            <th scope="col">Price</th>
+                            <!-- <th scope="col">Images</th> -->
+                            <th scope="col">Operations</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+
+
+                        if (isset($_POST['submit'])) {
+                            $search = $_POST['search'];
+                            $films = $db->find_by_data('Movies', $search);
+                        } else if (isset($_GET['filter'])) {
+                            $filter = $_GET['filter'];
+                            $films = $db->find_movie('Movies', 'typeID', $filter);
+                        } else {
+                            $films = $db->findAll('Movies');
+                        }
+                        $status = 1;
+                        foreach ($films as $film) {
+                            $category = $db->find_data('TypeMovie', 'typeID', $film['typeID']);
+
+
                             $id = $film['movieID'];
                             $name_movie = $film['Name'];
                             $director = $film['director'];
@@ -200,17 +241,17 @@ if ($_SESSION['username'] != "admin@gmail.com") {
                             $image = $film['image'];
 
                             echo '<tr>
-                                    <th scope="row">'.$status.'</th>
-                                    <td>'.$name_movie.'</td>
-                                    <td>'.$director.'</td>
+                                    <th scope="row">' . $status . '</th>
+                                    <td>' . $name_movie . '</td>
+                                    <td>' . $director . '</td>
                                    
-                                    <td>'.$genre.'</td>
-                                    <td>'.$time.'</td>
-                                    <td>'.$language.'</td>
-                                    <td>'.$premiere.'</td>
-                                    <td>'.$cost.'</td>
+                                    <td>' . $genre . '</td>
+                                    <td>' . $time . '</td>
+                                    <td>' . $language . '</td>
+                                    <td>' . $premiere . '</td>
+                                    <td>' . $cost . '</td>
                                     <td>
-                                        <a href="updateMovie.php?updateid='.$id.'" class="text-light"><button class="btn btn-primary">Update</button></a>
+                                        <a href="updateMovie.php?updateid=' . $id . '" class="text-light"><button class="btn btn-primary">Update</button></a>
                                         <a class="text-light">
                                             <button class="btn btn-danger" data-toggle="modal" data-target="#popup_Modal">
                                                 Delete  
@@ -234,7 +275,7 @@ if ($_SESSION['username'] != "admin@gmail.com") {
                                                     <!-- Modal footer -->
                                                     <div class="modal-footer" >
                 
-                                                    <a href="deleteMovie.php?deleteid='.$id.'">
+                                                    <a href="deleteMovie.php?deleteid=' . $id . '">
                                                         <button class="btn btn-danger" >
                                                             Đồng ý
                                                         </button>                                              
@@ -246,20 +287,20 @@ if ($_SESSION['username'] != "admin@gmail.com") {
                                         </div>
                                     </td>
                                   </tr>';
-                            
+
                             $status++;
-                    }
-                    
-                ?>
-                
-            </tbody>
-        </table>
-    </div>
-        
-        
-        
-</div>
-<!-- Body End -->
+                        }
+
+                        ?>
+
+                    </tbody>
+                </table>
+            </div>
+
+
+
+        </div>
+        <!-- Body End -->
 
 
         <!-- info section -->

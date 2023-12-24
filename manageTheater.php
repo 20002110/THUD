@@ -12,6 +12,8 @@ if ($_SESSION['username'] != "admin@gmail.com") {
     header("location: service.php");
 }
 
+include 'handleDB.php';
+$db = new HandleDB();
 
 ?>
 
@@ -84,7 +86,7 @@ if ($_SESSION['username'] != "admin@gmail.com") {
                     <nav class="navbar navbar-expand-lg custom_nav-container">
                         <a class="navbar-brand" href="index.php">
                             <span>
-                                THUD
+                                CGV*
                             </span>
                         </a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -94,33 +96,43 @@ if ($_SESSION['username'] != "admin@gmail.com") {
                         </button>
 
                         <div class="collapse navbar-collapse ml-auto" id="navbarSupportedContent">
-                        <ul class="navbar-nav  ">
-                            <li class="nav-item">
-                                <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
-                            </li>
-                            <li class="nav-item dropdown active">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Theater
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="addTheater.php">Add Theater</a>
-                                    <a class="dropdown-item" href="manageTheater.php">List Theater</a>
-                                </div>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Movies
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="addNew.php">Add Movies</a>
-                                    <a class="dropdown-item" href="manageMovie.php">List Movies</a>
-                                </div>
-                            </li>
-                            <?php      
-                if (isset($_SESSION['username'])) {
-                  echo '  <li class="nav-item dropdown ">  
+                            <ul class="navbar-nav  ">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
+                                </li>
+                                <!-- search bar -->
+                                <li class="nav-item">
+                                    <div class="search-container">
+                                        <form method="post" action="" style="margin-top: 27px;">
+                                            <input type="text" placeholder="Search.." name="search">
+                                            <button type="submit" name="submit"><i class="fa fa-search"></i></button>
+                                            <!-- <input type ="submit"  class="fa fa-search"  value=""> -->
+                                        </form>
+                                    </div>
+                                </li>
+                                <li class="nav-item dropdown active">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Theater
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="addTheater.php">Add Theater</a>
+                                        <a class="dropdown-item" href="manageTheater.php">List Theater</a>
+                                    </div>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Movies
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="addNew.php">Add Movies</a>
+                                        <a class="dropdown-item" href="manageMovie.php">List Movies</a>
+                                    </div>
+                                </li>
+                                <?php
+                                if (isset($_SESSION['username'])) {
+                                    echo '  <li class="nav-item dropdown ">  
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         ' . $_SESSION['username'] . '
@@ -131,13 +143,13 @@ if ($_SESSION['username'] != "admin@gmail.com") {
                     </div>
                 </li>';
 
-                } else {
-                  echo '<li class="nav-item">
+                                } else {
+                                    echo '<li class="nav-item">
                   <a class="nav-link" href="login.php"> Login </a>
                 </li>';
-                }
-                ?>
-                        </ul>
+                                }
+                                ?>
+                            </ul>
                         </div>
                     </nav>
                 </div>
@@ -145,57 +157,65 @@ if ($_SESSION['username'] != "admin@gmail.com") {
         </header>
         <!-- end header section -->
 
-       <!-- Body Start -->
-<div class="container py-5">
-    <a href="addTheater.php" class="text-light"><button class="btn btn-primary my-5">Add New Theater</button></a>
-        <!-- start echo message to user -->
-        <?php
-				if(isset($message)) {
-					foreach($message as $message) {
-						echo '<div class="alert alert-danger" role="alert">
-							'.$message.'
+        <!-- Body Start -->
+        <div class="container py-5">
+            <a href="addTheater.php" class="text-light"><button class="btn btn-primary my-5">Add New
+                    Theater</button></a>
+            <!-- start echo message to user -->
+            <?php
+            if (isset($message)) {
+                foreach ($message as $message) {
+                    echo '<div class="alert alert-danger" role="alert">
+							' . $message . '
 						</div>';
-					}
-				}
-		?>
-		<!-- end echo mesaage to user -->
-        <div>
-        <table class="table align-middle table-striped  text-white">
-            <thead class="table-success align-middle thead-dark">
-                <tr>
-                    <th scope="col">No.</th>
-                    <th scope="col">Name Theater</th>
-                    <th scope="col">Location</th>
-                    <th scope="col">Number of rooms</th>
-                    <th scope="col">Number of seat per row</th>
-                    <th scope="col">Number of seat per col</th>
-                    <th scope="col">Operations</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                    include 'handleDB.php';
-                    $db = new HandleDB();
-                    $theaters = $db->findAll('theater');
-                    $status = 1;
-                    foreach ($theaters as $theater) {
+                }
+            }
+            ?>
+            <!-- end echo mesaage to user -->
+            <div>
+                <table class="table align-middle table-striped  text-white">
+                    <thead class="table-success align-middle thead-dark">
+                        <tr>
+                            <th scope="col">No.</th>
+                            <th scope="col">Name Theater</th>
+                            <th scope="col">Location</th>
+                            <th scope="col">Number of rooms</th>
+                            <th scope="col">Number of seat per row</th>
+                            <th scope="col">Number of seat per col</th>
+                            <th scope="col">Operations</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+
+                        if (isset($_POST['submit'])) {
+                            $search = $_POST['search'];
+                            $theaters = $db->find_one('theater', 'theaterName', $search);
+                        }
+                        else{
+
+                        $theaters = $db->findAll('theater');
+                        }
+
+                        $status = 1;
+                        foreach ($theaters as $theater) {
 
                             $id = $theater['theaterID'];
                             $theaterName = $theater['theaterName'];
-                            $location= $theater['location'];
+                            $location = $theater['location'];
                             $rooms = $theater['rooms'];
                             $row = $theater['row'];
                             $col = $theater['col'];
 
                             echo '<tr>
-                                    <th scope="row">'.$status.'</th>
-                                    <td>'.$theaterName.'</td>
-                                    <td>'.$location.'</td>
-                                    <td>'.$rooms.'</td>
-                                    <td>'.$row.'</td>
-                                    <td>'.$col.'</td>
+                                    <th scope="row">' . $status . '</th>
+                                    <td>' . $theaterName . '</td>
+                                    <td>' . $location . '</td>
+                                    <td>' . $rooms . '</td>
+                                    <td>' . $row . '</td>
+                                    <td>' . $col . '</td>
                                     <td>
-                                        <a href="updateTheater.php?updateid='.$id.'" class="text-light"><button class="btn btn-primary">Update</button></a>
+                                        <a href="updateTheater.php?updateid=' . $id . '" class="text-light"><button class="btn btn-primary">Update</button></a>
                                         <a class="text-light">
                                             <button class="btn btn-danger" data-toggle="modal" data-target="#popup_Modal">
                                                 Delete  
@@ -219,7 +239,7 @@ if ($_SESSION['username'] != "admin@gmail.com") {
                                                     <!-- Modal footer -->
                                                     <div class="modal-footer" >
                 
-                                                    <a href="deleteTheater.php?deleteid='.$id.'">
+                                                    <a href="deleteTheater.php?deleteid=' . $id . '">
                                                         <button class="btn btn-danger" >
                                                             Đồng ý
                                                         </button>                                              
@@ -231,20 +251,20 @@ if ($_SESSION['username'] != "admin@gmail.com") {
                                         </div>
                                     </td>
                                   </tr>';
-                            
+
                             $status++;
-                    }
-                    
-                ?>
-                
-            </tbody>
-        </table>
-    </div>
-        
-        
-        
-</div>
-<!-- Body End -->
+                        }
+
+                        ?>
+
+                    </tbody>
+                </table>
+            </div>
+
+
+
+        </div>
+        <!-- Body End -->
 
 
         <!-- info section -->
