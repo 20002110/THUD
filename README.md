@@ -54,7 +54,7 @@ Contributions are welcome! If you would like to contribute to the Movie Ticket p
 
 
 ## Team
-- 20002110
+- Nguyen Truong Danh
 - KyoGren
 - TL27
 - Hunter1202
